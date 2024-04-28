@@ -1,20 +1,11 @@
-import { auth, signIn, signOut } from "@/auth";
+import { signIn } from "next-auth/react";
 import { SignOut } from "./signout";
+import { getServerSession } from "next-auth";
+import { authOptions } from "./api/auth/[...nextauth]/authOptions";
+import { SignIn } from "./sign-in";
 
-function SignIn() {
-  return (
-    <form
-      action={async () => {
-        "use server";
-        await signIn("google");
-      }}
-    >
-      <button type="submit">Signin with Google</button>
-    </form>
-  );
-}
 export default async function Home() {
-  const session = await auth();
+  const session = await getServerSession(authOptions);
   console.log(session);
   return (
     <>
