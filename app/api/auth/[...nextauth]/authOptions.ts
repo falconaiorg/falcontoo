@@ -37,6 +37,6 @@ export const authOptions: AuthOptions = {
     maxAge: 30 * 24 * 60 * 60, // 30 days
   },
   pages: {
-    signIn: "/",
+    signIn: "/auth/sign-in",
   },
 };
