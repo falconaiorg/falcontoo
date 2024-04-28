@@ -1,7 +1,7 @@
 import { auth, signIn, signOut } from "@/auth";
 import { SignOut } from "./signout";
 
-export function SignIn() {
+function SignIn() {
   return (
     <form
       action={async () => {
