@@ -1,0 +1,25 @@
+{
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "conventionalCommits.scopes": ["Commit Messages"],
+  "cSpell.words": [
+    "Chrono",
+    "dall",
+    "DALLE",
+    "denormalization",
+    "endent",
+    "Falcoo",
+    "formkit",
+    "Gameplay",
+    "katex",
+    "Kolkata",
+    "Pincode",
+    "sendgrid",
+    "sonner",
+    "Streamable",
+    "Tesseract",
+    "toastify",
+    "usehooks",
+    "webp"
+  ]
+}

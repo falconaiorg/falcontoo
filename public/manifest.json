@@ -1,0 +1,44 @@
+{
+  "theme_color": "#0f172a",
+  "background_color": "#0f172a",
+  "icons": [
+    {
+      "purpose": "maskable any",
+      "sizes": "512x512",
+      "src": "icon512_maskable.png",
+      "type": "image/png"
+    },
+    {
+      "purpose": "maskable any",
+      "sizes": "192x192",
+      "src": "icon192_maskable.png",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "scope": "/",
+  "orientation": "portrait",
+  "display": "fullscreen",
+  "dir": "auto",
+  "lang": "en-GB",
+  "name": "Lex by FalconAI",
+  "short_name": "Lex",
+  "screenshots": [
+    {
+      "src": "/ScreenshotAppMobile.png",
+      "form_factor": "narrow",
+      "sizes": "512x1110",
+      "type": "image/png",
+      "label": "Test Chat View"
+    },
+    {
+      "src": "/ScreenshotAppDesktop.png",
+      "form_factor": "wide",
+      "sizes": "2880x1626",
+      "type": "image/png",
+      "label": "Test Creation page"
+    }
+  ],
+  "description": "Learn better with Lex - the study buddy for your school, college, and life.",
+  "categories": ["education"]
+}

@@ -14,6 +14,7 @@ const montserrat = Montserrat({
 export const metadata: Metadata = {
   title: "FalconTwo",
   description: "Study with Falcon",
+  manifest: "/manifest.json",
 };
 
 export default function RootLayout({
