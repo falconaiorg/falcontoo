@@ -58,6 +58,7 @@
     "zod-to-json-schema": "^3.22.5"
   },
   "devDependencies": {
+    "@bubblewrap/cli": "^1.21.0",
     "@next/bundle-analyzer": "^14.2.3",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/container-queries": "^0.1.1",

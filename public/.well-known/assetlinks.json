@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "in.falconai.study.twa",
+      "sha256_cert_fingerprints": [
+        "A7:6D:B8:CA:7A:AD:72:C3:2E:80:F8:19:9D:38:C2:37:2A:AA:4E:5F:72:BC:34:59:7B:AE:B4:09:51:0C:CC:8B"
+      ]
+    }
+  }
+]
