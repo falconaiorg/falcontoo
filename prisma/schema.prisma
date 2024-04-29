@@ -21,6 +21,16 @@ model User {
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
+
+    // Created 
+    plan      Plan      @default(TRIAL)
+    planStart DateTime?
+    planEnd   DateTime?
+}
+
+enum Plan {
+    TRIAL
+    PRO
 }
 
 model Account {
