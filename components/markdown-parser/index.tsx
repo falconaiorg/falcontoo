@@ -3,9 +3,9 @@ import { ElementContent } from "react-markdown/lib";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import "katex/dist/katex.min.css";
-import { CodeBlock } from "@/app/(schools)/(engines)/(merlin)/merlin/components/code-block";
 import rehypeKatex from "rehype-katex";
 import { cn } from "@/lib/utils";
+import { CodeBlock } from "../chat/code-block";
 
 type TextElementContent = ElementContent & {
   value: string;
