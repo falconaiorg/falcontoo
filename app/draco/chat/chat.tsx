@@ -9,8 +9,8 @@ import { usePathname, useRouter } from "next/navigation";
 import { Message } from "./actions";
 import { useScrollAnchor } from "./use-scroll-anchor";
 import { toast } from "sonner";
-import { EmptyMessage } from "../../../../../../components/chat/empty-message";
 import { ChatPanel } from "./chat-panel";
+import { EmptyMessage } from "@/components/chat/empty-message";
 
 export interface ChatProps extends React.ComponentProps<"div"> {
   initialMessages?: Message[];

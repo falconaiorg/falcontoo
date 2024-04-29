@@ -2,8 +2,8 @@
 
 import prisma from "@/prisma";
 import { Chat } from "./types";
-import { authOptions } from "@/app/(schools)/api/auth/[...nextauth]/authOptions";
 import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 
 export const saveChat = async (chat: Chat) => {
   const session = await getServerSession(authOptions);
@@ -17,17 +17,17 @@ export const saveChat = async (chat: Chat) => {
     messages: stringifiedMessages,
   };
   try {
-    await prisma.chat.upsert({
-      where: { id },
-      update: {
-        messages: stringifiedMessages,
-      },
-      create: {
-        id,
-        userId,
-        ...payload,
-      },
-    });
+    // await prisma.chat.upsert({
+    //   where: { id },
+    //   update: {
+    //     messages: stringifiedMessages,
+    //   },
+    //   create: {
+    //     id,
+    //     userId,
+    //     ...payload,
+    //   },
+    // });
   } catch (error) {
     console.error("Upsert Error:", error);
   }
