@@ -22,8 +22,8 @@ function useNoSleep() {
     // Add event listener to the document
     document.addEventListener("click", handler, false);
   }, []);
-
   const disableNoSleep = useCallback(() => {
+    noSleep.current?.enable();
     noSleep.current?.disable();
   }, []);
 
