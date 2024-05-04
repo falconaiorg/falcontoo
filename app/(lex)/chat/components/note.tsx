@@ -22,12 +22,15 @@ export function Note({
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="flex flex-row items-center space-x-2">
-          <CheckBadgeIcon size="xs" />
+        <CardDescription className="flex flex-row items-center space-x-2">
+          <CheckBadgeIcon size="xxs" />
           <div className="font-serif">Note Taken</div>
-        </CardTitle>
-        <CardDescription>{note}</CardDescription>
+        </CardDescription>
+        <CardTitle>{note}</CardTitle>
       </CardHeader>
+      <CardContent>
+        <div>{context}</div>
+      </CardContent>
       <CardFooter className="flex justify-end">
         <Button>Edit</Button>
       </CardFooter>
