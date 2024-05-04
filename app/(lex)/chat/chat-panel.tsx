@@ -2,9 +2,9 @@ import * as React from "react";
 
 import { ButtonScrollToBottom } from "./button-scroll-to-bottom";
 import { useAIState, useActions, useUIState } from "ai/rsc";
-import type { AI } from "./actions";
+import type { AI } from "../../draco/chat/actions";
 import { nanoid } from "nanoid";
-import { UserMessage } from "./rsc/user-message";
+import { UserMessage } from "../../draco/chat/rsc/user-message";
 import { PromptForm } from "./prompt-form";
 
 export interface ChatPanelProps {

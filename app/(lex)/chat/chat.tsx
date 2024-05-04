@@ -2,12 +2,12 @@
 
 import { cn } from "@/lib/utils";
 import { ChatList } from "./chat-list";
-import { useLocalStorage } from "./use-local-storage";
+import { useLocalStorage } from "../../draco/chat/use-local-storage";
 import { useEffect, useState } from "react";
 import { useUIState, useAIState } from "ai/rsc";
 import { usePathname, useRouter } from "next/navigation";
-import { Message } from "./actions";
-import { useScrollAnchor } from "./use-scroll-anchor";
+import { Message } from "../../draco/chat/actions";
+import { useScrollAnchor } from "../../draco/chat/use-scroll-anchor";
 import { toast } from "sonner";
 import { ChatPanel } from "./chat-panel";
 import { EmptyMessage } from "@/components/chat/empty-message";

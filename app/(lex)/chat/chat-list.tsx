@@ -1,5 +1,5 @@
 import { Separator } from "@/components/ui/separator";
-import { UIState } from "./actions";
+import { UIState } from "../../draco/chat/actions";
 
 export interface ChatList {
   messages: UIState;

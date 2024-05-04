@@ -1,6 +1,11 @@
 import { nanoid } from "nanoid";
 import { SpinnerMessage } from "../../rsc/spinner-message";
-import { getMutableAIState, render, createStreamableValue } from "ai/rsc";
+import {
+  getMutableAIState,
+  render,
+  createStreamableValue,
+  streamUI,
+} from "ai/rsc";
 import { BotMessage } from "../../rsc/bot-message";
 import { z } from "zod";
 import { BotCard } from "../../rsc/bot-card";
@@ -8,9 +13,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 import OpenAI from "openai";
 import { AI } from "..";
 import { systemPrompt } from "./system-prompt";
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY || "",
-});
+import { openai } from "@ai-sdk/openai";
+
 export const sleep = (ms: number) =>
   new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -18,6 +22,8 @@ export async function submitUserMessage(content: string) {
   "use server";
 
   const aiState = getMutableAIState<typeof AI>();
+
+  const getState = aiState.get();
 
   aiState.update({
     ...aiState.get(),
@@ -34,15 +40,25 @@ export async function submitUserMessage(content: string) {
   let textStream: undefined | ReturnType<typeof createStreamableValue<string>>;
   let textNode: undefined | React.ReactNode;
 
-  const ui = render({
-    model: "gpt-3.5-turbo",
-    provider: openai,
+  const result = await streamUI({
+    model: openai("gpt-3.5-turbo"),
     initial: <SpinnerMessage />,
+    system: `\
+    You are a stock trading conversation bot and you can help users buy stocks, step by step.
+    You and the user can discuss stock prices and the user can adjust the amount of stocks they want to buy, or place an order, in the UI.
+    
+    Messages inside [] means that it's a UI element or a user event. For example:
+    - "[Price of AAPL = 100]" means that an interface of the stock price of AAPL is shown to the user.
+    - "[User has changed the amount of AAPL to 10]" means that the user has changed the amount of AAPL to 10 in the UI.
+    
+    If the user requests purchasing a stock, call \`show_stock_purchase_ui\` to show the purchase UI.
+    If the user just wants the price, call \`show_stock_price\` to show the price.
+    If you want to show trending stocks, call \`list_stocks\`.
+    If you want to show events, call \`get_events\`.
+    If the user wants to sell stock, or complete another impossible task, respond that you are a demo and cannot do that.
+    
+    Besides that, you can also chat with users and do some calculations if needed.`,
     messages: [
-      {
-        role: "system",
-        content: systemPrompt,
-      },
       ...aiState.get().messages.map((message: any) => ({
         role: message.role,
         content: message.content,
@@ -74,7 +90,7 @@ export async function submitUserMessage(content: string) {
 
       return textNode;
     },
-    functions: {
+    tools: {
       listStocks: {
         description: "List three imaginary stocks that are trending.",
         parameters: z.object({
@@ -86,7 +102,7 @@ export async function submitUserMessage(content: string) {
             }),
           ),
         }),
-        render: async function* ({ stocks }) {
+        generate: async function* ({ stocks }) {
           yield (
             <BotCard>
               <Skeleton />
@@ -108,7 +124,7 @@ export async function submitUserMessage(content: string) {
             ],
           });
 
-          return <BotCard> {JSON.stringify(stocks)}</BotCard>;
+          return <BotCard>{JSON.stringify(stocks)}</BotCard>;
         },
       },
       showStockPrice: {
@@ -123,12 +139,8 @@ export async function submitUserMessage(content: string) {
           price: z.number().describe("The price of the stock."),
           delta: z.number().describe("The change in price of the stock"),
         }),
-        render: async function* ({ symbol, price, delta }) {
-          yield (
-            <BotCard>
-              <Skeleton />
-            </BotCard>
-          );
+        generate: async function* ({ symbol, price, delta }) {
+          yield <BotCard>loading stock price...</BotCard>;
 
           await sleep(1000);
 
@@ -145,15 +157,7 @@ export async function submitUserMessage(content: string) {
             ],
           });
 
-          return (
-            <BotCard>
-              {JSON.stringify({
-                symbol,
-                price,
-                delta,
-              })}
-            </BotCard>
-          );
+          return <BotCard>{JSON.stringify({ symbol, price, delta })}</BotCard>;
         },
       },
     },
@@ -161,6 +165,6 @@ export async function submitUserMessage(content: string) {
 
   return {
     id: nanoid(),
-    display: ui,
+    display: result.value,
   };
 }
