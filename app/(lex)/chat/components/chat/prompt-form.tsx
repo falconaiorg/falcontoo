@@ -3,11 +3,11 @@
 import * as React from "react";
 import Textarea from "react-textarea-autosize";
 import { useActions, useUIState } from "ai/rsc";
-import { type AI } from "../../draco/chat/actions";
+import { type AI } from "../../../../draco/chat/actions";
 import { Button } from "@/components/ui/button";
 import { IconArrowElbow } from "@/components/ui/icons";
 import { nanoid } from "nanoid";
-import { UserMessage } from "../../draco/chat/rsc/user-message";
+import { UserMessage } from "../../../../draco/chat/rsc/user-message";
 import { useEnterSubmit } from "@/hooks/use-enter-submit";
 
 export function PromptForm({

@@ -1,6 +1,6 @@
 import { nanoid } from "nanoid";
 // import { AI } from "./chat/actions";
-import { Chat } from "./chat";
+import { Chat } from "./components/chat/chat";
 import { AI } from "./api/actions";
 
 const Page = () => {
