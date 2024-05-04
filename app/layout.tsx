@@ -25,13 +25,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={montserrat.className}>
-        <div className="flex h-svh flex-col items-center md:bg-slate-900 md:p-2">
+        <div className="flex h-svh flex-col items-center md:p-2">
           <ThemeProvider
             attribute="class"
             defaultTheme="dark"
             disableTransitionOnChange
           >
-            <div className="scrollbar-sm w-full max-w-screen-sm overflow-y-auto bg-background ring-offset-rose-200 md:rounded  md:ring-2 md:ring-rose-300 md:ring-offset-2">
+            <div className="scrollbar-sm h-full w-full max-w-screen-sm overflow-y-auto ">
               <Providers>{children}</Providers>
             </div>
             <Toaster richColors />
