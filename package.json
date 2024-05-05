@@ -38,6 +38,7 @@
     "framer-motion": "^11.1.7",
     "jotai": "^2.8.0",
     "lottie-react": "^2.4.0",
+    "mime-types": "^2.1.35",
     "nanoid": "^5.0.7",
     "next": "14.2.3",
     "next-auth": "^4.24.7",
