@@ -9,6 +9,7 @@ import { IconArrowElbow } from "@/components/ui/icons";
 import { nanoid } from "nanoid";
 import { UserMessage } from "../../../../draco/chat/rsc/user-message";
 import { useEnterSubmit } from "@/hooks/use-enter-submit";
+import { CameraIcon } from "@/components/icons";
 
 export function PromptForm({
   input,
@@ -58,6 +59,17 @@ export function PromptForm({
       }}
     >
       <div className="relative flex max-h-60 w-full grow flex-col overflow-hidden bg-background px-8 sm:rounded-md sm:border sm:px-12">
+        <Button
+          variant="outline"
+          size="icon"
+          className="absolute left-0 top-[14px] size-8 rounded-full bg-background p-0 sm:left-4"
+          onClick={() => {
+            console.log("New Chat");
+          }}
+        >
+          <CameraIcon size="xxs" />
+          <span className="sr-only">New Chat</span>
+        </Button>
         <Textarea
           ref={inputRef}
           tabIndex={0}
