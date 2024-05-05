@@ -1,5 +1,6 @@
 import React, { ComponentType, ExoticComponent } from "react";
 import {
+  CameraIcon as CameraIconSolid,
   WrenchScrewdriverIcon,
   AcademicCapIcon,
   UserCircleIcon,
@@ -234,4 +235,8 @@ export const ArrowDownIcon: React.FC<IconProps> = (props) => (
 
 export const CheckBadgeIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props} Icon={CheckBadgeIconSolid} />
+);
+
+export const CameraIcon: React.FC<IconProps> = (props) => (
+  <BaseIcon {...props} Icon={CameraIconSolid} />
 );
