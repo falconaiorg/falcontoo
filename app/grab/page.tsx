@@ -1,14 +1,10 @@
 "use client";
-
-import { useSearchParams } from "next/navigation";
+// Why suspense: https://nextjs.org/docs/messages/missing-suspense-with-csr-bailout
 import { Suspense } from "react";
-// https://nextjs.org/docs/messages/missing-suspense-with-csr-bailout
-function SearchBar() {
-  const searchParams = useSearchParams();
+import { useShareParams } from "@/hooks/use-share-params";
 
-  const title = searchParams.get("title");
-  const url = searchParams.get("url");
-  const text = searchParams.get("text");
+function SearchBar() {
+  const { text, title, url } = useShareParams();
 
   return (
     <>
