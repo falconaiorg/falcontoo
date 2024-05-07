@@ -1,13 +1,16 @@
 "use client";
 
-import { useShareParams } from "@/hooks/use-share-params";
 import { useQuery } from "@tanstack/react-query";
 import { fetchArticle } from "./action";
 import { AIMarkdown } from "@/components/chat/ai-markdown";
+import { useSearchParams } from "next/navigation";
 const urlTest = "https://substack.com/home/post/p-144117118?source=queue";
 
 export function SearchParams() {
-  const { text, title, url } = useShareParams();
+  const searchParams = useSearchParams();
+
+  const title = searchParams.get("title") || "No title";
+  const url = searchParams.get("url") || urlTest;
   const urlToFetch = url || urlTest;
 
   const {
