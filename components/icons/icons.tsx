@@ -29,6 +29,7 @@ import {
   ArrowUpIcon as ArrowUpIconSolid,
   ArrowDownIcon as ArrowDownIconSolid,
   CheckBadgeIcon as CheckBadgeIconSolid,
+  UserIcon as UserIconSolid,
 } from "@heroicons/react/24/solid";
 import { XCircleIcon } from "@heroicons/react/24/outline";
 import { FaFilePdf } from "react-icons/fa";
@@ -254,4 +255,8 @@ export const BookmarkIcon: React.FC<IconProps> = (props) => (
 
 export const BookOpenIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props} Icon={BookOpenIconSolid} />
+);
+
+export const UserIcon: React.FC<IconProps> = (props) => (
+  <BaseIcon {...props} Icon={UserIconSolid} />
 );
