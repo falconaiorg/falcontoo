@@ -15,8 +15,17 @@
       "type": "image/png"
     }
   ],
-  "start_url": "/",
+  "start_url": "/home",
   "scope": "/",
+  "share_target": {
+    "action": "/grab",
+    "method": "GET",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  },
   "orientation": "portrait",
   "display": "fullscreen",
   "dir": "auto",
