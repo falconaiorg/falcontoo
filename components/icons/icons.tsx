@@ -1,5 +1,8 @@
 import React, { ComponentType, ExoticComponent } from "react";
 import {
+  BookmarkIcon as BookmarkIconSolid,
+  BookOpenIcon as BookOpenIconSolid,
+  CalendarIcon as CalendarIconSolid,
   CameraIcon as CameraIconSolid,
   WrenchScrewdriverIcon,
   AcademicCapIcon,
@@ -40,14 +43,14 @@ import { FiSliders, FiAirplay, FiTool } from "react-icons/fi";
 
 // Tailwind Size Mapping
 const sizeMapping = {
-  "3xs": "h-3 w-3",
-  xxs: "h-4 w-4",
-  xs: "h-5 w-5",
-  sm: "h-6 w-6",
-  md: "h-8 w-8",
-  lg: "h-10 w-10",
-  xl: "h-12 w-12",
-  "2xl": "h-14 w-14",
+  xxs: "h-3 w-3",
+  xs: "h-4 w-4",
+  sm: "h-5 w-5",
+  base: "h-6 w-6",
+  md: "h-7 w-7",
+  lg: "h-8 w-8",
+  xl: "h-10 w-10",
+  "2xl": "h-12 w-12",
 };
 
 // Color Mapping
@@ -76,7 +79,7 @@ type BaseIconProps = {
 
 const BaseIcon: React.FC<BaseIconProps> = ({
   Icon,
-  size = "md",
+  size = "base",
   color = "currentColor",
   className,
   ...props
@@ -239,4 +242,16 @@ export const CheckBadgeIcon: React.FC<IconProps> = (props) => (
 
 export const CameraIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props} Icon={CameraIconSolid} />
+);
+
+export const CalendarIcon: React.FC<IconProps> = (props) => (
+  <BaseIcon {...props} Icon={CalendarIconSolid} />
+);
+
+export const BookmarkIcon: React.FC<IconProps> = (props) => (
+  <BaseIcon {...props} Icon={BookmarkIconSolid} />
+);
+
+export const BookOpenIcon: React.FC<IconProps> = (props) => (
+  <BaseIcon {...props} Icon={BookOpenIconSolid} />
 );
