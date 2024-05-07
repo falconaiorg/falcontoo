@@ -22,13 +22,13 @@ export default function Error({
   return (
     <div className="flex h-screen w-screen flex-col items-center justify-center gap-5">
       <div className="flex flex-col items-center gap-5 text-center">
-        <Image
+        {/* <Image
           src="/chubbi-sad.png"
           alt="chubbi"
           width={200}
           height={200}
           className="rounded-full"
-        />
+        /> */}
 
         <div className="text-2xl font-bold sm:text-2xl md:text-3xl lg:text-4xl">
           {isOnline ? "Something went wrong!" : "You are offline!"}
