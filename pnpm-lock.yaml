@@ -104,12 +104,18 @@ dependencies:
   filepond-plugin-image-exif-orientation:
     specifier: ^1.0.11
     version: 1.0.11(filepond@4.31.1)
+  filepond-plugin-image-preview:
+    specifier: ^4.6.12
+    version: 4.6.12(filepond@4.31.1)
   filepond-plugin-image-validate-size:
     specifier: ^1.2.7
     version: 1.2.7(filepond@4.31.1)
   framer-motion:
     specifier: ^11.1.7
     version: 11.1.7(react-dom@18.3.1)(react@18.3.1)
+  html2canvas:
+    specifier: ^1.4.1
+    version: 1.4.1
   jotai:
     specifier: ^2.8.0
     version: 2.8.0(@types/react@18.3.1)(react@18.3.1)
@@ -4345,6 +4351,11 @@ packages:
     dev: false
     optional: true
 
+  /base64-arraybuffer@1.0.2:
+    resolution: {integrity: sha512-I3yl4r9QB5ZRY3XuJVEPfc2XhZO6YweFPI+UovAzn+8/hb3oJ6lnysaFcjVpkCPfVWFUDvoZ8kmVDP7WyRtYtQ==}
+    engines: {node: '>= 0.6.0'}
+    dev: false
+
   /base64-js@1.5.1:
     resolution: {integrity: sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==}
 
@@ -4767,6 +4778,12 @@ packages:
   /crypto-random-string@2.0.0:
     resolution: {integrity: sha512-v1plID3y9r/lPhviJ1wrXpLeyUIGAZ2SHNYTEapm7/8A9nLPoyvVp3RK/EPFqn5kEznyWgYZNsRtYYIWbuG8KA==}
     engines: {node: '>=8'}
+    dev: false
+
+  /css-line-break@2.1.0:
+    resolution: {integrity: sha512-FHcKFCZcAha3LwfVBhCQbW2nCNbkZXn7KVUJcsT5/P8YmfsVja0FMPJr0B903j/E69HUphKiV9iQArX8SDYA4w==}
+    dependencies:
+      utrie: 1.0.2
     dev: false
 
   /css-tree@2.3.1:
@@ -5722,6 +5739,14 @@ packages:
       filepond: 4.31.1
     dev: false
 
+  /filepond-plugin-image-preview@4.6.12(filepond@4.31.1):
+    resolution: {integrity: sha512-Y8ETX5QVV0mbPB0586UH8AUmG9tZg8PuN5bdEAIlZVJFTct5ebViJ7+Am94/VhTPjLqZjBf1zmDq5JU6XRsZKw==}
+    peerDependencies:
+      filepond: '>=4.x <5.x'
+    dependencies:
+      filepond: 4.31.1
+    dev: false
+
   /filepond-plugin-image-validate-size@1.2.7(filepond@4.31.1):
     resolution: {integrity: sha512-Sxu2XTbQHf9HRWu+AQg6zJkww0O6hTXq9IX5/SAJLuvohpF23XTzCNg+29KXr4Wulm70/jSSpMcJURn9AU72rA==}
     peerDependencies:
@@ -6310,6 +6335,14 @@ packages:
 
   /html-url-attributes@3.0.0:
     resolution: {integrity: sha512-/sXbVCWayk6GDVg3ctOX6nxaVj7So40FcFAnWlWGNAB1LpYKcV5Cd10APjPjW80O7zYW2MsjBV4zZ7IZO5fVow==}
+    dev: false
+
+  /html2canvas@1.4.1:
+    resolution: {integrity: sha512-fPU6BHNpsyIhr8yyMpTLLxAbkaK8ArIBcmZIRiBLiDhjeqvXolaEmDGmELFuX9I4xDcaKKcJl+TKZLqruBbmWA==}
+    engines: {node: '>=8.0.0'}
+    dependencies:
+      css-line-break: 2.1.0
+      text-segmentation: 1.0.3
     dev: false
 
   /https-proxy-agent@5.0.1:
@@ -9790,6 +9823,12 @@ packages:
       source-map-support: 0.5.21
     dev: false
 
+  /text-segmentation@1.0.3:
+    resolution: {integrity: sha512-iOiPUo/BGnZ6+54OsWxZidGCsdU8YbE4PSpdPinp7DeMtUJNJBoJ/ouUSTJjHkh1KntHaltHl/gDs2FC4i5+Nw==}
+    dependencies:
+      utrie: 1.0.2
+    dev: false
+
   /text-table@0.2.0:
     resolution: {integrity: sha512-N+8UisAXDGk8PFXP4HAzVR9nbfmVJ3zYLAWiTIoqC5v5isinhr+r5uaO8+7r3BMfuNIufIsA7RdpVgacC2cSpw==}
     dev: true
@@ -10255,6 +10294,12 @@ packages:
       is-generator-function: 1.0.10
       is-typed-array: 1.1.13
       which-typed-array: 1.1.15
+    dev: false
+
+  /utrie@1.0.2:
+    resolution: {integrity: sha512-1MLa5ouZiOmQzUbjbu9VmjLzn1QLXBhwpUa7kdLUQK+KQ5KA9I1vk5U4YHe/X2Ch7PYnJfWuWT+VbuxbGwljhw==}
+    dependencies:
+      base64-arraybuffer: 1.0.2
     dev: false
 
   /uuid@8.0.0:
