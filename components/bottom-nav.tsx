@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { vibrate } from "@/lib/vibrate";
 
 type NavbarSegments = "home" | "notes" | "profile";
 
@@ -43,6 +44,7 @@ export const BottomNav = () => {
           const isSelected = layoutSegment === segment;
           return (
             <Link
+              onClick={!isSelected ? () => vibrate() : undefined}
               key={href}
               href={href}
               className={cn(
