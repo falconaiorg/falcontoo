@@ -4,14 +4,11 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchArticle } from "./action";
 import { AIMarkdown } from "@/components/chat/ai-markdown";
 import { useSearchParams } from "next/navigation";
+import { useShareParams } from "@/hooks/use-share-params";
 const urlTest = "https://substack.com/home/post/p-144117118?source=queue";
 
 export function SearchParams() {
-  const searchParams = useSearchParams();
-
-  const title = searchParams.get("title") || "No title";
-  const url = searchParams.get("url") || urlTest;
-  const urlToFetch = url || urlTest;
+  const { text, url, title } = useShareParams();
 
   const {
     data: markdown,
@@ -19,7 +16,7 @@ export function SearchParams() {
     isLoading,
   } = useQuery({
     queryKey: ["todos"],
-    queryFn: () => fetchArticle(urlToFetch),
+    queryFn: () => fetchArticle(url || urlTest),
   });
 
   if (isLoading) return <div>Loading...</div>;
@@ -30,6 +27,7 @@ export function SearchParams() {
     <div>
       <h1 className="text-2xl font-bold">{title}</h1>
       <h2 className="text-xl font-semibold">{url}</h2>
+      <h3 className="text-lg font-medium">{text}</h3>
       <AIMarkdown content={markdown} className="p-3 py-4" />;
     </div>
   );
