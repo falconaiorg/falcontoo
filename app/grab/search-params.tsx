@@ -9,14 +9,14 @@ const urlTest = "https://substack.com/home/post/p-144117118?source=queue";
 
 export function SearchParams() {
   const { text, url, title } = useShareParams();
-
   const {
     data: markdown,
     error,
     isLoading,
   } = useQuery({
-    queryKey: ["todos"],
-    queryFn: () => fetchArticle(url || urlTest),
+    queryKey: ["todos", url],
+    queryFn: () => fetchArticle(url),
+    enabled: !!url,
   });
 
   if (isLoading) return <div>Loading...</div>;
