@@ -76,10 +76,10 @@ export const CardStack = function ({ cardArray }: { cardArray: CardData[] }) {
         <div className="font-semibold">{cardArray[0].date}</div>
       </div>
       <Card className="px-2">
-        {cardArray.map((card) => (
+        {cardArray.map((card, index) => (
           <>
             <SessionCard cardData={card} key={cardData.title} />
-            <>{cardArray.length > 1 && <Separator />}</>
+            {index < cardArray.length - 1 && <Separator />}
           </>
         ))}
       </Card>
