@@ -2,8 +2,7 @@
 import axios from "axios";
 import { Readability } from "@mozilla/readability";
 import { JSDOM } from "jsdom";
-const turndownService = new TurndownService();
-import TurndownService from "turndown";
+import Showdown from "showdown";
 
 export async function fetchArticle(url: string) {
   const response = await axios.get(url);
@@ -12,6 +11,17 @@ export async function fetchArticle(url: string) {
   const document = dom.window.document;
   const reader = new Readability(document);
   const article = reader.parse();
-  if (article?.content) return turndownService.turndown(article?.content);
+  const htmlSting = article?.content;
+  console.log(htmlSting);
+  const htmlNewDom = new JSDOM(htmlSting);
+  console.log(htmlNewDom);
+  const newDocument = htmlNewDom.window.document;
+  console.log(newDocument);
+  const convertor = new Showdown.Converter();
+  if (htmlSting) {
+    const markdown = convertor.makeMarkdown(htmlSting, newDocument);
+    console.log(markdown);
+    return markdown;
+  }
   return null;
 }
