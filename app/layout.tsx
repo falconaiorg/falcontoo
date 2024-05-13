@@ -36,7 +36,6 @@ export default function RootLayout({
             <Providers headers={headers()}>
               <div className="scrollbar-sm h-full w-full max-w-screen-sm overflow-y-auto ">
                 {children}
-                <BottomNav />
               </div>
             </Providers>
             <Toaster richColors />
