@@ -6,6 +6,7 @@ import Providers from "@/components/providers";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import { BottomNav } from "@/components/bottom-nav";
+import { headers } from "next/headers";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -32,7 +33,7 @@ export default function RootLayout({
             defaultTheme="dark"
             disableTransitionOnChange
           >
-            <Providers>
+            <Providers headers={headers()}>
               <div className="scrollbar-sm h-full w-full max-w-screen-sm overflow-y-auto ">
                 {children}
                 <BottomNav />
