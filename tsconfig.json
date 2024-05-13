@@ -21,6 +21,13 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/(lex)/chat/api/actions.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "app/(lex)/chat/api/actions.tsx",
+    "app/(lex)/chat/components/example-messages.tsx"
+  ],
   "exclude": ["node_modules"]
 }

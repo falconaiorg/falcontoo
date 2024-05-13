@@ -6,11 +6,13 @@ import { useLocalStorage } from "../../../../draco/chat/use-local-storage";
 import { useEffect, useState } from "react";
 import { useUIState, useAIState } from "ai/rsc";
 import { usePathname, useRouter } from "next/navigation";
-import { Message } from "../../../../draco/chat/actions";
+import { Message, UIState } from "../../../../draco/chat/actions";
 import { useScrollAnchor } from "../../../../draco/chat/use-scroll-anchor";
 import { toast } from "sonner";
 import { ChatPanel } from "./chat-panel";
 import { EmptyMessage } from "@/components/chat/empty-message";
+// For testing purposes
+import { dummyChatMessages as messages } from "../example-messages";
 
 export interface ChatProps extends React.ComponentProps<"div"> {
   initialMessages?: Message[];
@@ -23,7 +25,7 @@ export function Chat({ id, className, session }: ChatProps) {
   const router = useRouter();
   const path = usePathname();
   const [input, setInput] = useState("");
-  const [messages] = useUIState();
+  // const [messages] = useUIState();
   const [aiState] = useAIState();
 
   const [_, setNewChatId] = useLocalStorage("newChatId", id);
