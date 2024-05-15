@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
 import Providers from "@/components/providers";
+import { ViewTransitions } from "next-view-transitions";
 
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
@@ -25,24 +26,26 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={montserrat.className}>
-        <div className="flex h-svh flex-col items-center md:p-2">
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="dark"
-            disableTransitionOnChange
-          >
-            <Providers headers={headers()}>
-              <div className="scrollbar-sm h-full w-full max-w-screen-sm overflow-y-auto ">
-                {children}
-              </div>
-            </Providers>
-            <Toaster richColors />
-          </ThemeProvider>
-        </div>
-      </body>
-      <Toaster richColors />
-    </html>
+    <ViewTransitions>
+      <html lang="en">
+        <body className={montserrat.className}>
+          <div className="flex h-svh flex-col items-center md:p-2">
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="dark"
+              disableTransitionOnChange
+            >
+              <Providers headers={headers()}>
+                <div className="scrollbar-sm h-full w-full max-w-screen-sm overflow-y-auto ">
+                  {children}
+                </div>
+              </Providers>
+              <Toaster richColors />
+            </ThemeProvider>
+          </div>
+        </body>
+        <Toaster richColors />
+      </html>
+    </ViewTransitions>
   );
 }

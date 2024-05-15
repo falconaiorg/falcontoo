@@ -173,6 +173,9 @@ dependencies:
   next-themes:
     specifier: ^0.3.0
     version: 0.3.0(react-dom@18.3.1)(react@18.3.1)
+  next-view-transitions:
+    specifier: ^0.1.1
+    version: 0.1.1(next@14.2.3)(react-dom@18.3.1)(react@18.3.1)
   node-fetch:
     specifier: ^3.3.2
     version: 3.3.2
@@ -2274,8 +2277,8 @@ packages:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.4.15
 
-  /@maxim_mazurok/gapi.client.androidpublisher-v3@0.0.20240513:
-    resolution: {integrity: sha512-w7V4qPitfukL408T1iKV6A/mvqijpzs57H4liiE2v7mivWtcdVQjA78ZDDRs+56+40NvZrbk4ccqaj2NZDLwVw==}
+  /@maxim_mazurok/gapi.client.androidpublisher-v3@0.0.20240514:
+    resolution: {integrity: sha512-wlGlzoDxCLp/DQ8e7LYYBxSPfquWOkFS1NVzGBFeOAgCEHSzJMsXHtgBDqJXg4iwcscmC7QjvSZ33Wx+62MhVA==}
     dependencies:
       '@types/gapi.client': 1.0.8
       '@types/gapi.client.discovery-v1': 0.0.4
@@ -3676,7 +3679,7 @@ packages:
     resolution: {integrity: sha512-ITizgxAt4cTHQ7n+pGRTHi/QeWA1MKYliiuZcuR2rjyiyAvR/jdTamKmUYxdtP3lWorR+q/+RFZToFKkCliGnQ==}
     deprecated: use @types/gapi.client.androidpublisher-v3 instead; see https://github.com/Maxim-Mazurok/google-api-typings-generator/issues/652 for details
     dependencies:
-      '@maxim_mazurok/gapi.client.androidpublisher-v3': 0.0.20240513
+      '@maxim_mazurok/gapi.client.androidpublisher-v3': 0.0.20240514
     dev: true
 
   /@types/gapi.client.discovery-v1@0.0.4:
@@ -8695,6 +8698,18 @@ packages:
       react: ^16.8 || ^17 || ^18
       react-dom: ^16.8 || ^17 || ^18
     dependencies:
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+    dev: false
+
+  /next-view-transitions@0.1.1(next@14.2.3)(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-1rpXhWF8j0VJwJG52c8WeeAYpr1K7o3ub82lahbSoUwAry54TEm1d3mqBbSLLIMl85c3OewkZjxncTHwYFk+IA==}
+    peerDependencies:
+      next: ^14.0.0
+      react: ^18.2.0
+      react-dom: ^18.2.0
+    dependencies:
+      next: 14.2.3(@babel/core@7.24.5)(react-dom@18.3.1)(react@18.3.1)
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
     dev: false

@@ -1,5 +1,4 @@
 "use client";
-import Link from "next/link";
 import { BookmarkIcon, AIMagicIcon, UserIcon } from "@/components/icons";
 import { url } from "@/urls";
 import { useSelectedLayoutSegment } from "next/navigation";
@@ -8,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { vibrate } from "@/lib/vibrate";
+import { Link } from "next-view-transitions";
 
 type NavbarSegments = "home" | "notes" | "profile";
 
