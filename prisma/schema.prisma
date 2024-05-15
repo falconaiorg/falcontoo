@@ -89,8 +89,71 @@ model User {
     // Study Session
     workSession WorkSession[]
     files       File[]
+
+    // Resources
+    articles    Article[]
+    annotations Annotation[]
+
+    // Chat
+    chats Chat[]
 }
 
+model Article {
+    id             String       @id @default(cuid())
+    createdAt      DateTime     @default(now())
+    updatedAt      DateTime     @updatedAt
+    title          String
+    description    String?
+    url            String
+    rawHTML        String
+    rawChecksum    String // SHA256
+    content        String
+    parsedChecksum String // SHA256
+    thumbnail      String?
+    annotations    Annotation[]
+    user   User[]
+    layers Layer[]
+}
+
+model Layer {
+    id          String            @id @default(cuid())
+    createdAt   DateTime          @default(now())
+    updatedAt   DateTime          @updatedAt
+    name        String
+    article     Article           @relation(fields: [articleId], references: [id])
+    articleId   String
+    layerType   LayerType
+    annotations LayerAnnotation[]
+}
+
+enum LayerType {
+    LOGICAL_FALLACIES
+}
+
+model LayerAnnotation {
+    id        String   @id @default(cuid())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    highlight String
+    title     String?
+    note      String?
+    layer     Layer    @relation(fields: [layerId], references: [id])
+    layerId   String
+}
+
+model Annotation {
+    id        String   @id @default(cuid())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    highlight String?
+    note      String?
+    article   Article  @relation(fields: [articleId], references: [id])
+    articleId String
+    user      User     @relation(fields: [userId], references: [id])
+    userId    String
+}
+
+// Sessions 
 model WorkSession {
     id        String   @id @default(cuid())
     createdAt DateTime @default(now())
@@ -111,6 +174,8 @@ model Chat {
     updatedAt     DateTime     @updatedAt
     workSession   WorkSession? @relation(fields: [workSessionId], references: [id])
     workSessionId String?      @unique
+    User          User?        @relation(fields: [userId], references: [id])
+    userId        String?
 }
 
 model File {
