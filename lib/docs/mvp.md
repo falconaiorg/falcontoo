@@ -1,34 +1,38 @@
-# MVP
+# Article Reader
 
-## Major Risks
+## Base Reader Features
 
-1. Bubblewrap
-   1. Will the app, bubblewrapped, perform well?
-2. Continuous audio communication, and actions.
-3. Keeping the screen on.
+- Save the article.
+- Render the article.
+- Highlight the article.
+- Annotate the article.
+- Share the article.
+- Search the article.
+- Article Themes.
+- Article Typography.
 
-## Non-risks
+## AI Features
 
-1. The directory structure and database integration.
+### Article Level
 
-## Phase 1
+- Chat with the article.
+- Summarize the article.
+- Show concepts/ideas in the article.
+- Show Arguments in the articles.
+- Critical Tagging of the article.
+  - Biases
+  - Fallacies
+  - Misinformation
+  - Misleading
+  - Unverified
+- Learn More in the same domain.
 
-1. Make a basic audio chat app with AI that can take actions.
-2. Bubblewrap the app and test the APK.
-   1. For experience and performance.
+#### Context Based features
 
-## Phase 1
+- Show users prior knowledge on these topics by looking at the embeddings of the past articles. 
 
-1. The user logs in.
-2. The user creates a notebook
-3. The user creates a section
-4. The user creates a study session.
-   1. This study session is a chat with AI.
-5. The user starts chatting with the AI about the AI.
-6. While chatting, the user can perform actions with the chat
-   1. The user can ask the AI to take a note based on audio input.
-   2. The user can send a picture to the AI and ask it to take a note based on the picture.
-7. Once the session is complete, the user can see the notes, and chat history.
-8. The notes also get displayed in the section.
-9. The user can click a note and convert it into a flashcard.'
-10. The user can quickly create a quiz on a section.
+### Annotation Level
+
+- Save the embeddings of the annotations.
+- Link the annotations with the concepts.
+- Generate flashcards from the annotations.
