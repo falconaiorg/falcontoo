@@ -38,3 +38,4 @@ next-env.d.ts
 /app/src/main
 /app/build
 .gradle
+(a_local)
