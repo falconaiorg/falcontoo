@@ -106,13 +106,15 @@ model Article {
     description    String?
     url            String
     rawHTML        String
+    author         String
+    publishedAt    DateTime
     rawChecksum    String // SHA256
     content        String
     parsedChecksum String // SHA256
     thumbnail      String?
     annotations    Annotation[]
-    user   User[]
-    layers Layer[]
+    user           User[]
+    layers         Layer[]
 }
 
 model Layer {
