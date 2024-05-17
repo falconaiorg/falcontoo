@@ -8,6 +8,8 @@ import {
   CardDescription,
 } from "@/components/ui/card";
 import Image from "next/image";
+import Link from "next/link";
+import { url } from "@/urls";
 
 const dummyArticleData = [
   {
@@ -42,7 +44,12 @@ export const ArticleList = ({ articles }: { articles: Article[] }) => {
   return (
     <div className="flex flex-col gap-4">
       {articles.map((article) => (
-        <ArticleCard article={article} key={article.title} />
+        <Link
+          href={url.reader.read({ articleId: article.id })}
+          key={article.title}
+        >
+          <ArticleCard article={article} key={article.title} />
+        </Link>
       ))}
     </div>
   );

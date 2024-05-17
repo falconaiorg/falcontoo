@@ -9,7 +9,6 @@ export default async function HomePage() {
   const articles = await queries.article.getArticlesbyUserId({
     userId: user.id,
   });
-
   return (
     <div className="px-4 py-2">
       <ArticleList articles={articles} />

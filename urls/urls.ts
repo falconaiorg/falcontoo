@@ -11,4 +11,7 @@ export const url = {
     edit: `${root}/session/edit`,
     view: `${root}/session/view`,
   },
+  reader: {
+    read: ({ articleId }: { articleId: string }) => `${root}/read/${articleId}`,
+  },
 };
