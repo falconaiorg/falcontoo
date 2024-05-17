@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "build-s": "pnpm build && pnpm start",
-    "migrate:dev": "npx prisma migrate dev"
+    "migrate:dev": "npx prisma migrate dev",
+    "remove modules": "rm -rf node_modules"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^0.0.9",

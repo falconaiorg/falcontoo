@@ -96,6 +96,8 @@ export async function seedDb(): Promise<SeedReturn> {
             .update(article.rawHTML)
             .digest("hex"),
           user: { connect: { id: userId } },
+          author: "Test User",
+          publishedAt: new Date(),
         },
       });
     }
