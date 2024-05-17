@@ -7,7 +7,8 @@
     "build": "prisma generate && prisma migrate deploy && next build",
     "start": "next start",
     "lint": "next lint",
-    "build-s": "pnpm build && pnpm start"
+    "build-s": "pnpm build && pnpm start",
+    "migrate:dev": "npx prisma migrate dev"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^0.0.9",
