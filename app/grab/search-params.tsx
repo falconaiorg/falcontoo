@@ -3,10 +3,12 @@
 import { useQuery } from "@tanstack/react-query";
 import { fetchArticle } from "./action";
 import { AIMarkdown } from "@/components/chat/ai-markdown";
-import { useSearchParams } from "next/navigation";
 import { useShareParams } from "@/hooks/use-share-params";
-const urlTest = "https://substack.com/home/post/p-144117118?source=queue";
+export const testArticle =
+  "https://substack.com/home/post/p-144117118?source=queue";
 
+const dynamic = "force-dyamic";
+const revalidate = 0;
 export function SearchParams() {
   const { text, url, title } = useShareParams();
   const {
