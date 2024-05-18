@@ -23,7 +23,7 @@ const Highlight = ({ children }: any) => {
         onClick={() => setOpen(!open)}
         onScroll={() => setOpen(false)}
       >
-        <span ref={animationParent}>{children}</span>
+        <p ref={animationParent}>{children}</p>
       </HoverCardTrigger>
       <HoverCardContent>
         <CardHeader>Logical Fallacy</CardHeader>

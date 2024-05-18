@@ -33,7 +33,7 @@ export default async function ReadPage({
       <div>
         <h1>Markdown with Highlighted Words</h1>
         <MarkdownWithHighlight
-          markdownText={markdownText}
+          markdownText={article.content}
           searchWords={searchWords}
         />
       </div>

@@ -13,21 +13,6 @@ export default async function HomePage() {
   return (
     <div className="px-4 py-2">
       <div className="flex flex-col space-y-3">
-        {testArticles.map((article) => (
-          <Link
-            key={article.url}
-            href={{
-              pathname: "/grab",
-              query: {
-                url: article.url,
-                title: article.title,
-                text: article.text,
-              },
-            }}
-          >
-            <Button>{article.title}</Button>
-          </Link>
-        ))}
       </div>
       <ArticleList articles={articles} />
     </div>

@@ -1,7 +1,7 @@
 import prisma from "@/prisma";
 import { cache } from "@/server/cache";
 
-export const getArticlesbyUserId = cache.next(
+export const getArticlesbyUserId = cache.react(
   async ({ userId }: { userId: string }) => {
     try {
       const userWithArticles = await prisma.user.findUnique({
@@ -9,7 +9,11 @@ export const getArticlesbyUserId = cache.next(
           id: userId,
         },
         include: {
-          articles: true,
+          articles: {
+            orderBy: {
+              createdAt: "desc",
+            },
+          },
         },
       });
       if (!userWithArticles) {
@@ -19,9 +23,5 @@ export const getArticlesbyUserId = cache.next(
     } catch (error) {
       throw new Error("Failed to get articles");
     }
-  },
-  [],
-  {
-    tags: ["articles", "user"],
   },
 );

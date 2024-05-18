@@ -21,20 +21,10 @@ export default async function Grab({
     return <div>No content found.</div>;
   }
 
-  const article = await fetchArticle(url);
-  if (!article) {
-    return <div>No content found.</div>;
+  try {
+    await fetchArticle(url);
+    return <div>Oops something went wrong. Please try again later.</div>;
+  } catch (err) {
+    return <div>Oops something went wrong. Please try again later.</div>;
   }
-
-  return (
-    <div>
-      {/* <MarkdownWithHighlight
-        markdownText={article}
-        searchWords={[
-          "Everyone else in the audience was probably local, but Steve and Alexis came up on the train from the University of Virginia, where they were seniors. Since they'd come so far I agreed to meet them for coffee. They told me about the startup idea we'd later fund them to drop: a way to order fast food on your cellphone.",
-        ]}
-      /> */}
-      <SearchParams />
-    </div>
-  );
 }

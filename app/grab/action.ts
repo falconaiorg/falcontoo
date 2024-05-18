@@ -2,9 +2,11 @@
 import { TRPCError } from "@trpc/server";
 import prisma from "@/prisma";
 import { getServerComponentSession } from "@/auth";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { parseWithPostlight, parseWithReadability } from "@/lib/parser/html";
 import { ParsedArticle } from "@/lib/parser/types";
+import { redirect } from "next/navigation";
+import { url } from "@/urls";
 
 const saveArticle = async (url: string, articleData: ParsedArticle) => {
   const { user } = await getServerComponentSession();
@@ -19,26 +21,25 @@ const saveArticle = async (url: string, articleData: ParsedArticle) => {
     },
   });
   revalidatePath("/");
+  revalidateTag("articles");
   return newArticle;
 };
 
-export async function fetchArticle(url: string | undefined) {
+export async function fetchArticle(articleUrl: string | undefined) {
   try {
-    if (!url) {
+    if (!articleUrl) {
       return;
     }
     let content: string;
     try {
-      const article = await parseWithReadability(url);
-      await saveArticle(url, article);
+      const article = await parseWithReadability(articleUrl);
+      await saveArticle(articleUrl, article);
       content = article.content;
     } catch (err) {
-      const article = await parseWithPostlight(url);
-      await saveArticle(url, article);
+      const article = await parseWithPostlight(articleUrl);
+      await saveArticle(articleUrl, article);
       content = article.content;
     }
-
-    return content;
   } catch (err) {
     console.log(err);
     throw new TRPCError({
@@ -47,4 +48,6 @@ export async function fetchArticle(url: string | undefined) {
       cause: err,
     });
   }
+
+  redirect(url.home);
 }
