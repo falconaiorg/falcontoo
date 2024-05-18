@@ -55,16 +55,17 @@ const MarkdownWithHighlight = ({
   searchWords,
 }: {
   markdownText: string;
-  searchWords: string[];
+  searchWords?: string[];
 }) => {
   const [hasFilter] = useAtom(filterAtom);
+
   return (
     <div>
       <ReactMarkdown
         components={{
           p: ({ node, children }) => {
             const textToHighlight = extractText(children);
-            if (!hasFilter) {
+            if (!hasFilter || !searchWords || searchWords.length === 0) {
               return <p>{children}</p>;
             }
             return (
