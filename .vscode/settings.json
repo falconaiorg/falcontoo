@@ -21,5 +21,10 @@
     "toastify",
     "usehooks",
     "webp"
-  ]
+  ],
+  "zenMode.hideLineNumbers": false,
+  "zenMode.centerLayout": true,
+  "zenMode.fullScreen": true,
+  "zenMode.hideActivityBar": true,
+  "zenMode.hideStatusBar": true
 }
