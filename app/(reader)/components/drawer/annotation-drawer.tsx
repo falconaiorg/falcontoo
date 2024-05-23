@@ -7,13 +7,15 @@ import {
   DrawerOverlay,
 } from "@/components/ui/drawer";
 import { Card, CardContent } from "@/components/ui/card";
-import { useState } from "react";
+import { use, useEffect, useState } from "react";
 import { useTextSelection } from "./use-text-selection";
 import { cn } from "@/lib/utils";
 import { useInView } from "react-intersection-observer";
 import { DrawerCarousel } from "./drawer-carousel";
 import { ChatSpace } from "./chat-space";
 import { TestOverflow } from "@/components/ui/test/test-overflow";
+import { useSetAtom } from "jotai";
+import { hasSelectionAtom } from "./atoms";
 
 const SNAP_POINT = {
   initial: 0.5,
@@ -30,6 +32,7 @@ export function AnnotationDrawer() {
   const [activeSnapPoint, setActiveSnapPoint] = useState<
     string | number | null
   >(0.5);
+  const setSelectionAtom = useSetAtom(hasSelectionAtom);
 
   const {
     text,
@@ -40,6 +43,14 @@ export function AnnotationDrawer() {
     hasSelection,
     setHasSelectionChange,
   } = useTextSelection();
+
+  useEffect(() => {
+    if (hasSelection) {
+      setSelectionAtom(true);
+    } else {
+      setSelectionAtom(false);
+    }
+  }, [hasSelection]);
 
   return (
     <Drawer
@@ -55,7 +66,7 @@ export function AnnotationDrawer() {
       activeSnapPoint={activeSnapPoint}
       setActiveSnapPoint={setActiveSnapPoint}
     >
-      <DrawerContent className="mt-0 h-[90%]">
+      <DrawerContent className="mt-0 h-[90%] w-[98%] mx-auto">
         <main className="flex h-full w-full flex-col items-center">
           <DrawerHeader className="flex flex-row justify-center">
             <Card className="w-3/4 border-none p-4">
@@ -66,7 +77,7 @@ export function AnnotationDrawer() {
           </DrawerHeader>
           <div
             className={cn("flex h-5/6 flex-col items-center space-y-3 pb-10", {
-              "overflow-y-auto scrollbar-thin scrollbar-track-background scrollbar-thumb-gray-800 overflow-x-hidden":
+              "overflow-y-auto overflow-x-hidden scrollbar-thin scrollbar-track-background scrollbar-thumb-gray-800":
                 activeSnapPoint === SNAP_POINT.final,
             })}
           >
