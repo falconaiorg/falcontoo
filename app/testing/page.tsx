@@ -10,14 +10,17 @@ const aiText =
 
 export default function TestingPage() {
   const hasSelection = useAtomValue(hasSelectionAtom);
-
   return (
     <div
       className={cn({
         "select-none": hasSelection,
       })}
     >
-      {aiText}
+      {hasSelection ? (
+        <div key="base">{aiText}</div>
+      ) : (
+        <div key="swapped">{aiText}</div>
+      )}
       <AnnotationDrawer />
     </div>
   );
