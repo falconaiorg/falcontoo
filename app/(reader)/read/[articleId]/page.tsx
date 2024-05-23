@@ -1,7 +1,7 @@
 import { getServerComponentSession } from "@/auth";
 import { queries } from "@/server/next";
-import MarkdownWithHighlight from "../../markdown/with-highlight";
-import { FilterButton } from "../../filter-btn";
+import MarkdownWithHighlight from "../../components/markdown/with-highlight";
+import { FilterButton } from "../../components/filter-btn";
 
 const markdownText = `
 # Sample Markdown
