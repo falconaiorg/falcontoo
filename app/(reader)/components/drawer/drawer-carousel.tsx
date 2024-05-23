@@ -15,13 +15,13 @@ export const DrawerCarousel = ({
   hideArrows?: boolean;
 }) => {
   return (
-    <Carousel className="w-5/6">
+    <Carousel className="z-50 w-9/12">
       <CarouselContent>
         {content.map((_, index) => (
           <CarouselItem key={index}>
             <div className="p-1">
               <Card>
-                <CardContent className="aspect-square flex items-center justify-center p-6">
+                <CardContent className="flex items-center justify-center p-6 text-sm">
                   {content}
                 </CardContent>
               </Card>
@@ -29,8 +29,8 @@ export const DrawerCarousel = ({
           </CarouselItem>
         ))}
       </CarouselContent>
-      {!hideArrows && <CarouselPrevious />}
-      {!hideArrows && <CarouselNext />}
+      {!hideArrows && <CarouselPrevious variant={"ghost"} />}
+      {!hideArrows && <CarouselNext variant={"ghost"} />}
     </Carousel>
   );
 };

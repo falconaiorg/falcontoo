@@ -1,3 +1,4 @@
+import { TestOverflow } from "@/components/ui/test/test-overflow";
 import { AnnotationDrawer } from "../(reader)/components/drawer/annotation-drawer";
 
 const aiText =
@@ -5,10 +6,9 @@ const aiText =
 
 export default function TestingPage() {
   return (
-    <div className="over h-screen">
-      <AnnotationDrawer />
+    <div>
       {aiText}
-      {/* <ParserTester /> */}
+      <AnnotationDrawer />
     </div>
   );
 }
