@@ -73,6 +73,8 @@ export const useTextSelection = () => {
       "selectionchange",
       debouncedHandleSelectionChange,
     );
+    document.addEventListener("contextmenu", (e) => e.preventDefault());
+
     return () => {
       console.log("Removing event listeners");
       document.removeEventListener(
@@ -80,6 +82,7 @@ export const useTextSelection = () => {
         debouncedHandleSelectionChange,
       );
       document.removeEventListener("selectstart", handleSelectStart);
+      document.removeEventListener("contextmenu", (e) => e.preventDefault());
     };
   }, [debouncedHandleSelectionChange, handleSelectStart]);
 
