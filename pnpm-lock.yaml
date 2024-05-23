@@ -44,6 +44,9 @@ dependencies:
   '@radix-ui/react-checkbox':
     specifier: ^1.0.4
     version: 1.0.4(@types/react-dom@18.3.0)(@types/react@18.3.1)(react-dom@18.3.1)(react@18.3.1)
+  '@radix-ui/react-dialog':
+    specifier: ^1.0.5
+    version: 1.0.5(@types/react-dom@18.3.0)(@types/react@18.3.1)(react-dom@18.3.1)(react@18.3.1)
   '@radix-ui/react-hover-card':
     specifier: ^1.0.7
     version: 1.0.7(@types/react-dom@18.3.0)(@types/react@18.3.1)(react-dom@18.3.1)(react@18.3.1)
@@ -233,6 +236,9 @@ dependencies:
   react-icons:
     specifier: ^5.2.0
     version: 5.2.0(react@18.3.1)
+  react-intersection-observer:
+    specifier: ^9.10.2
+    version: 9.10.2(react-dom@18.3.1)(react@18.3.1)
   react-markdown:
     specifier: ^9.0.1
     version: 9.0.1(@types/react@18.3.1)(react@18.3.1)
@@ -272,6 +278,9 @@ dependencies:
   valid-url:
     specifier: ^1.0.9
     version: 1.0.9
+  vaul:
+    specifier: ^0.9.1
+    version: 0.9.1(@types/react-dom@18.3.0)(@types/react@18.3.1)(react-dom@18.3.1)(react@18.3.1)
   zod:
     specifier: ^3.23.6
     version: 3.23.6
@@ -301,6 +310,9 @@ devDependencies:
   '@types/jsdom':
     specifier: ^21.1.6
     version: 21.1.6
+  '@types/lodash':
+    specifier: ^4.17.4
+    version: 4.17.4
   '@types/node':
     specifier: ^20.12.8
     version: 20.12.8
@@ -2358,8 +2370,8 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.15
     dev: true
 
-  /@maxim_mazurok/gapi.client.androidpublisher-v3@0.0.20240520:
-    resolution: {integrity: sha512-2rIYkpLW+ciej7vDufr35fycReWgRL1I6rhR8dLRBcVw/zIzJBD85O0rdO81SKUAyBKrpc5BA1xWFR+4KcA9uw==}
+  /@maxim_mazurok/gapi.client.androidpublisher-v3@0.0.20240522:
+    resolution: {integrity: sha512-A5FiVFpHec+mrXHoLgvjIirIHmVza/CN+V/1Sdj7/+ocAVj9bILgVRr9Q/rs2S5TVW7nlHEYRr6vv9xaVk3UNg==}
     dependencies:
       '@types/gapi.client': 1.0.8
       '@types/gapi.client.discovery-v1': 0.0.4
@@ -3876,7 +3888,7 @@ packages:
     resolution: {integrity: sha512-ITizgxAt4cTHQ7n+pGRTHi/QeWA1MKYliiuZcuR2rjyiyAvR/jdTamKmUYxdtP3lWorR+q/+RFZToFKkCliGnQ==}
     deprecated: use @types/gapi.client.androidpublisher-v3 instead; see https://github.com/Maxim-Mazurok/google-api-typings-generator/issues/652 for details
     dependencies:
-      '@maxim_mazurok/gapi.client.androidpublisher-v3': 0.0.20240520
+      '@maxim_mazurok/gapi.client.androidpublisher-v3': 0.0.20240522
     dev: true
 
   /@types/gapi.client.discovery-v1@0.0.4:
@@ -3941,11 +3953,11 @@ packages:
   /@types/lodash.template@4.5.3:
     resolution: {integrity: sha512-Mo0UYKLu1oXgkV9TVoXZLlXXjyIXlW7ZQRxi/4gQJmzJr63dmicE8gG0OkPjYTKBrBic852q0JzqrtNUWLBIyA==}
     dependencies:
-      '@types/lodash': 4.17.1
+      '@types/lodash': 4.17.4
     dev: true
 
-  /@types/lodash@4.17.1:
-    resolution: {integrity: sha512-X+2qazGS3jxLAIz5JDXDzglAF3KpijdhFxlf/V1+hEsOUc+HnWi81L/uv/EvGuV90WY+7mPGFCUDGfQC3Gj95Q==}
+  /@types/lodash@4.17.4:
+    resolution: {integrity: sha512-wYCP26ZLxaT3R39kiN2+HcJ4kTd3U1waI/cY7ivWYqFP6pW3ZNpvi6Wd6PHZx7T/t8z0vlkXMg3QYLa7DZ/IJQ==}
     dev: true
 
   /@types/mdast@4.0.3:
@@ -10365,6 +10377,19 @@ packages:
       react: 18.3.1
     dev: false
 
+  /react-intersection-observer@9.10.2(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-j2hGADK2hCbAlfaq6L3tVLb4iqngoN7B1fT16MwJ4J16YW/vWLcmAIinLsw0lgpZeMi4UDUWtHC9QDde0/P1yQ==}
+    peerDependencies:
+      react: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+      react-dom: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+    peerDependenciesMeta:
+      react-dom:
+        optional: true
+    dependencies:
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+    dev: false
+
   /react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
 
@@ -12143,6 +12168,20 @@ packages:
 
   /valid-url@1.0.9:
     resolution: {integrity: sha512-QQDsV8OnSf5Uc30CKSwG9lnhMPe6exHtTXLRYX8uMwKENy640pU+2BgBL0LRbDh/eYRahNCS7aewCx0wf3NYVA==}
+
+  /vaul@0.9.1(@types/react-dom@18.3.0)(@types/react@18.3.1)(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-fAhd7i4RNMinx+WEm6pF3nOl78DFkAazcN04ElLPFF9BMCNGbY/kou8UMhIcicm0rJCNePJP0Yyza60gGOD0Jw==}
+    peerDependencies:
+      react: ^16.8 || ^17.0 || ^18.0
+      react-dom: ^16.8 || ^17.0 || ^18.0
+    dependencies:
+      '@radix-ui/react-dialog': 1.0.5(@types/react-dom@18.3.0)(@types/react@18.3.1)(react-dom@18.3.1)(react@18.3.1)
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+    transitivePeerDependencies:
+      - '@types/react'
+      - '@types/react-dom'
+    dev: false
 
   /verror@1.10.0:
     resolution: {integrity: sha512-ZZKSmDAEFOijERBLkmYfJ+vmk3w+7hOLYDNkRCuRuMJGEmqYNCNLyBBFwWKVMhfwaEF3WOd0Zlw86U/WC/+nYw==}
