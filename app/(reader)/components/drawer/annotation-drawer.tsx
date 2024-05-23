@@ -15,7 +15,7 @@ const SNAP_POINT = {
 const aiText =
   "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, velit ac aliquet ultrices, urna nisi tincidunt nunc, id lacinia nunc purus in justo. Nulla facilisi. Sed euismod, velit ac aliquet ultrices, urna nisi tincidunt nunc, id lacinia nunc purus in justo. Nulla facilisi.";
 
-export function AnonotationDrawer() {
+export function AnnotationDrawer() {
   const { ref, inView } = useInView({
     threshold: 0.5, // Adjust the threshold as needed
   });
@@ -34,6 +34,8 @@ export function AnonotationDrawer() {
     setHasSelectionChange,
   } = useTextSelection();
 
+  const [open, setOpen] = useState(hasSelection);
+
   console.log("selection", text);
 
   const fullyOpened = activeSnapPoint === SNAP_POINT.final;
@@ -43,6 +45,9 @@ export function AnonotationDrawer() {
       onOpenChange={(open) => {
         console.log("open", open);
         setHasSelectionChange(open);
+        if (!open) {
+          clearSelection();
+        }
       }}
       open={hasSelection}
       snapPoints={[SNAP_POINT.initial, SNAP_POINT.final]}
