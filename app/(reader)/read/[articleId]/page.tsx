@@ -2,6 +2,7 @@ import { getServerComponentSession } from "@/auth";
 import { queries } from "@/server/next";
 import MarkdownWithHighlight from "../../components/markdown/with-highlight";
 import { FilterButton } from "../../components/filter-btn";
+import { AnnotationDrawer } from "../../components/drawer/annotation-drawer";
 
 const markdownText = `
 # Sample Markdown
@@ -36,6 +37,7 @@ export default async function ReadPage({
           markdownText={article.content}
           searchWords={searchWords}
         />
+        <AnnotationDrawer />
       </div>
     </div>
   );

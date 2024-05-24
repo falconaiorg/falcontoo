@@ -4,18 +4,17 @@ import {
   DrawerContent,
   DrawerFooter,
   DrawerHeader,
-  DrawerOverlay,
 } from "@/components/ui/drawer";
-import { Card, CardContent } from "@/components/ui/card";
-import { use, useEffect, useState } from "react";
+import { Card } from "@/components/ui/card";
+import { useEffect, useState } from "react";
 import { useTextSelection } from "./use-text-selection";
 import { cn } from "@/lib/utils";
 import { useInView } from "react-intersection-observer";
 import { DrawerCarousel } from "./drawer-carousel";
 import { ChatSpace } from "./chat-space";
-import { TestOverflow } from "@/components/ui/test/test-overflow";
 import { useSetAtom } from "jotai";
 import { hasSelectionAtom } from "./atoms";
+import { Button } from "@/components/ui/button";
 
 const SNAP_POINT = {
   initial: 0.5,
@@ -28,6 +27,10 @@ export function AnnotationDrawer() {
   const { ref, inView } = useInView({
     threshold: 0.5, // Adjust the threshold as needed
   });
+
+  const [startChat, setStartChat] = useState(false);
+
+  const [isAnnotationExpanded, setIsAnnotationExpanded] = useState(false);
 
   const [activeSnapPoint, setActiveSnapPoint] = useState<
     string | number | null
@@ -66,11 +69,25 @@ export function AnnotationDrawer() {
       activeSnapPoint={activeSnapPoint}
       setActiveSnapPoint={setActiveSnapPoint}
     >
-      <DrawerContent className="mt-0 h-[90%] w-[98%] mx-auto">
+      <DrawerContent className="mx-auto mt-0 h-[90%] w-[98%]">
         <main className="flex h-full w-full flex-col items-center">
           <DrawerHeader className="flex flex-row justify-center">
-            <Card className="w-3/4 border-none p-4">
-              <span className="line-clamp-2 font-serif text-sm font-thin text-muted-foreground">
+            <Card className="relative w-3/4 border-none p-4">
+              <span
+                onClick={() => {
+                  setIsAnnotationExpanded(!isAnnotationExpanded);
+                  if (!isAnnotationExpanded) {
+                    setActiveSnapPoint(SNAP_POINT.final);
+                  }
+                }}
+                className={cn(
+                  "font-serif text-sm font-thin text-muted-foreground",
+                  {
+                    "line-clamp-none": isAnnotationExpanded,
+                    "line-clamp-2": !isAnnotationExpanded,
+                  },
+                )}
+              >
                 {text}
               </span>
             </Card>
@@ -84,16 +101,25 @@ export function AnnotationDrawer() {
             <DrawerCarousel
               content={[aiText, aiText + aiText + aiText]}
               hideArrows={inView}
+              clamp={
+                activeSnapPoint == SNAP_POINT.final && startChat ? 5 : undefined
+              }
             />
-            <DrawerCarousel
+            {/* <DrawerCarousel
               content={[aiText, aiText + aiText + aiText]}
               hideArrows={inView}
-            />
+            /> */}
             <div ref={ref} className="z-50 w-11/12">
-              <ChatSpace />
+              {startChat && <ChatSpace />}
             </div>
           </div>
-          <DrawerFooter>Chat Input</DrawerFooter>
+          <DrawerFooter>
+            <div>
+              <Button onClick={() => setStartChat(!startChat)}>
+                {startChat ? "Close Chat" : "Start Chat"}
+              </Button>
+            </div>
+          </DrawerFooter>
         </main>
       </DrawerContent>
     </Drawer>
