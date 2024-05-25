@@ -4,6 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  '@langchain/core': ^0.2.0
+
 dependencies:
   '@ai-sdk/anthropic':
     specifier: ^0.0.9
@@ -26,15 +29,21 @@ dependencies:
   '@langchain/community':
     specifier: ^0.2.2
     version: 0.2.2(@mozilla/readability@0.5.0)(@qdrant/js-client-rest@1.9.0)(axios@1.6.8)(cheerio@1.0.0-rc.12)(jsdom@24.0.0)(lodash@4.17.21)(openai@4.45.0)(puppeteer@22.9.0)
+  '@langchain/core':
+    specifier: ^0.2.0
+    version: 0.2.0(langchain@0.2.2)(openai@4.45.0)
+  '@langchain/groq':
+    specifier: ^0.0.12
+    version: 0.0.12(langchain@0.2.2)(openai@4.45.0)
   '@langchain/openai':
     specifier: ^0.0.33
-    version: 0.0.33
+    version: 0.0.33(langchain@0.2.2)
   '@langchain/qdrant':
     specifier: ^0.0.4
-    version: 0.0.4(openai@4.45.0)(typescript@5.4.5)
+    version: 0.0.4(langchain@0.2.2)(openai@4.45.0)(typescript@5.4.5)
   '@langchain/textsplitters':
     specifier: ^0.0.2
-    version: 0.0.2(openai@4.45.0)
+    version: 0.0.2(langchain@0.2.2)(openai@4.45.0)
   '@mozilla/readability':
     specifier: ^0.5.0
     version: 0.5.0
@@ -167,6 +176,9 @@ dependencies:
   jsdom:
     specifier: ^24.0.0
     version: 24.0.0
+  langchain:
+    specifier: ^0.2.2
+    version: 0.2.2(axios@1.6.8)(cheerio@1.0.0-rc.12)(jsdom@24.0.0)(openai@4.45.0)(puppeteer@22.9.0)
   lodash:
     specifier: ^4.17.21
     version: 4.17.21
@@ -2788,39 +2800,19 @@ packages:
       - openai
     dev: false
 
-  /@langchain/core@0.2.0(openai@4.45.0):
-    resolution: {integrity: sha512-UbCJUp9eh2JXd9AW/vhPbTgtZoMgTqJgSan5Wf/EP27X8JM65lWdCOpJW+gHyBXvabbyrZz3/EGaptTUL5gutw==}
+  /@langchain/groq@0.0.12(langchain@0.2.2)(openai@4.45.0):
+    resolution: {integrity: sha512-qgrVBdUnK9Qe8fzMc9gmMPGzc/8swDYbQuHoqsZmeK7M3wxEPR60rKdZvbbkFzqn+1NdquyRTeVKSgihPCib5Q==}
     engines: {node: '>=18'}
     dependencies:
-      ansi-styles: 5.2.0
-      camelcase: 6.3.0
-      decamelize: 1.2.0
-      js-tiktoken: 1.0.12
-      langsmith: 0.1.28(@langchain/core@0.2.0)(openai@4.45.0)
-      ml-distance: 4.0.1
-      mustache: 4.2.0
-      p-queue: 6.6.2
-      p-retry: 4.6.2
-      uuid: 9.0.1
-      zod: 3.23.6
-      zod-to-json-schema: 3.23.0(zod@3.23.6)
-    transitivePeerDependencies:
-      - langchain
-      - openai
-    dev: false
-
-  /@langchain/openai@0.0.33:
-    resolution: {integrity: sha512-hTBo9y9bHtFvMT5ySBW7TrmKhLSA91iNahigeqAFBVrLmBDz+6rzzLFc1mpq6JEAR3fZKdaUXqso3nB23jIpTw==}
-    engines: {node: '>=18'}
-    dependencies:
-      '@langchain/core': 0.2.0(openai@4.45.0)
-      js-tiktoken: 1.0.12
-      openai: 4.45.0
+      '@langchain/core': 0.2.0(langchain@0.2.2)(openai@4.45.0)
+      '@langchain/openai': 0.0.33(langchain@0.2.2)
+      groq-sdk: 0.3.3
       zod: 3.23.6
       zod-to-json-schema: 3.23.0(zod@3.23.6)
     transitivePeerDependencies:
       - encoding
       - langchain
+      - openai
     dev: false
 
   /@langchain/openai@0.0.33(langchain@0.2.2):
@@ -2837,11 +2829,11 @@ packages:
       - langchain
     dev: false
 
-  /@langchain/qdrant@0.0.4(openai@4.45.0)(typescript@5.4.5):
+  /@langchain/qdrant@0.0.4(langchain@0.2.2)(openai@4.45.0)(typescript@5.4.5):
     resolution: {integrity: sha512-LBDMlwcW+MJOgUR1j5g5Nm3WtSnisbwUGkwKjBu8zOoWNeNZon2rrWJbx+FhHeSMFL0q1wt99gZxAVCYp1mMEw==}
     engines: {node: '>=18'}
     dependencies:
-      '@langchain/core': 0.2.0(openai@4.45.0)
+      '@langchain/core': 0.2.0(langchain@0.2.2)(openai@4.45.0)
       '@qdrant/js-client-rest': 1.9.0(typescript@5.4.5)
       uuid: 9.0.1
     transitivePeerDependencies:
@@ -2855,17 +2847,6 @@ packages:
     engines: {node: '>=18'}
     dependencies:
       '@langchain/core': 0.2.0(langchain@0.2.2)(openai@4.45.0)
-      js-tiktoken: 1.0.12
-    transitivePeerDependencies:
-      - langchain
-      - openai
-    dev: false
-
-  /@langchain/textsplitters@0.0.2(openai@4.45.0):
-    resolution: {integrity: sha512-6bQOuYHTGYlkgPY/8M5WPq4nnXZpEysGzRopQCYjg2WLcEoIPUMMrXsAaNNdvU3BOeMrhin8izvpDPD165hX6Q==}
-    engines: {node: '>=18'}
-    dependencies:
-      '@langchain/core': 0.2.0(openai@4.45.0)
       js-tiktoken: 1.0.12
     transitivePeerDependencies:
       - langchain
@@ -5453,6 +5434,10 @@ packages:
     dev: false
     optional: true
 
+  /base-64@0.1.0:
+    resolution: {integrity: sha512-Y5gU45svrR5tI2Vt/X9GPd3L0HNIKzGu202EjxrXMpuc2V2CiKgemAbUUsqYmZJvPtCXoUKjNZwBJzsNScUbXA==}
+    dev: false
+
   /base64-arraybuffer@1.0.2:
     resolution: {integrity: sha512-I3yl4r9QB5ZRY3XuJVEPfc2XhZO6YweFPI+UovAzn+8/hb3oJ6lnysaFcjVpkCPfVWFUDvoZ8kmVDP7WyRtYtQ==}
     engines: {node: '>= 0.6.0'}
@@ -5692,6 +5677,10 @@ packages:
   /chardet@0.7.0:
     resolution: {integrity: sha512-mT8iDcrh03qDGRRmoA2hmBJnxpllMR+0/0qlzjqZES6NdiWDcZkCNAk4rPFZ9Q85r27unkiNNg8ZOiwZXBHwcA==}
     dev: true
+
+  /charenc@0.0.2:
+    resolution: {integrity: sha512-yrLQ/yVUFXkzg7EDQsPieE/53+0RlaWTs+wBrvW36cyilJ2SaDWfl4Yj7MtLTXleV9uEKefbAGUPv2/iWSooRA==}
+    dev: false
 
   /cheerio-select@2.1.0:
     resolution: {integrity: sha512-9v9kG0LvzrlcungtnJtpGNxY+fzECQKhK4EGJX2vByejiMX84MFNQw4UxPJl3bFbTMw+Dfs37XaIkCwTZfLh4g==}
@@ -6036,6 +6025,10 @@ packages:
       which: 2.0.2
     dev: true
 
+  /crypt@0.0.2:
+    resolution: {integrity: sha512-mCxBlsHFYh9C+HVpiEacem8FEBnMXgU9gy4zmNC+SXAZNB/1idgp/aulFJ4FgCi7GPEVbfyng092GqL2k2rmow==}
+    dev: false
+
   /crypto-random-string@2.0.0:
     resolution: {integrity: sha512-v1plID3y9r/lPhviJ1wrXpLeyUIGAZ2SHNYTEapm7/8A9nLPoyvVp3RK/EPFqn5kEznyWgYZNsRtYYIWbuG8KA==}
     engines: {node: '>=8'}
@@ -6318,6 +6311,13 @@ packages:
     resolution: {integrity: sha512-58lmxKSA4BNyLz+HHMUzlOEpg09FV+ev6ZMe3vJihgdxzgcwZ8VoEEPmALCZG9LmqfVoNMMKpttIYTVG6uDY7A==}
     engines: {node: '>=0.3.1'}
     dev: true
+
+  /digest-fetch@1.3.0:
+    resolution: {integrity: sha512-CGJuv6iKNM7QyZlM2T3sPAdZWd/p9zQiRNS9G+9COUCwzWFTs0Xp8NF5iePx7wtvhDykReiRRrSeNb4oMmB8lA==}
+    dependencies:
+      base-64: 0.1.0
+      md5: 2.3.0
+    dev: false
 
   /dir-glob@3.0.1:
     resolution: {integrity: sha512-WkrWp9GR4KXfKGYzOLmTuGVi1UWFfws377n9cc55/tb6DuqyF6pcQ5AbiHEshaDpY9v6oaSr2XCDidGmMwdzIA==}
@@ -7717,6 +7717,22 @@ packages:
     resolution: {integrity: sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==}
     dev: true
 
+  /groq-sdk@0.3.3:
+    resolution: {integrity: sha512-wdOeZ2QymPjjP3tmFpUAnfMisoLbt7xF2MfpROeFAngcqWbfTyB9j9pMWSEAMF/E4gZx8f2Y+5zswO0q92CSxA==}
+    dependencies:
+      '@types/node': 18.19.31
+      '@types/node-fetch': 2.6.11
+      abort-controller: 3.0.0
+      agentkeepalive: 4.5.0
+      digest-fetch: 1.3.0
+      form-data-encoder: 1.7.2
+      formdata-node: 4.4.1
+      node-fetch: 2.7.0
+      web-streams-polyfill: 3.3.3
+    transitivePeerDependencies:
+      - encoding
+    dev: false
+
   /gtoken@5.3.2:
     resolution: {integrity: sha512-gkvEKREW7dXWF8NV8pVrKfW7WqReAmjjkMBh6lNCCGOM4ucS0r0YyXXl0r/9Yj8wcW/32ISkfc8h5mPTDbtifQ==}
     engines: {node: '>=10'}
@@ -8950,7 +8966,7 @@ packages:
   /langsmith@0.1.28(@langchain/core@0.2.0)(langchain@0.2.2)(openai@4.45.0):
     resolution: {integrity: sha512-IQUbo7I7rEE6QYBhrcgwqvlkcUsHlia0yTQpDwWdITw/VJx1f7gLPjNdbwWE+jvOZ4HcD7gCf2HR6zFXputu5A==}
     peerDependencies:
-      '@langchain/core': '*'
+      '@langchain/core': ^0.2.0
       langchain: '*'
       openai: '*'
     peerDependenciesMeta:
@@ -8965,29 +8981,6 @@ packages:
       '@types/uuid': 9.0.8
       commander: 10.0.1
       langchain: 0.2.2(axios@1.6.8)(cheerio@1.0.0-rc.12)(jsdom@24.0.0)(openai@4.45.0)(puppeteer@22.9.0)
-      openai: 4.45.0
-      p-queue: 6.6.2
-      p-retry: 4.6.2
-      uuid: 9.0.1
-    dev: false
-
-  /langsmith@0.1.28(@langchain/core@0.2.0)(openai@4.45.0):
-    resolution: {integrity: sha512-IQUbo7I7rEE6QYBhrcgwqvlkcUsHlia0yTQpDwWdITw/VJx1f7gLPjNdbwWE+jvOZ4HcD7gCf2HR6zFXputu5A==}
-    peerDependencies:
-      '@langchain/core': '*'
-      langchain: '*'
-      openai: '*'
-    peerDependenciesMeta:
-      '@langchain/core':
-        optional: true
-      langchain:
-        optional: true
-      openai:
-        optional: true
-    dependencies:
-      '@langchain/core': 0.2.0(openai@4.45.0)
-      '@types/uuid': 9.0.8
-      commander: 10.0.1
       openai: 4.45.0
       p-queue: 6.6.2
       p-retry: 4.6.2
@@ -9248,6 +9241,14 @@ packages:
 
   /markdown-table@3.0.3:
     resolution: {integrity: sha512-Z1NL3Tb1M9wH4XESsCDEksWoKTdlUafKc4pt0GRwjUyXaCFZ+dc3g2erqB6zm3szA2IUSi7VnPI+o/9jnxh9hw==}
+    dev: false
+
+  /md5@2.3.0:
+    resolution: {integrity: sha512-T1GITYmFaKuO91vxyoQMFETst+O71VUPEU3ze5GNzDm0OWdP8v1ziTaAEPUr/3kLsY3Sftgz242A1SetQiDL7g==}
+    dependencies:
+      charenc: 0.0.2
+      crypt: 0.0.2
+      is-buffer: 1.1.6
     dev: false
 
   /mdast-util-find-and-replace@3.0.1:
