@@ -7,8 +7,6 @@ import { useShareParams } from "@/hooks/use-share-params";
 export const testArticle =
   "https://substack.com/home/post/p-144117118?source=queue";
 
-const dynamic = "force-dyamic";
-const revalidate = 0;
 export function SearchParams() {
   const { text, url, title } = useShareParams();
   const {
@@ -21,7 +19,7 @@ export function SearchParams() {
     enabled: !!url,
   });
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <div>Loading Article...</div>;
   if (error) return <div>An error occurred: {error.message}</div>;
   if (!markdown) return <div>No content found.</div>;
 
@@ -30,7 +28,6 @@ export function SearchParams() {
       <h1 className="text-2xl font-bold">{title}</h1>
       <h2 className="text-xl font-semibold">{url}</h2>
       <h3 className="text-lg font-medium">{text}</h3>
-      <AIMarkdown content={markdown} className="p-3 py-4" />;
     </div>
   );
 }
