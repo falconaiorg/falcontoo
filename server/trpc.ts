@@ -1,6 +1,6 @@
 import { initTRPC, TRPCError } from "@trpc/server";
 import SuperJSON from "superjson";
-import type { TrpcContext } from "./context";
+import type { TrpcContext } from "./trpc-context";
 import { User } from "@prisma/client";
 
 export const t = initTRPC.context<TrpcContext>().create({
