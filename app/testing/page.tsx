@@ -1,5 +1,4 @@
 import prisma from "@/prisma";
-import { Embed } from "../(a_local)/embed";
 import { getServerComponentSession } from "@/auth";
 
 const aiText =
@@ -30,9 +29,10 @@ export default async function TestingPage() {
   }
 
   return (
-    <>
-      <Embed article={article} />
-    </>
+    <>nothing</>
+    // <>
+    //   <Embed article={article} />
+    // </>
     // <div
     //   className={cn({
     //     "select-none": hasSelection,
