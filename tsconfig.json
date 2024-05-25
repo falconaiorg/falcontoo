@@ -27,7 +27,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "app/(lex)/chat/api/actions.tsx",
-    "app/(lex)/chat/components/example-messages.tsx"
+    "app/(lex)/chat/components/example-messages.tsx",
+    "server/ai/rag/qdrant/index.ts"
   ],
   "exclude": ["node_modules"]
 }

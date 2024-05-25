@@ -5,15 +5,22 @@ import { htmlToMarkdownWithTurndown } from "./markdown";
 import { parseUrl } from "./url";
 import jsdom from "jsdom";
 import { TRPCError } from "@trpc/server";
+import { createChecksum } from "./checksum";
+import { ParsedArticle } from "./types";
 
-export const parseArticle = async function ({
-  url,
-}: {
-  url: string;
-}): Promise<string> {
+export const parseArticle = async function ({ url }: { url: string }) {
   const parsedUrl = await parseUrl({ url: url });
   const html = await parseWebpage({ url: parsedUrl });
-  let doc, reader, articleWithReadability, markdown;
+  let doc,
+    reader: Readability<string>,
+    articleWithReadability: ReturnType<Readability<string>["parse"]>,
+    markdown,
+    title,
+    description,
+    author,
+    thumbnail,
+    publishedAt;
+
   try {
     doc = new jsdom.JSDOM(html, {
       url: parsedUrl.href,
@@ -43,6 +50,11 @@ export const parseArticle = async function ({
         cause: new Error(`Parser Readability failed to parse the content`),
       });
     }
+    title = articleWithReadability?.title;
+    description = articleWithReadability?.excerpt;
+    author = articleWithReadability?.byline || "unknown";
+    thumbnail = articleWithReadability?.siteName;
+    publishedAt = new Date(articleWithReadability?.publishedTime);
   } catch (err) {
     throw new TRPCError({
       code: "UNPROCESSABLE_CONTENT",
@@ -59,5 +71,18 @@ export const parseArticle = async function ({
       cause: err,
     });
   }
-  return markdown;
+  const articleObject: ParsedArticle = {
+    title,
+    description,
+    author,
+    content: markdown,
+    rawHTML: html,
+    thumbnail,
+    url,
+    publishedAt,
+    rawChecksum: createChecksum(html),
+    parsedChecksum: createChecksum(markdown),
+  };
+
+  return articleObject;
 };

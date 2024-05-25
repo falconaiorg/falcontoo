@@ -1,27 +1,49 @@
-"use client";
-import { TestOverflow } from "@/components/ui/test/test-overflow";
-import { AnnotationDrawer } from "../(reader)/components/drawer/annotation-drawer";
-import { cn } from "@/lib/utils";
-import { useAtomValue } from "jotai";
-import { hasSelectionAtom } from "../(reader)/components/drawer/atoms";
+import prisma from "@/prisma";
+import { Embed } from "../(a_local)/embed";
+import { getServerComponentSession } from "@/auth";
 
 const aiText =
   "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, velit ac aliquet ultrices, urna nisi tincidunt nunc, id lacinia nunc purus in justo. Nulla facilisi. Sed euismod, velit ac aliquet ultrices, urna nisi tincidunt nunc, id lacinia nunc purus in justo. Nulla facilisi.";
 
-export default function TestingPage() {
-  const hasSelection = useAtomValue(hasSelectionAtom);
+export default async function TestingPage() {
+  const { user } = await getServerComponentSession();
+  const testArticle = "clwc653nl001clgw1u0funwqt";
+
+  // const article = await prisma.article.findFirst({
+  //   where: {
+  //     user: {
+  //       some: {
+  //         id: user.id,
+  //       },
+  //     },
+  //   },
+  // });
+
+  const article = await prisma.article.findUnique({
+    where: {
+      id: testArticle,
+    },
+  });
+
+  if (!article) {
+    return <div>No article found</div>;
+  }
+
   return (
-    <div
-      className={cn({
-        "select-none": hasSelection,
-      })}
-    >
-      {hasSelection ? (
-        <div key="base">{aiText}</div>
-      ) : (
-        <div key="swapped">{aiText}</div>
-      )}
-      <AnnotationDrawer />
-    </div>
+    <>
+      <Embed article={article} />
+    </>
+    // <div
+    //   className={cn({
+    //     "select-none": hasSelection,
+    //   })}
+    // >
+    //   {hasSelection ? (
+    //     <div key="base">{aiText}</div>
+    //   ) : (
+    //     <div key="swapped">{aiText}</div>
+    //   )}
+    //   <AnnotationDrawer />
+    // </div>
   );
 }
