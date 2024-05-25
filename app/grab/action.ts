@@ -3,8 +3,8 @@ import { TRPCError } from "@trpc/server";
 import prisma from "@/prisma";
 import { getServerComponentSession } from "@/auth";
 import { revalidatePath, revalidateTag } from "next/cache";
-import { parseWithPostlight, parseWithReadability } from "@/lib/parser/html";
-import { ParsedArticle } from "@/lib/parser/types";
+import { parseWithPostlight, parseWithReadability } from "@/server/parser/html";
+import { ParsedArticle } from "@/server/parser/types";
 import { redirect } from "next/navigation";
 import { url } from "@/urls";
 
