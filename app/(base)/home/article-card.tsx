@@ -10,6 +10,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { url } from "@/urls";
+import { ArticleWithContent } from "@/server/next/article";
 
 const dummyArticleData = [
   {
@@ -24,11 +25,11 @@ const dummyArticleData = [
   },
 ];
 
-export const ArticleCard = ({ article }: { article: Article }) => (
+export const ArticleCard = ({ article }: { article: ArticleWithContent }) => (
   <Card className="flex flex-row items-center justify-between px-1">
     <CardHeader>
-      <CardTitle className="leading-5">{article.title}</CardTitle>
-      <CardDescription>{article.description}</CardDescription>
+      <CardTitle className="leading-5">{article.content.title}</CardTitle>
+      <CardDescription>{article.content.description}</CardDescription>
     </CardHeader>
     <Image
       src={"/lex.png"}
@@ -40,15 +41,19 @@ export const ArticleCard = ({ article }: { article: Article }) => (
   </Card>
 );
 
-export const ArticleList = ({ articles }: { articles: Article[] }) => {
+export const ArticleList = ({
+  articles,
+}: {
+  articles: ArticleWithContent[];
+}) => {
   return (
     <div className="flex flex-col gap-4">
       {articles.map((article) => (
         <Link
           href={url.reader.read({ articleId: article.id })}
-          key={article.title}
+          key={article.id}
         >
-          <ArticleCard article={article} key={article.title} />
+          <ArticleCard article={article} />
         </Link>
       ))}
     </div>

@@ -6,7 +6,6 @@ import prisma from "@/prisma";
 import { Article } from "@prisma/client";
 import { TRPCError } from "@trpc/server";
 import { split } from "./splitter";
-import { checkArticleOwnership } from "../auth";
 import { OpenAIEmbeddings } from "@langchain/openai";
 import { AIconfig } from "./config";
 import { match } from "assert";

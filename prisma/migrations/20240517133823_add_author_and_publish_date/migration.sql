@@ -1,3 +1,0 @@
--- AlterTable
-ALTER TABLE "Article" ADD COLUMN     "author" TEXT NOT NULL DEFAULT 'Unknown',
-ADD COLUMN     "publishedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP;

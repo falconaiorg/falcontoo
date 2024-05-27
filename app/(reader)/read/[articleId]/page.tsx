@@ -1,5 +1,5 @@
 import { getServerComponentSession } from "@/auth";
-import { queries } from "@/server/next";
+import { server } from "@/server/next";
 import MarkdownWithHighlight from "../../components/markdown/with-highlight";
 import { FilterButton } from "../../components/filter-btn";
 import { AnnotationDrawer } from "../../components/drawer/annotation-drawer";
@@ -20,7 +20,7 @@ export default async function ReadPage({
 }) {
   const articleId = params.articleId;
   const { user } = await getServerComponentSession();
-  const article = await queries.article.getArticlebyArticleId({
+  const article = await server.article.getArticlebyArticleId({
     articleId,
     userId: user.id,
   });
@@ -28,13 +28,13 @@ export default async function ReadPage({
     <div className="px-4 py-2">
       <FilterButton />
       <div className="flex flex-col gap-4">
-        <h1 className="text-2xl font-bold">{article.title}</h1>
-        <p className="text-gray-500">{article.description}</p>
+        <h1 className="text-2xl font-bold">{article.content.title}</h1>
+        <p className="text-gray-500">{article.content.description}</p>
       </div>
       <div>
         <h1>Markdown with Highlighted Words</h1>
         <MarkdownWithHighlight
-          markdownText={article.content}
+          markdownText={article.content.markdown}
           searchWords={searchWords}
         />
         <AnnotationDrawer />

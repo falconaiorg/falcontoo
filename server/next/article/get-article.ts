@@ -4,7 +4,7 @@ import { checkArticleAccess } from "./access";
 
 export const getArticlebyArticleId = cache.next(
   async ({ articleId, userId }: { articleId: string; userId: string }) => {
-    const { hasAccess, article } = await checkArticleAccess({
+    const { hasAccess, articleWithContent } = await checkArticleAccess({
       articleId,
       userId,
     });
@@ -15,10 +15,14 @@ export const getArticlebyArticleId = cache.next(
         message: "User does not own article",
       });
     }
-    return article;
+    return articleWithContent;
   },
   [],
   {
     tags: ["articles", "user"],
   },
 );
+
+export type ArticleWithContent = Awaited<
+  ReturnType<typeof getArticlebyArticleId>
+>;

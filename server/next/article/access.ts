@@ -9,32 +9,26 @@ export const checkArticleAccess = async ({
   userId: string;
 }) => {
   try {
-    const articleWithUser = await prisma.article.findUnique({
+    const articleWithContent = await prisma.article.findUnique({
       where: {
         id: articleId,
       },
       include: {
-        user: {
-          where: {
-            id: userId,
-          },
-        },
+        content: true,
       },
     });
-    if (!articleWithUser) {
+    if (!articleWithContent) {
       throw new TRPCError({
         code: "NOT_FOUND",
         message: "Article not found",
       });
     }
-    const hasAccess = articleWithUser.user.length > 0;
-
-    const { user, ...article } = articleWithUser;
+    const hasAccess = articleWithContent.userId === userId;
 
     if (!hasAccess) {
-      return { hasAccess, article: null };
+      return { hasAccess, articleWithContent };
     }
-    return { hasAccess, article };
+    return { hasAccess, articleWithContent };
   } catch (error) {
     throw new TRPCError({
       code: "INTERNAL_SERVER_ERROR",

@@ -1,4 +1,4 @@
 import * as article from "./article";
-export const queries = {
+export const server = {
   article,
 };

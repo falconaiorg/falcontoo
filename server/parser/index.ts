@@ -6,11 +6,10 @@ import { parseUrl } from "./url";
 import jsdom from "jsdom";
 import { TRPCError } from "@trpc/server";
 import { createChecksum } from "./checksum";
-import { ParsedArticle } from "./types";
+import { ArticleWithContent, ParsedArticle } from "./types";
 
-export const parseArticle = async function ({ url }: { url: string }) {
-  const parsedUrl = await parseUrl({ url: url });
-  const html = await parseWebpage({ url: parsedUrl });
+export const parseArticle = async function ({ url }: { url: URL }) {
+  const html = await parseWebpage({ url });
   let doc,
     reader: Readability<string>,
     articleWithReadability: ReturnType<Readability<string>["parse"]>,
@@ -23,7 +22,7 @@ export const parseArticle = async function ({ url }: { url: string }) {
 
   try {
     doc = new jsdom.JSDOM(html, {
-      url: parsedUrl.href,
+      url: url.href,
     });
   } catch (err) {
     throw new TRPCError({
@@ -71,17 +70,16 @@ export const parseArticle = async function ({ url }: { url: string }) {
       cause: err,
     });
   }
-  const articleObject: ParsedArticle = {
+  const articleObject: ArticleWithContent = {
     title,
     description,
     author,
-    content: markdown,
-    rawHTML: html,
+    markdown: markdown,
+    readablityHtml: html,
     thumbnail,
-    url,
+    url: url.href,
     publishedAt,
-    rawChecksum: createChecksum(html),
-    parsedChecksum: createChecksum(markdown),
+    markdownChecksum: createChecksum(markdown),
   };
 
   return articleObject;

@@ -3,10 +3,15 @@ import { RecursiveCharacterTextSplitter } from "@langchain/textsplitters";
 import { AIconfig } from "./config";
 import { TRPCError } from "@trpc/server";
 import { Article } from "@prisma/client";
+import { ArticleWithContent } from "@/server/next/article";
 
-export const split = async function ({ article }: { article: Article }) {
+export const split = async function ({
+  article,
+}: {
+  article: ArticleWithContent;
+}) {
   try {
-    const articleMarkdown = article.content;
+    const articleMarkdown = article.content.markdown;
     const { chunkSize, chunkOverlap } = AIconfig.splitter;
     const mdSplitter = RecursiveCharacterTextSplitter.fromLanguage("markdown", {
       chunkSize,
@@ -17,10 +22,10 @@ export const split = async function ({ article }: { article: Article }) {
       [articleMarkdown],
       [
         {
-          title: article.title,
-          description: article.description,
-          articleId: article.id,
-          author: article.author,
+          title: article.content.title,
+          description: article.content.description,
+          articleId: article.content.id,
+          author: article.content.author,
         },
       ],
     );

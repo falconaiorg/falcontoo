@@ -2,12 +2,15 @@
 import { Article } from "@prisma/client";
 import { TRPCError } from "@trpc/server";
 import { split } from "./splitter";
-import { checkArticleOwnership } from "../auth";
 import { embedInQdrant } from "./embed";
+import { ArticleWithContent } from "@/server/next/article";
 
-export const saveAsVector = async function ({ article }: { article: Article }) {
+export const saveAsVector = async function ({
+  article,
+}: {
+  article: ArticleWithContent;
+}) {
   try {
-    await checkArticleOwnership({ article });
     const { documentArray, chunks } = await split({ article });
     console.log(documentArray, chunks);
     console.log(documentArray.forEach((doc) => console.log(doc.metadata)));

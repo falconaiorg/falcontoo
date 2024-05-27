@@ -1,8 +1,9 @@
 import prisma from "@/prisma";
 import { cache } from "@/server/cache";
+import { ArticleWithContent } from "./get-article";
 
 export const getArticlesbyUserId = cache.react(
-  async ({ userId }: { userId: string }) => {
+  async ({ userId }: { userId: string }): Promise<ArticleWithContent[]> => {
     try {
       const userWithArticles = await prisma.user.findUnique({
         where: {
@@ -12,6 +13,9 @@ export const getArticlesbyUserId = cache.react(
           articles: {
             orderBy: {
               createdAt: "desc",
+            },
+            include: {
+              content: true,
             },
           },
         },

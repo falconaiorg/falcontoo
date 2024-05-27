@@ -116,6 +116,9 @@ dependencies:
   ai:
     specifier: ^3.1.5
     version: 3.1.5(openai@4.45.0)(react@18.3.1)(solid-js@1.8.17)(svelte@4.2.15)(vue@3.4.26)(zod@3.23.6)
+  await-to-js:
+    specifier: ^3.0.0
+    version: 3.0.0
   aws-sdk:
     specifier: ^2.1613.0
     version: 2.1613.0
@@ -299,6 +302,9 @@ dependencies:
   turndown:
     specifier: ^7.1.3
     version: 7.1.3
+  use-deep-compare-effect:
+    specifier: ^1.8.1
+    version: 1.8.1(react@18.3.1)
   valid-url:
     specifier: ^1.0.9
     version: 1.0.9
@@ -5281,6 +5287,11 @@ packages:
     engines: {node: '>= 0.4'}
     dependencies:
       possible-typed-array-names: 1.0.0
+
+  /await-to-js@3.0.0:
+    resolution: {integrity: sha512-zJAaP9zxTcvTHRlejau3ZOY4V7SRpiByf3/dxx2uyKxxor19tpmpV2QRsTKikckwhaPmr2dVpxxMr7jOCYVp5g==}
+    engines: {node: '>=6.0.0'}
+    dev: false
 
   /aws-sdk@2.1613.0:
     resolution: {integrity: sha512-NCBSOa7i/VewoAy6fZIcxJxjKqySREy+bqAG2tKESZo2/DCm0i9XFW0R78LDtxKvjz+mqjmqviAm3r7LBsF0dg==}
@@ -12924,6 +12935,17 @@ packages:
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
+      react: 18.3.1
+    dev: false
+
+  /use-deep-compare-effect@1.8.1(react@18.3.1):
+    resolution: {integrity: sha512-kbeNVZ9Zkc0RFGpfMN3MNfaKNvcLNyxOAAd9O4CBZ+kCBXXscn9s/4I+8ytUER4RDpEYs5+O6Rs4PqiZ+rHr5Q==}
+    engines: {node: '>=10', npm: '>=6'}
+    peerDependencies:
+      react: '>=16.13'
+    dependencies:
+      '@babel/runtime': 7.24.5
+      dequal: 2.0.3
       react: 18.3.1
     dev: false
 
