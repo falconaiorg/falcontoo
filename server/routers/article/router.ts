@@ -78,10 +78,7 @@ export const articleRouter = router({
       });
 
       if (articleContents.length === 0) {
-        throw new TRPCError({
-          code: "NOT_FOUND",
-          message: "Article content not found",
-        });
+        return false;
       }
 
       // Filter articles for the specific user
@@ -90,10 +87,7 @@ export const articleRouter = router({
         .find((article) => article.userId === ctx.user.id);
 
       if (!userArticle) {
-        throw new TRPCError({
-          code: "NOT_FOUND",
-          message: "Article not found for the user",
-        });
+        return false;
       }
 
       return userArticle;
