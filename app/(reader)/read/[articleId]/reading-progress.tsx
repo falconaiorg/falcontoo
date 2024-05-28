@@ -14,6 +14,8 @@ import { cn } from "@/lib/utils";
 const FormSchema = z.object({
   hasRead: z.boolean(),
 });
+
+// TODO Fix opmitimistic updates, currently state does not reset to previous state if the request fails
 export const ReadingProgress = ({
   article,
 }: {
