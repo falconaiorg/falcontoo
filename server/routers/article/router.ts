@@ -67,24 +67,18 @@ export const articleRouter = router({
 
       const parsedUrl = await parseUrl({ url: input.url });
 
-      // Find all ArticleContent records by URL
-      const articleContents = await prisma.articleContent.findMany({
+      // Find the Article record by URL and userId
+      const userArticle = await prisma.article.findFirst({
         where: {
-          url: parsedUrl.href,
+          userId: ctx.user.id,
+          content: {
+            url: parsedUrl.href,
+          },
         },
         include: {
-          articles: true,
+          content: true,
         },
       });
-
-      if (articleContents.length === 0) {
-        return false;
-      }
-
-      // Filter articles for the specific user
-      const userArticle = articleContents
-        .flatMap((content) => content.articles)
-        .find((article) => article.userId === ctx.user.id);
 
       if (!userArticle) {
         return false;

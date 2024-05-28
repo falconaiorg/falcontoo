@@ -1,5 +1,4 @@
 "use client";
-import { useShareParams } from "@/hooks/use-share-params";
 import { api } from "@/app/_trpc";
 import {
   AlertDialog,
@@ -11,16 +10,15 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
-import { url } from "@/urls";
+import { url as urlRouter } from "@/urls";
 import { useRouter } from "next/navigation";
 import to from "await-to-js";
 import Link from "next/link";
 export const testArticle =
   "https://substack.com/home/post/p-144117118?source=queue";
 
-export function SearchParams() {
+export function GrabArticle({ url }: { url: string }) {
   const router = useRouter();
-  const { text, url: articleUrl, title } = useShareParams();
   const [isRedirecting, setIsRedirecting] = useState(false);
 
   const {
@@ -30,10 +28,10 @@ export function SearchParams() {
     isSuccess,
   } = api.articles.doesArticleExist.useQuery(
     {
-      url: articleUrl,
+      url,
     },
     {
-      enabled: !!articleUrl,
+      enabled: !!url,
     },
   );
 
@@ -49,13 +47,13 @@ export function SearchParams() {
   });
 
   const createArticleAndRedirect = async () => {
-    const [err, article] = await to(createArticle({ url: articleUrl }));
+    const [err, article] = await to(createArticle({ url: url }));
     if (err) {
       console.log(err);
       return;
     }
     setIsRedirecting(true);
-    router.push(url.reader.read({ articleId: article?.id }));
+    router.push(urlRouter.reader.read({ articleId: article?.id }));
     setIsRedirecting(false);
   };
 
@@ -67,7 +65,7 @@ export function SearchParams() {
     };
 
     createArticleIfNotExists();
-  }, [article, isSuccess, articleUrl, createArticle, router]);
+  }, [article, isSuccess, url, createArticle, router]);
 
   if (isLoading) return <div>Loading Article...</div>;
   if (error) return <div>An error occurred: {error.message}</div>;
@@ -86,7 +84,7 @@ export function SearchParams() {
                     : "Exists in your library"}
               </AlertDialogTitle>
               <AlertDialogDescription>
-                <span className="line-clamp-2">{title}</span>
+                <span className="line-clamp-2">{article.content.title}</span>
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter className="flex flex-row justify-center space-x-2">
@@ -99,7 +97,9 @@ export function SearchParams() {
               </Button>
               <Link
                 href={
-                  isPending ? "" : url.reader.read({ articleId: article?.id })
+                  isPending
+                    ? ""
+                    : urlRouter.reader.read({ articleId: article?.id })
                 }
               >
                 <Button disabled={isPending}>Go to the Article</Button>
@@ -108,9 +108,6 @@ export function SearchParams() {
           </AlertDialogContent>
         </AlertDialog>
       )}
-      <h1 className="text-2xl font-bold">{title}</h1>
-      <h2 className="text-xl font-semibold">{articleUrl}</h2>
-      <h3 className="text-lg font-medium">{text}</h3>
     </div>
   );
 }
