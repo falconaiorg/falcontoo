@@ -13,9 +13,11 @@ type GrabParams = {
 
 export default function Grab() {
   const searchParams = useSearchParams();
-  const title = searchParams.get("name") || undefined;
-  const url = searchParams.get("description") || undefined;
-  const text = searchParams.get("link") || undefined;
+  const title = searchParams.get("url") || undefined;
+  const url = searchParams.get("title") || undefined;
+  const text = searchParams.get("text") || undefined;
+
+  console.log("searchParams", searchParams);
 
   searchParams.forEach((value, key) => {
     console.log(key, value);
