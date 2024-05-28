@@ -26,14 +26,13 @@ const nextConfig = {
 
     return config;
   },
-  // Suppose to work but does not.
-  // serverExternalPackages: [
-  //   "puppeteer-extra",
-  //   "puppeteer-extra-plugin-stealth",
-  //   "puppeteer-extra-plugin-adblocker",
-  //   "puppeteer-extra-plugin-block-resources",
-  //   "turndown",
-  // ],
+  serverExternalPackages: [
+    "puppeteer-extra",
+    "puppeteer-extra-plugin-stealth",
+    "puppeteer-extra-plugin-adblocker",
+    "puppeteer-extra-plugin-block-resources",
+    "turndown",
+  ],
 
   images: {
     domains: [
