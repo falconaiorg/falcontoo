@@ -4,6 +4,8 @@
 import { SearchParams } from "./search-params";
 import { fetchArticle } from "./action";
 import { useSearchParams } from "next/navigation";
+import { isUri } from "valid-url";
+import { useState } from "react";
 
 type GrabParams = {
   url: string | undefined;
@@ -12,35 +14,29 @@ type GrabParams = {
 };
 
 export default function Grab() {
+  const [message, setMessage] = useState<string | null>(null);
+  let articleUrl: string | undefined;
   const searchParams = useSearchParams();
   const url = searchParams.get("url") || undefined;
   const title = searchParams.get("title") || undefined;
   const text = searchParams.get("text") || undefined;
+  articleUrl = url;
+  if (!url) {
+    const isUrlInText = text && isUri(text);
+    const isUrlInTitle = title && isUri(title);
+    if (isUrlInText) {
+      articleUrl = isUrlInText;
+    } else if (isUrlInTitle) {
+      articleUrl = isUrlInTitle;
+    } else {
+      setMessage("Can't save this article. Try adding manually.");
+    }
+  }
 
-  console.log("searchParams", searchParams);
-
-  searchParams.forEach((value, key) => {
-    console.log(key, value);
-  });
-
-  /// return all for testing
   return (
     <div>
-      {Array.from(searchParams).map(([key, value]) => {
-        return (
-          <div key={key + value}>
-            {key}: {value}
-          </div>
-        );
-      })}
-      <br />
-      <br />
-      <>TITLE: {title ? title : "Title not found"}</>
-      <br />
-      <>URL: {url ? url : "URL not found"}</>
-      <br />
-      <>TEXT: {text ? text : "Text not found"}</>
-      {/* <SearchParams /> */}
+      {message ? message : null}
+      {articleUrl}
     </div>
   );
 }
