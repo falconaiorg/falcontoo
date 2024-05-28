@@ -8,9 +8,9 @@ type OptionalShareParams = Partial<ShareParams>;
 
 function getShareParams(params: URLSearchParams): OptionalShareParams {
   return {
-    title: params.get("title") || undefined,
-    url: params.get("url") || undefined,
-    text: params.get("text") || undefined,
+    title: params.get("name") || undefined,
+    url: params.get("link") || undefined,
+    text: params.get("description") || undefined,
   };
 }
 
