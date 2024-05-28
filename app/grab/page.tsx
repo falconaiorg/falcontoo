@@ -13,8 +13,8 @@ type GrabParams = {
 
 export default function Grab() {
   const searchParams = useSearchParams();
-  const title = searchParams.get("url") || undefined;
-  const url = searchParams.get("title") || undefined;
+  const url = searchParams.get("url") || undefined;
+  const title = searchParams.get("title") || undefined;
   const text = searchParams.get("text") || undefined;
 
   console.log("searchParams", searchParams);
@@ -26,12 +26,20 @@ export default function Grab() {
   /// return all for testing
   return (
     <div>
-      <>{title ? title : "Title not found"}</>
+      {Array.from(searchParams).map(([key, value]) => {
+        return (
+          <div key={key + value}>
+            {key}: {value}
+          </div>
+        );
+      })}
       <br />
-      <>{url ? url : "URL not found"}</>
       <br />
-      <>{text ? text : "Text not found"}</>
-
+      <>TITLE: {title ? title : "Title not found"}</>
+      <br />
+      <>URL: {url ? url : "URL not found"}</>
+      <br />
+      <>TEXT: {text ? text : "Text not found"}</>
       {/* <SearchParams /> */}
     </div>
   );
