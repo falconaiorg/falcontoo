@@ -37,7 +37,7 @@ export function GrabArticle({ url }: { url: string }) {
 
   const {
     mutateAsync: createArticle,
-    isPending,
+    isPending: isCreationPending,
     isSuccess: isCreationSuccess,
     error: creationError,
   } = api.articles.createArticle.useMutation({
@@ -69,6 +69,10 @@ export function GrabArticle({ url }: { url: string }) {
 
   if (isLoading) return <div>Loading Article...</div>;
   if (error) return <div>An error occurred: {error.message}</div>;
+  if (isCreationPending) return <div>Creating article...</div>;
+  if (creationError)
+    return <div>An error occurred: {creationError.message}</div>;
+  if (isCreationSuccess) return <div>Article created successfully</div>;
 
   return (
     <div>
@@ -77,7 +81,7 @@ export function GrabArticle({ url }: { url: string }) {
           <AlertDialogContent className="w-11/12">
             <AlertDialogHeader>
               <AlertDialogTitle>
-                {isPending
+                {isCreationPending
                   ? "Creating article..."
                   : isRedirecting
                     ? "Taking you to  the article"
@@ -91,18 +95,18 @@ export function GrabArticle({ url }: { url: string }) {
               <Button
                 variant={"secondary"}
                 onClick={createArticleAndRedirect}
-                disabled={isPending}
+                disabled={isCreationPending}
               >
                 Import Again
               </Button>
               <Link
                 href={
-                  isPending
+                  isCreationPending
                     ? ""
                     : urlRouter.reader.read({ articleId: article?.id })
                 }
               >
-                <Button disabled={isPending}>Go to the Article</Button>
+                <Button disabled={isCreationPending}>Go to the Article</Button>
               </Link>
             </AlertDialogFooter>
           </AlertDialogContent>
