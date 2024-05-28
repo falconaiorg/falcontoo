@@ -99,15 +99,15 @@ export const articleRouter = router({
       const article = await parseArticle({ url: parsedUrl });
       const savedArticle = await saveArticle(article);
       console.log("Saved article", savedArticle);
-      // const [err] = await to(saveAsVector({ article: savedArticle }));
-      // if (err) {
-      //   server.article.deleteArticleForUser({ articleId: savedArticle.id });
-      //   throw new TRPCError({
-      //     code: "INTERNAL_SERVER_ERROR",
-      //     message: "Error saving article. Try again.",
-      //     cause: err,
-      //   });
-      // }
+      const [err] = await to(saveAsVector({ article: savedArticle }));
+      if (err) {
+        server.article.deleteArticleForUser({ articleId: savedArticle.id });
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "Error saving article. Try again.",
+          cause: err,
+        });
+      }
       return savedArticle;
     }),
 
