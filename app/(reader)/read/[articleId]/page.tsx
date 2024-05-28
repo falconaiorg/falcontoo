@@ -12,6 +12,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { ReadingProgress } from "./reading-progress";
 
 const markdownText = `
 # Sample Markdown
@@ -36,7 +37,7 @@ export default async function ReadPage({
   return (
     <div className="flex flex-col space-y-3 px-4 py-4">
       {/* <FilterButton /> */}
-      <Card className="dark:bg-grid-small-white/[0.2] bg-grid-small-black/[0.2] relative ">
+      <Card className="relative bg-grid-small-black/[0.2] dark:bg-grid-small-white/[0.2] ">
         <CardHeader className="py-4">
           <CardTitle className="text-sm">Pre-reading</CardTitle>
           <CardDescription>
@@ -49,7 +50,13 @@ export default async function ReadPage({
 
       <Card className="flex flex-col gap-4">
         <CardHeader>
-          <CardTitle>{article.content.title}</CardTitle>
+          <CardTitle>
+            <div className="flex flex-row items-center justify-between">
+              <div>{article.content.title}</div>
+              <ReadingProgress article={article} />
+            </div>
+          </CardTitle>
+
           {/* <p className="text-sm text-gray-500">{article.content.description}</p> */}
         </CardHeader>
         <CardContent>
@@ -62,7 +69,7 @@ export default async function ReadPage({
       </Card>
       <Card
         className={cn(
-          "animate-shimmer inline-flex items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-slate-400 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50",
+          "inline-flex animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-slate-400 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50",
         )}
       >
         <CardHeader className="py-4">

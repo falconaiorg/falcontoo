@@ -110,4 +110,30 @@ export const articleRouter = router({
       // }
       return savedArticle;
     }),
+
+  setReadingProgress: authenticatedProcedure
+    .input(
+      z.object({ articleId: z.string(), progress: z.number().min(0).max(100) }),
+    )
+    .mutation(async ({ input }) => {
+      const { articleId, progress } = input;
+      const [err] = await to(
+        prisma.article.update({
+          where: {
+            id: articleId,
+          },
+          data: {
+            readingProgress: progress,
+          },
+        }),
+      );
+      if (err) {
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "Failed to set reading progress",
+          cause: err,
+        });
+      }
+      return true;
+    }),
 });

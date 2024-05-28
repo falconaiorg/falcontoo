@@ -251,6 +251,9 @@ dependencies:
   react:
     specifier: ^18.3.1
     version: 18.3.1
+  react-circular-progressbar:
+    specifier: ^2.1.0
+    version: 2.1.0(react@18.3.1)
   react-dom:
     specifier: ^18.3.1
     version: 18.3.1(react@18.3.1)
@@ -2850,8 +2853,8 @@ packages:
       - openai
     dev: false
 
-  /@maxim_mazurok/gapi.client.androidpublisher-v3@0.0.20240522:
-    resolution: {integrity: sha512-A5FiVFpHec+mrXHoLgvjIirIHmVza/CN+V/1Sdj7/+ocAVj9bILgVRr9Q/rs2S5TVW7nlHEYRr6vv9xaVk3UNg==}
+  /@maxim_mazurok/gapi.client.androidpublisher-v3@0.0.20240528:
+    resolution: {integrity: sha512-3WEyouHnV0jt+/rCiRH47oDz2/ufIfwC76otI+J6q1XTcwbbOV0ha93dIo4bV/NvgQt1tBDRcIXeWIuVTB3fYw==}
     dependencies:
       '@types/gapi.client': 1.0.8
       '@types/gapi.client.discovery-v1': 0.0.4
@@ -4372,7 +4375,7 @@ packages:
     resolution: {integrity: sha512-ITizgxAt4cTHQ7n+pGRTHi/QeWA1MKYliiuZcuR2rjyiyAvR/jdTamKmUYxdtP3lWorR+q/+RFZToFKkCliGnQ==}
     deprecated: use @types/gapi.client.androidpublisher-v3 instead; see https://github.com/Maxim-Mazurok/google-api-typings-generator/issues/652 for details
     dependencies:
-      '@maxim_mazurok/gapi.client.androidpublisher-v3': 0.0.20240522
+      '@maxim_mazurok/gapi.client.androidpublisher-v3': 0.0.20240528
     dev: true
 
   /@types/gapi.client.discovery-v1@0.0.4:
@@ -11203,6 +11206,14 @@ packages:
       ini: 1.3.8
       minimist: 1.2.8
       strip-json-comments: 2.0.1
+    dev: false
+
+  /react-circular-progressbar@2.1.0(react@18.3.1):
+    resolution: {integrity: sha512-xp4THTrod4aLpGy68FX/k1Q3nzrfHUjUe5v6FsdwXBl3YVMwgeXYQKDrku7n/D6qsJA9CuunarAboC2xCiKs1g==}
+    peerDependencies:
+      react: ^0.14.0 || ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.3.1
     dev: false
 
   /react-dom@18.3.1(react@18.3.1):
