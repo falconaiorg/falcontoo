@@ -1,5 +1,5 @@
+"use server";
 import { TRPCError } from "@trpc/server";
-import "server-only";
 import { isUri } from "valid-url";
 import axios from "axios";
 import { privateIpPatterns } from "./config";
