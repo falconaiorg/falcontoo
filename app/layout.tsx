@@ -8,6 +8,7 @@ import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import { BottomNav } from "@/components/bottom-nav";
 import { headers } from "next/headers";
+export const maxDuration = 300; // sets max duration for all actions in the app
 
 const montserrat = Montserrat({
   subsets: ["latin"],
