@@ -1,8 +1,8 @@
 import { config as browserConfig } from "./browser-config";
-import { puppeteer } from "./with-plugins";
+// import { puppeteer } from "./with-plugins";
 import chromium from "@sparticuz/chromium";
 
-// import puppeteer from "puppeteer-extra";
+import puppeteer from "puppeteer-extra";
 
 const content = "dog";
 
