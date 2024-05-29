@@ -9,20 +9,18 @@ import {
   AlertDialogContent,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { url as urlRouter } from "@/urls";
 import { useRouter } from "next/navigation";
 import to from "await-to-js";
 import Link from "next/link";
-import { parseArticle } from "@/server/parser";
-import { parseUrl } from "@/server/parser/url";
+import { FullScreenMessage } from "@/components/full-screen-message";
 export const testArticle =
   "https://substack.com/home/post/p-144117118?source=queue";
 
 export function GrabArticle({ url }: { url: string }) {
   const router = useRouter();
   const [isRedirecting, setIsRedirecting] = useState(false);
-  const [manualError, setManualError] = useState<string | null>(null);
 
   const {
     data: article,
@@ -49,18 +47,7 @@ export function GrabArticle({ url }: { url: string }) {
     },
   });
 
-  const createArticleAndRedirect = async () => {
-    // const [error1, parsedUrl] = await to(parseUrl({ url: url }));
-    // if (error1) {
-    //   setManualError("error parsing url");
-    //   return;
-    // }
-    // const [error2, testArticle] = await to(parseArticle({ url: parsedUrl }));
-    // if (error2) {
-    //   setManualError("error parsing article");
-    //   return;
-    // }
-
+  const createArticleAndRedirect = useCallback(async () => {
     const [err, article] = await to(createArticle({ url: url }));
     if (err) {
       console.log(err);
@@ -69,7 +56,7 @@ export function GrabArticle({ url }: { url: string }) {
     setIsRedirecting(true);
     router.push(urlRouter.reader.read({ articleId: article?.id }));
     setIsRedirecting(false);
-  };
+  }, [createArticle, router, url]);
 
   useEffect(() => {
     const createArticleIfNotExists = async () => {
@@ -79,18 +66,26 @@ export function GrabArticle({ url }: { url: string }) {
     };
 
     createArticleIfNotExists();
-  }, [article, isSuccess, url, createArticle, router]);
+  }, [
+    article,
+    isSuccess,
+    url,
+    createArticle,
+    router,
+    createArticleAndRedirect,
+  ]);
 
-  if (isLoading) return <div>Loading Article...</div>;
-  if (error) return <div>An error occurred: {error.message}</div>;
-  if (isCreationPending) return <div>Creating article...</div>;
-  if (creationError)
-    return <div>An error occurred: {creationError.message}</div>;
-  if (isCreationSuccess) return <div>Article created successfully</div>;
+  if (isLoading) return <FullScreenMessage text={"Loading Article..."} />;
+  if (error) return <FullScreenMessage text={"Error Occurred"} />;
+  if (isCreationPending)
+    return <FullScreenMessage text={"Creating Article..."} />;
+  if (creationError) return <FullScreenMessage text={"Error Occurred"} />;
+  if (isCreationSuccess)
+    return <FullScreenMessage text={"Article Created Successfully"} />;
+  if (isRedirecting) return <FullScreenMessage text={"Redirecting..."} />;
 
   return (
     <div>
-      {manualError && <div>{manualError}</div>}
       {article && (
         <AlertDialog open={!!article}>
           <AlertDialogContent className="w-11/12">

@@ -1,3 +1,4 @@
+import { isDev } from "@/lib/utils";
 import { config as browserConfig } from "./browser-config";
 // import { puppeteer } from "./with-plugins"; // Gives an error
 import chromium from "@sparticuz/chromium";
@@ -10,14 +11,23 @@ export const parseWebpage = async ({ url }: { url: URL }) => {
   const href = url.href;
   const executablePath = await chromium.executablePath();
   console.log(`Parsing webpage: ${href}`);
-  const browser = await puppeteer.launch({
-    args: [...chromium.args, "--no-sandbox", "--disable-setuid-sandbox"],
-    defaultViewport: chromium.defaultViewport,
-    executablePath: executablePath,
-    headless: !!chromium.headless,
-    ignoreHTTPSErrors: true,
-    dumpio: true,
-  });
+
+  let puppeteerConfig: any;
+
+  if (isDev) {
+    puppeteerConfig = browserConfig;
+  } else {
+    puppeteerConfig = {
+      args: [...chromium.args, "--no-sandbox", "--disable-setuid-sandbox"],
+      defaultViewport: chromium.defaultViewport,
+      executablePath: executablePath,
+      headless: !!chromium.headless,
+      ignoreHTTPSErrors: true,
+      dumpio: true,
+    };
+  }
+
+  const browser = await puppeteer.launch(puppeteerConfig);
   console.log(`Browser launched: ${href}`);
   const page = await browser.newPage();
   await page.goto(href);
