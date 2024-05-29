@@ -2856,8 +2856,8 @@ packages:
       - openai
     dev: false
 
-  /@maxim_mazurok/gapi.client.androidpublisher-v3@0.0.20240528:
-    resolution: {integrity: sha512-3WEyouHnV0jt+/rCiRH47oDz2/ufIfwC76otI+J6q1XTcwbbOV0ha93dIo4bV/NvgQt1tBDRcIXeWIuVTB3fYw==}
+  /@maxim_mazurok/gapi.client.androidpublisher-v3@0.0.20240529:
+    resolution: {integrity: sha512-o4Dn5CvVZFc+/CflqsFjKHEM4aEdPjzoHPWiingrk1Bn7NFWzbm8ildhnS0+05bupGt/5QAETV7hvNwNYpkfbQ==}
     dependencies:
       '@types/gapi.client': 1.0.8
       '@types/gapi.client.discovery-v1': 0.0.4
@@ -4388,7 +4388,7 @@ packages:
     resolution: {integrity: sha512-ITizgxAt4cTHQ7n+pGRTHi/QeWA1MKYliiuZcuR2rjyiyAvR/jdTamKmUYxdtP3lWorR+q/+RFZToFKkCliGnQ==}
     deprecated: use @types/gapi.client.androidpublisher-v3 instead; see https://github.com/Maxim-Mazurok/google-api-typings-generator/issues/652 for details
     dependencies:
-      '@maxim_mazurok/gapi.client.androidpublisher-v3': 0.0.20240528
+      '@maxim_mazurok/gapi.client.androidpublisher-v3': 0.0.20240529
     dev: true
 
   /@types/gapi.client.discovery-v1@0.0.4:

@@ -99,16 +99,30 @@ model User {
 }
 
 model Article {
-    id              String         @id @default(cuid())
-    createdAt       DateTime       @default(now())
-    updatedAt       DateTime       @updatedAt
+    id              String          @id @default(cuid())
+    createdAt       DateTime        @default(now())
+    updatedAt       DateTime        @updatedAt
     annotations     Annotation[]
     contentId       String
-    content         ArticleContent @relation(fields: [contentId], references: [id])
-    User            User           @relation(fields: [userId], references: [id])
+    content         ArticleContent  @relation(fields: [contentId], references: [id])
+    User            User            @relation(fields: [userId], references: [id])
     userId          String
     layers          Layer[]
-    readingProgress Float          @default(0)
+    readingProgress Float           @default(0)
+    context         ArticleContext?
+}
+
+// Check if the context is stale, if so, regenerate it
+
+model ArticleContext {
+    id             String   @id @default(cuid())
+    createdAt      DateTime @default(now())
+    updatedAt      DateTime @updatedAt
+    Article        Article  @relation(fields: [articleId], references: [id])
+    articleId      String   @unique
+    markdown       String
+    linkedArticles String[] // top K articles related to this article
+    isStale        Boolean  @default(false)
 }
 
 model ArticleContent {

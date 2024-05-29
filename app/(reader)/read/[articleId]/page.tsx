@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { ReadingProgress } from "./reading-progress";
+import { ai } from "@/server/ai";
 
 const markdownText = `
 # Sample Markdown
@@ -34,17 +35,18 @@ export default async function ReadPage({
     articleId,
     userId: user.id,
   });
+
+  const context = await ai.context.getArticleContext({
+    article,
+  });
+
   return (
     <div className="flex flex-col space-y-3 px-4 py-4">
       {/* <FilterButton /> */}
       <Card className="relative bg-grid-small-black/[0.2] dark:bg-grid-small-white/[0.2] ">
         <CardHeader className="py-4">
           <CardTitle className="text-sm">Pre-reading</CardTitle>
-          <CardDescription>
-            Before you start reading, here is a summary of the article. You will
-            review stuff here. You can read your past annotations here. You can
-            read similar articles here.
-          </CardDescription>
+          <CardDescription>{context}</CardDescription>
         </CardHeader>
       </Card>
 

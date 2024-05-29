@@ -4,6 +4,7 @@ import { AIconfig } from "./config";
 import { TRPCError } from "@trpc/server";
 import { Article } from "@prisma/client";
 import { ArticleWithContent } from "@/server/next/article";
+import { ArticleCollectionMetadata } from "../types";
 
 export const split = async function ({
   article,
@@ -18,16 +19,17 @@ export const split = async function ({
       chunkOverlap,
     });
 
+    const metadata: ArticleCollectionMetadata = {
+      title: article.content.title,
+      description: article.content.description,
+      contentId: article.content.id,
+      author: article.content.author,
+    };
+    console.log(metadata);
+
     const documentArray = await mdSplitter.createDocuments(
       [articleMarkdown],
-      [
-        {
-          title: article.content.title,
-          description: article.content.description,
-          articleId: article.content.id,
-          author: article.content.author,
-        },
-      ],
+      [metadata],
     );
     const chunks = await mdSplitter.splitText(articleMarkdown);
 
