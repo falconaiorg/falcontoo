@@ -14,7 +14,7 @@ export const parseWebpage = async ({ url }: { url: URL }) => {
     args: [...chromium.args, "--no-sandbox", "--disable-setuid-sandbox"],
     defaultViewport: chromium.defaultViewport,
     executablePath: executablePath,
-    headless: chromium.headless,
+    headless: !!chromium.headless,
     ignoreHTTPSErrors: true,
   });
   console.log(`Browser launched: ${href}`);
