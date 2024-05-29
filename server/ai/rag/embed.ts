@@ -1,4 +1,5 @@
 "use server";
+// Retry the embedding process, if failed
 import { QdrantVectorStore } from "@langchain/qdrant";
 import { Document } from "@langchain/core/documents";
 import { getServerComponentSession } from "@/auth";
