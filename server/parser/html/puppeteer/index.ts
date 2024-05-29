@@ -1,8 +1,8 @@
 import { config as browserConfig } from "./browser-config";
-import { puppeteer } from "./with-plugins";
+// import { puppeteer } from "./with-plugins"; // Gives an error
 import chromium from "@sparticuz/chromium";
 
-// import puppeteer from "puppeteer-extra";
+import puppeteer from "puppeteer-extra";
 
 const content = "dog";
 
@@ -16,6 +16,7 @@ export const parseWebpage = async ({ url }: { url: URL }) => {
     executablePath: executablePath,
     headless: !!chromium.headless,
     ignoreHTTPSErrors: true,
+    dumpio: true,
   });
   console.log(`Browser launched: ${href}`);
   const page = await browser.newPage();
