@@ -9,7 +9,10 @@ import { createChecksum } from "./checksum";
 import { ArticleWithContent, ParsedArticle } from "./types";
 
 export const parseArticle = async function ({ url }: { url: URL }) {
+  console.log(`Parsing article: ${url.href}`);
   const html = await parseWebpage({ url });
+  console.log(`Parsed article: ${url.href}`);
+
   let doc,
     reader: Readability<string>,
     articleWithReadability: ReturnType<Readability<string>["parse"]>,

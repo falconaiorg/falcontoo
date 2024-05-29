@@ -17,23 +17,28 @@ const nextConfig = {
     // add externals
     config.externals = config.externals || [];
     config.externals.push(
+      "puppeteer-core",
       "puppeteer-extra",
       "puppeteer-extra-plugin-stealth",
       "puppeteer-extra-plugin-adblocker",
       "puppeteer-extra-plugin-block-resources",
       "turndown",
+      "@sparticuz/chromium",
     );
 
     return config;
   },
-  serverExternalPackages: [
-    "puppeteer-extra",
-    "puppeteer-extra-plugin-stealth",
-    "puppeteer-extra-plugin-adblocker",
-    "puppeteer-extra-plugin-block-resources",
-    "turndown",
-  ],
-
+  experimental: {
+    serverComponentsExternalPackages: [
+      "puppeteer-core",
+      "puppeteer-extra",
+      "puppeteer-extra-plugin-stealth",
+      "puppeteer-extra-plugin-adblocker",
+      "puppeteer-extra-plugin-block-resources",
+      "turndown",
+      "@sparticuz/chromium",
+    ],
+  },
   images: {
     domains: [
       "lh3.googleusercontent.com",

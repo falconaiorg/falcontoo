@@ -1,6 +1,7 @@
 import { config as browserConfig } from "./browser-config";
 import { puppeteer } from "./with-plugins";
-import chromium from "@sparticuz/chromium";
+const chromium = require("@sparticuz/chromium");
+
 // import puppeteer from "puppeteer-extra";
 
 const content = "dog";
@@ -8,13 +9,7 @@ const content = "dog";
 export const parseWebpage = async ({ url }: { url: URL }) => {
   const href = url.href;
   console.log(`Parsing webpage: ${href}`);
-  const browser = await puppeteer.launch({
-    args: chromium.args,
-    defaultViewport: chromium.defaultViewport,
-    executablePath: await chromium.executablePath(),
-    headless: !!chromium.headless,
-    ignoreHTTPSErrors: true,
-  });
+  const browser = await puppeteer.launch(browserConfig);
   console.log(`Browser launched: ${href}`);
   const page = await browser.newPage();
   await page.goto(href);
@@ -23,3 +18,16 @@ export const parseWebpage = async ({ url }: { url: URL }) => {
   await browser.close();
   return content;
 };
+
+/**
+ *   console.log(`Parsing webpage: ${url.href}`);
+  const executablePath = await chromium.executablePath();
+  // "/opt/nodejs/node_modules/@sparticuz/chromium/bin",
+ * {
+    args: [...chromium.args, "--no-sandbox", "--disable-setuid-sandbox"],
+    defaultViewport: chromium.defaultViewport,
+    executablePath: executablePath,
+    headless: chromium.headless,
+    ignoreHTTPSErrors: true,
+  }
+ */

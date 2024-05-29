@@ -95,8 +95,11 @@ export const articleRouter = router({
           message: "URL is required",
         });
       }
+      console.log("Creating article", input.url);
       const parsedUrl = await parseUrl({ url: input.url });
+      console.log("Parsed URL", parsedUrl);
       const article = await parseArticle({ url: parsedUrl });
+      console.log("Parsed article", article);
       const savedArticle = await saveArticle(article);
       console.log("Saved article", savedArticle);
       // const [err] = await to(saveAsVector({ article: savedArticle }));
