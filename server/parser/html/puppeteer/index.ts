@@ -12,7 +12,7 @@ export const parseWebpage = async ({ url }: { url: URL }) => {
     args: chromium.args,
     defaultViewport: chromium.defaultViewport,
     executablePath: await chromium.executablePath(),
-    headless: chromium.headless,
+    headless: !!chromium.headless,
     ignoreHTTPSErrors: true,
   });
   console.log(`Browser launched: ${href}`);
