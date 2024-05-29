@@ -50,16 +50,16 @@ export function GrabArticle({ url }: { url: string }) {
   });
 
   const createArticleAndRedirect = async () => {
-    const [error1, parsedUrl] = await to(parseUrl({ url: url }));
-    if (error1) {
-      setManualError("error parsing url");
-      return;
-    }
-    const [error2, testArticle] = await to(parseArticle({ url: parsedUrl }));
-    if (error2) {
-      setManualError("error parsing article");
-      return;
-    }
+    // const [error1, parsedUrl] = await to(parseUrl({ url: url }));
+    // if (error1) {
+    //   setManualError("error parsing url");
+    //   return;
+    // }
+    // const [error2, testArticle] = await to(parseArticle({ url: parsedUrl }));
+    // if (error2) {
+    //   setManualError("error parsing article");
+    //   return;
+    // }
 
     const [err, article] = await to(createArticle({ url: url }));
     if (err) {
