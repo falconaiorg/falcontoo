@@ -9,5 +9,25 @@
       "cache": false,
       "dependsOn": ["^dev"]
     }
-  }
+  },
+  "globalEnv": [
+    "ANTHROPIC_API_KEY",
+    "DATABASE_URL_DEV",
+    "DIRECT_URL_DEV",
+    "DO_SPACES_ACCESS_KEY",
+    "DO_SPACES_BUCKET",
+    "DO_SPACES_CDN_ENDPOINT",
+    "DO_SPACES_ENDPOINT",
+    "DO_SPACES_SECRET_KEY",
+    "GOOGLE_CLIENT_ID",
+    "GOOGLE_CLIENT_SECRET",
+    "GROQ_API_KEY",
+    "NEXTAUTH_SECRET",
+    "NEXTAUTH_URL",
+    "NEXT_PUBLIC_API_ENDPOINT",
+    "OPENAI_API_KEY",
+    "QDRANT_API_KEY",
+    "QDRANT_URL"
+  ],
+  "globalDependencies": ["tsconfig.json"]
 }
