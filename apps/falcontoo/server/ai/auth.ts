@@ -3,7 +3,11 @@ import prisma from "@/prisma";
 import { TRPCError } from "@trpc/server";
 import to from "await-to-js";
 
-export async function checkArticleOwnership({ articleId }: { articleId: string }) {
+export async function checkArticleOwnership({
+  articleId,
+}: {
+  articleId: string;
+}) {
   const { user } = await getServerComponentSession();
   const userId = user.id;
   const [err, article] = await to(

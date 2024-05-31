@@ -4,11 +4,11 @@ import { createAI, getAIState } from "ai/rsc";
 import { nanoid } from "nanoid";
 import { getServerSession } from "next-auth";
 import { Chat } from "../types";
-import { getUIStateFromAIState } from "../get-ui-from-ai-state";
 import { saveChat } from "../save-chat";
 import { submitUserMessage } from "./submit";
 import { confirmPurchase } from "./confirm-purchase";
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
+import { getUIStateFromAIState } from "../get-ui-from-ai-state";
 
 export type Message = {
   role: "user" | "assistant" | "system" | "function" | "data" | "tool";
@@ -43,7 +43,9 @@ export const AI = createAI<AIState, UIState>({
       const aiState = getAIState();
 
       if (aiState) {
-        const uiState = getUIStateFromAIState(aiState);
+         // ToDO
+        // @ts-ignore
+        const uiState = getUIStateFromAIState(aiState)
         return uiState;
       }
     } else {

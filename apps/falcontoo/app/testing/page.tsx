@@ -29,8 +29,6 @@ export default async function TestingPage() {
     throw new Error("Content not found");
   }
 
-  
-
   // const article = await prisma.article.findFirst({
   //   where: {
   //     user: {

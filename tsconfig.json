@@ -1,34 +1,12 @@
 {
   "compilerOptions": {
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
+    "composite": true, // Allows projects to be built separately and included in parent projects
     "skipLibCheck": true,
     "strict": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "incremental": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
-    "paths": {
-      "@/*": ["./*"]
-    }
+    "esModuleInterop": true
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts",
-    "app/(lex)/chat/api/actions.tsx",
-    "app/(lex)/chat/components/example-messages.tsx",
-    "server/ai/rag/qdrant/index.ts"
-  ],
+  "include": ["packages/**/*", "apps/**/*"],
   "exclude": ["node_modules"]
 }
