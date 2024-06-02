@@ -1,12 +1,4 @@
 {
-  "compilerOptions": {
-    "composite": true, // Allows projects to be built separately and included in parent projects
-    "skipLibCheck": true,
-    "strict": true,
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "esModuleInterop": true
-  },
-  "include": ["packages/**/*", "apps/**/*"],
-  "exclude": ["node_modules"]
+  "extends": "./packages/tsconfig/base.json",
+  "include": ["packages/**/*", "apps/**/*"]
 }

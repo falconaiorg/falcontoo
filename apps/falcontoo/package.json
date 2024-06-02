@@ -1,5 +1,5 @@
 {
-  "name": "falcontoo",
+  "name": "@falcon/lex",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -12,7 +12,8 @@
     "migrate:dev": "npx prisma migrate dev",
     "studio": "npx prisma studio",
     "reset": "rm -rf node_modules && pnpm install && npx prisma generate",
-    "generate": "npx prisma generate"
+    "generate": "npx prisma generate",
+    "clean": "rimraf .next && rimraf node_modules"
   },
   "pnpm": {
     "overrides": {
@@ -128,6 +129,7 @@
     "zod-to-json-schema": "^3.23.0"
   },
   "devDependencies": {
+    "@falcon/tsconfig": "workspace:*",
     "@bubblewrap/cli": "^1.21.0",
     "@next/bundle-analyzer": "^14.2.3",
     "@tailwindcss/aspect-ratio": "^0.4.2",

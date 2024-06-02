@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "ES2020", // Meaning: The target version of JavaScript that the project is compiled to
+    "module": "NodeNext", // Meaning: The module system used in the project
+    "moduleResolution": "NodeNext", // Meaning: How module resolution is performed
+    "sourceMap": true, // Meaning: Generates corresponding .map files for easier debugging
+    "outDir": "dist", // Meaning: Redirect output structure to the directory
+    "rootDir": "src", // Meaning: Specify the root directory of input files
+    "strict": true, // Meaning: Enable all strict type-checking options
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "incremental": true
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"]
+}

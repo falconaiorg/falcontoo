@@ -1,0 +1,26 @@
+{
+  "name": "@falcon/draco",
+  "version": "1.0.0",
+  "description": "NodeJs backend for Falcon",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev-base": "nodemon --exec ts-node ./src/index.ts",
+    "dev": "console-ninja pnpm dev-base"
+  },
+  "keywords": [],
+  "author": "Falcon AI",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "zod": "^3.23.8",
+    "@falcon/dummy": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.12.12",
+    "nodemon": "^3.1.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  }
+}
