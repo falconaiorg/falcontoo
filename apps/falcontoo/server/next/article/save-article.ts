@@ -2,7 +2,7 @@ import { getServerComponentSession } from "@/auth";
 import { revalidatePath, revalidateTag } from "next/cache";
 import { ArticleWithContent, ParsedArticle } from "@/server/parser/types";
 import { ArticleWithContent as ArticleIncludingContent } from "./get-article";
-import prisma from "@/prisma";
+import prisma from "@falcon/prisma";
 
 export const saveArticle = async (
   articleData: ArticleWithContent,

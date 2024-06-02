@@ -3,8 +3,8 @@
 import { QdrantVectorStore } from "@langchain/qdrant";
 import { Document } from "@langchain/core/documents";
 import { getServerComponentSession } from "@/auth";
-import prisma from "@/prisma";
-import { Article } from "@prisma/client";
+import prisma from "@falcon/prisma";
+import { Article } from "@falcon/prisma/client";
 import { TRPCError } from "@trpc/server";
 import { split } from "./splitter";
 import { OpenAIEmbeddings } from "@langchain/openai";

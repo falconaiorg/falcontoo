@@ -2,7 +2,7 @@ import "server-only";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 import { cache } from "react";
-import prisma from "./prisma";
+import prisma from "@falcon/prisma";
 
 /**
  * Get session in the format compatible with authjs v5.

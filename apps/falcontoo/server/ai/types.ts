@@ -1,4 +1,4 @@
-import { ArticleContent } from "@prisma/client";
+import { ArticleContent } from "@falcon/prisma/client";
 
 export type ArticleCollectionMetadata = {
   title: ArticleContent["title"];

@@ -1,4 +1,4 @@
-import prisma from "@/prisma";
+import prisma from "@falcon/prisma";
 import { TRPCError } from "@trpc/server";
 
 export const checkArticleAccess = async ({

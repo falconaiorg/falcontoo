@@ -1,5 +1,5 @@
 "use server";
-import { Article } from "@prisma/client";
+import { Article } from "@falcon/prisma/client";
 import { TRPCError } from "@trpc/server";
 import { split } from "./splitter";
 import { embedInQdrant } from "./embed";

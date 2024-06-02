@@ -1,4 +1,4 @@
-import prisma from "@/prisma";
+import prisma from "@falcon/prisma";
 import { cache } from "@/server/cache";
 import { ArticleWithContent } from "./get-article";
 

@@ -1,13 +1,24 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "pipeline": {
-    "build": {
-      "outputs": [".next/**", "!.next/cache/**"]
-    },
     "type-check": {},
+    "build": {
+      "outputs": [".next/**", "!.next/cache/**"],
+      "dotEnv": [
+        ".env.production.local",
+        ".env.local",
+        ".env.production",
+        ".env"
+      ]
+    },
     "dev": {
-      "cache": false,
-      "dependsOn": ["^dev"]
+      "dotEnv": [
+        ".env.development.local",
+        ".env.local",
+        ".env.development",
+        ".env"
+      ],
+      "dependsOn": ["^build"]
     }
   },
   "globalEnv": [

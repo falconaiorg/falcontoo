@@ -1,5 +1,5 @@
 "use client";
-import type { Article } from "@prisma/client";
+import type { Article } from "@falcon/prisma/client";
 import {
   Card,
   CardHeader,

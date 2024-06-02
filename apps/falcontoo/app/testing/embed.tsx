@@ -2,7 +2,7 @@
 import { TestOverflow } from "@/components/ui/test/test-overflow";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { Article } from "@prisma/client";
+import { Article } from "@falcon/prisma/client";
 import { useState } from "react";
 import { rag } from "@/server/ai/rag";
 import { api } from "../_trpc";

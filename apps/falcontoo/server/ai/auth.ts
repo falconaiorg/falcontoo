@@ -1,5 +1,5 @@
 import { getServerComponentSession } from "@/auth";
-import prisma from "@/prisma";
+import prisma from "@falcon/prisma";
 import { TRPCError } from "@trpc/server";
 import to from "await-to-js";
 

@@ -1,4 +1,4 @@
-import prisma from "@/prisma";
+import prisma from "@falcon/prisma";
 import { getServerComponentSession } from "@/auth";
 import { Embed } from "./embed";
 import {

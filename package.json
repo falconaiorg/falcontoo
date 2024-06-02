@@ -9,16 +9,21 @@
   "packageManager": "pnpm@8.15.4",
   "scripts": {
     "clean": "turbo run clean && rimraf node_modules",
-    "dev": "turbo run dev",
-    "build-base": "turbo run build",
-    "type-check": "turbo run type-check",
-    "lint": "turbo run lint",
-    "with-env": "dotenv -e .env -e .env.local --",
-    "build": "dotenv -e .env -e .env.local -- turbo run build",
-    "lex:dev": "pnpm with-env pnpm -F @falcon/lex run dev",
-    "lex:build": "pnpm with-env pnpm -F @falcon/lex run build",
-    "draco:dev": "pnpm with-env pnpm -F @falcon/draco run dev",
-    "draco:build": "pnpm with-env pnpm -F @falcon/draco run build"
+    "dev": "dotenv -- turbo run dev",
+    "build-base": "dotenv -- turbo run build",
+    "type-check": "dotenv -- turbo run type-check",
+    "lint": "dotenv -- turbo run lint",
+    "with:env": "dotenv -e .env -e .env.local --",
+    "prisma:generate": "pnpm with:env pnpm -F @falcon/prisma run prisma:generate",
+    "prisma:migrate-dev": "pnpm with:env pnpm -F @falcon/prisma run prisma:migrate-dev",
+    "prisma:migrate-deploy": "pnpm with:env pnpm -F @falcon/prisma prisma:migrate-deploy",
+    "prisma:migrate-reset": "pnpm with:env pnpm -F @falcon/prisma run prisma:migrate-reset",
+    "prisma:studio": "pnpm with:env pnpm -F @falcon/prisma run prisma:studio",
+    "build": "pnpm run prisma:generate && pnpm run prisma:migrate-deploy && dotenv -- turbo run build",
+    "lex:dev": "pnpm with:env pnpm -F @falcon/lex run dev",
+    "lex:build": "pnpm with:env pnpm -F @falcon/lex run build",
+    "draco:dev": "pnpm with:env pnpm -F @falcon/draco run dev",
+    "draco:build": "pnpm with:env pnpm -F @falcon/draco run build"
   },
   "pnpm": {
     "overrides": {

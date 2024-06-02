@@ -1,5 +1,5 @@
 import NextAuth, { DefaultSession, DefaultUser } from "next-auth";
-import { Plan } from "@prisma/client";
+import { Plan } from "@falcon/prisma/client";
 
 declare module "next-auth" {
   interface Session {

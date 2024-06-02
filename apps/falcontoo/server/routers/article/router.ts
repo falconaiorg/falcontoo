@@ -1,4 +1,4 @@
-import prisma from "@/prisma";
+import prisma from "@falcon/prisma";
 import { authenticatedProcedure, router } from "@/server/trpc";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";

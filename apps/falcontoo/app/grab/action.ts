@@ -1,6 +1,6 @@
 "use server";
 import { TRPCError } from "@trpc/server";
-import prisma from "@/prisma";
+import prisma from "@falcon/prisma";
 import { getServerComponentSession } from "@/auth";
 import { revalidatePath, revalidateTag } from "next/cache";
 import { ArticleWithContent, ParsedArticle } from "@/server/parser/types";

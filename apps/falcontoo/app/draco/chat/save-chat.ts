@@ -1,6 +1,6 @@
 "use server";
 
-import prisma from "@/prisma";
+import prisma from "@falcon/prisma";
 import { Chat } from "./types";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";

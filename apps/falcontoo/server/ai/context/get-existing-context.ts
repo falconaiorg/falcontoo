@@ -1,4 +1,4 @@
-import prisma from "@/prisma";
+import prisma from "@falcon/prisma";
 
 export const getExistingArticleContext = async ({
   articleId,

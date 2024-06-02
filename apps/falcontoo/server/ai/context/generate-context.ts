@@ -5,7 +5,7 @@ import { QdrantVectorStore } from "@langchain/qdrant";
 import { QdrantClient } from "@qdrant/js-client-rest";
 import OpenAI from "openai";
 import { auth, getServerComponentSession } from "@/auth";
-import prisma from "@/prisma";
+import prisma from "@falcon/prisma";
 import { ArticleCollectionMetadata } from "../types";
 import { createOpenAI } from "@ai-sdk/openai";
 import { generateText } from "ai";

@@ -1,6 +1,6 @@
 "use server";
 import { getServerComponentSession } from "@/auth";
-import prisma from "@/prisma";
+import prisma from "@falcon/prisma";
 import { checkArticleOwnership } from "@/server/ai/auth";
 import { TRPCError } from "@trpc/server";
 import to from "await-to-js";

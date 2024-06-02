@@ -2,7 +2,7 @@
 import { RecursiveCharacterTextSplitter } from "@langchain/textsplitters";
 import { AIconfig } from "./config";
 import { TRPCError } from "@trpc/server";
-import { Article } from "@prisma/client";
+import { Article } from "@falcon/prisma/client";
 import { ArticleWithContent } from "@/server/next/article";
 import { ArticleCollectionMetadata } from "../types";
 

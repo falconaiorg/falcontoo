@@ -1,4 +1,4 @@
-import { Prisma } from "@prisma/client";
+import { Prisma } from "@falcon/prisma/client";
 
 export type ParsedArticle = Omit<Prisma.ArticleCreateInput, "user" | "content">;
 

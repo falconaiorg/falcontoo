@@ -1,11 +1,11 @@
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import Google from "next-auth/providers/google";
-import prisma from "@/prisma";
+import prisma from "@falcon/prisma";
 import { Adapter } from "next-auth/adapters";
 import { AuthOptions } from "next-auth";
 import { JWT } from "next-auth/jwt";
 import { User, Account, Profile } from "next-auth";
-import { User as PrismaUser } from "@prisma/client";
+import { User as PrismaUser } from "@falcon/prisma/client";
 import { assignTrialUserProperties } from "./trial";
 
 const googleProfileHandler = async (profile: any, tokens: any) => {
