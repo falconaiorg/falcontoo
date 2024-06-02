@@ -3,14 +3,14 @@ import { authenticatedProcedure, router } from "@/server/trpc";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 import { t } from "@/server/trpc";
-import { checkArticleOwnership } from "@/server/ai/auth";
-import { saveAsVector } from "@/server/ai/rag/save";
+import { checkArticleOwnership } from "@falcon/lib/ai/auth";
+import { saveAsVector } from "@falcon/lib/ai/rag/save";
 import { ZAddOrUpdateArticle, ZDoesArticleExist } from "./schema";
-import { parseUrl } from "@/server/parser/url";
-import { parseArticle } from "@/server/parser";
+import { parseUrl } from "@falcon/lib/parser/url";
+import { parseArticle } from "@falcon/lib/parser";
 import to from "await-to-js";
-import { server } from "@/server/next";
-import { saveArticle } from "@/server/next/article/save-article";
+import { server } from "@falcon/lib/server/next";
+import { saveArticle } from "@falcon/lib/server/next/article/save-article";
 
 const ArticleIdSchema = z.object({
   articleId: z.string(),

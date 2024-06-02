@@ -2,7 +2,6 @@
 // Retry the embedding process, if failed
 import { QdrantVectorStore } from "@langchain/qdrant";
 import { Document } from "@langchain/core/documents";
-import { getServerComponentSession } from "@/auth";
 import prisma from "@falcon/prisma";
 import { Article } from "@falcon/prisma/client";
 import { TRPCError } from "@trpc/server";
@@ -31,7 +30,7 @@ export const embedInQdrant = async function ({
         url: process.env.QDRANT_URL,
         apiKey: process.env.QDRANT_API_KEY,
         collectionName: "articles",
-      },
+      }
     );
 
     await vectorStore.addDocuments(documents);

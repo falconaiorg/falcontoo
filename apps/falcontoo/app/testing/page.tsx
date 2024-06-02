@@ -1,5 +1,5 @@
 import prisma from "@falcon/prisma";
-import { getServerComponentSession } from "@/auth";
+import { getServerComponentSession } from "@falcon/lib/next-auth";
 import { Embed } from "./embed";
 import {
   Card,
@@ -8,7 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { getCurrentArticleEmbeddings } from "@/server/ai/context/generate-context";
+import { getCurrentArticleEmbeddings } from "@falcon/lib/ai/context/generate-context";
 
 const aiText =
   "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, velit ac aliquet ultrices, urna nisi tincidunt nunc, id lacinia nunc purus in justo. Nulla facilisi. Sed euismod, velit ac aliquet ultrices, urna nisi tincidunt nunc, id lacinia nunc purus in justo. Nulla facilisi.";

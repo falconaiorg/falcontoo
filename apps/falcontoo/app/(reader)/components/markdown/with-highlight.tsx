@@ -1,6 +1,6 @@
 "use client";
 import { useAtom } from "jotai";
-import { filterAtom } from "@/lib/state/app";
+import { filterAtom } from "@falcon/lib/state/app";
 import { format } from "./format";
 import { MemoizedReactMarkdown } from "@/components/markdown-parser/markdown";
 import remarkGfm from "remark-gfm";

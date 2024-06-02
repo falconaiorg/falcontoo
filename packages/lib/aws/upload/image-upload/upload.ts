@@ -1,9 +1,10 @@
 "use server";
-import { auth } from "@/auth";
-import { s3 } from "@/lib/aws";
+
 import { nanoid } from "nanoid";
 import sharp from "sharp";
 import { createHash } from "crypto";
+import { s3 } from "../..";
+import { auth } from "../../../next-auth";
 
 export const uploadToDigitalOcean = async (formData: FormData) => {
   const session = await auth();

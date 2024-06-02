@@ -1,6 +1,6 @@
 import "server-only";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
+import { authOptions } from "./authOptions";
 import { cache } from "react";
 import prisma from "@falcon/prisma";
 

@@ -3,7 +3,7 @@ import { Article } from "@falcon/prisma/client";
 import { TRPCError } from "@trpc/server";
 import { split } from "./splitter";
 import { embedInQdrant } from "./embed";
-import { ArticleWithContent } from "@/server/next/article";
+import { ArticleWithContent } from "../../server/next/article";
 
 export const saveAsVector = async function ({
   article,

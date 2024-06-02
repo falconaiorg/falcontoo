@@ -10,7 +10,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { url } from "@/urls";
-import { ArticleWithContent } from "@/server/next/article";
+import { ArticleWithContent } from "@falcon/lib/server/next/article";
 
 const dummyArticleData = [
   {

@@ -7,7 +7,7 @@ import { Chat } from "../types";
 import { saveChat } from "../save-chat";
 import { submitUserMessage } from "./submit";
 import { confirmPurchase } from "./confirm-purchase";
-import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
+import { authOptions } from "@falcon/lib/next-auth/authOptions";
 import { getUIStateFromAIState } from "../get-ui-from-ai-state";
 
 export type Message = {

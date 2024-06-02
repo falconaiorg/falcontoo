@@ -5,7 +5,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const dotenv_1 = __importDefault(require("dotenv"));
-const dummy_1 = require("@falcon/dummy");
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 const HOST = process.env.HOST || "localhost";
@@ -18,7 +17,6 @@ app.all("/", (req, res, next) => {
     next();
 });
 app.get("/", (req, res) => {
-    const dummy = (0, dummy_1.dummyFunction)();
-    res.send(`Hello from Draco! ${dummy}`);
+    res.send(`Hello from Draco!`);
 });
 //# sourceMappingURL=index.js.map

@@ -1,9 +1,8 @@
 "use server";
-import { getServerComponentSession } from "@/auth";
 import prisma from "@falcon/prisma";
-import { checkArticleOwnership } from "@/server/ai/auth";
 import { TRPCError } from "@trpc/server";
 import to from "await-to-js";
+import { checkArticleOwnership } from "../../../ai/auth";
 
 export async function deleteArticleForUser({
   articleId,
@@ -14,7 +13,7 @@ export async function deleteArticleForUser({
   const [err] = await to(
     prisma.article.delete({
       where: { id: articleId },
-    }),
+    })
   );
   if (err) {
     throw new TRPCError({

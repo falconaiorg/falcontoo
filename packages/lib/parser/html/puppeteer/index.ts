@@ -1,9 +1,9 @@
-import { isDev } from "@/lib/utils";
 import { config as browserConfig } from "./browser-config";
 // import { puppeteer } from "./with-plugins"; // Gives an error
 import chromium from "@sparticuz/chromium";
 
 import puppeteer from "puppeteer-extra";
+import { isDev } from "../../../utils";
 
 const content = "dog";
 

@@ -3,8 +3,8 @@ import { RecursiveCharacterTextSplitter } from "@langchain/textsplitters";
 import { AIconfig } from "./config";
 import { TRPCError } from "@trpc/server";
 import { Article } from "@falcon/prisma/client";
-import { ArticleWithContent } from "@/server/next/article";
 import { ArticleCollectionMetadata } from "../types";
+import { ArticleWithContent } from "../../server/next/article";
 
 export const split = async function ({
   article,

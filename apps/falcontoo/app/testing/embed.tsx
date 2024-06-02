@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Article } from "@falcon/prisma/client";
 import { useState } from "react";
-import { rag } from "@/server/ai/rag";
+import { rag } from "@falcon/lib/ai/rag";
 import { api } from "../_trpc";
 
 const aiText =

@@ -3,7 +3,7 @@
 import prisma from "@falcon/prisma";
 import { Chat } from "./types";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
+import { authOptions } from "@falcon/lib/next-auth/authOptions";
 
 export const saveChat = async (chat: Chat) => {
   const session = await getServerSession(authOptions);

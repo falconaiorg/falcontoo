@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import { vibrate } from "@/lib/vibrate";
+import { vibrate } from "@falcon/lib/vibrate";
 import { Link } from "next-view-transitions";
 
 type NavbarSegments = "home" | "notes" | "profile";

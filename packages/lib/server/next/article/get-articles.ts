@@ -1,6 +1,7 @@
 import prisma from "@falcon/prisma";
-import { cache } from "@/server/cache";
+
 import { ArticleWithContent } from "./get-article";
+import { cache } from "../../cache";
 
 export const getArticlesbyUserId = cache.react(
   async ({ userId }: { userId: string }): Promise<ArticleWithContent[]> => {
@@ -27,5 +28,5 @@ export const getArticlesbyUserId = cache.react(
     } catch (error) {
       throw new Error("Failed to get articles");
     }
-  },
+  }
 );

@@ -1,4 +1,4 @@
-import { auth } from "@/auth";
+import { auth } from "@falcon/lib/next-auth";
 import { SignOut } from "@/components/auth/sign-out";
 import SignIn from "../sign-in";
 

@@ -1,11 +1,11 @@
-import { getServerComponentSession } from "@/auth";
 import { revalidatePath, revalidateTag } from "next/cache";
-import { ArticleWithContent, ParsedArticle } from "@/server/parser/types";
+import { ArticleWithContent, ParsedArticle } from "../../../parser/types";
 import { ArticleWithContent as ArticleIncludingContent } from "./get-article";
 import prisma from "@falcon/prisma";
+import { getServerComponentSession } from "../../../next-auth";
 
 export const saveArticle = async (
-  articleData: ArticleWithContent,
+  articleData: ArticleWithContent
 ): Promise<ArticleIncludingContent> => {
   const { user } = await getServerComponentSession();
 

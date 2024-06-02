@@ -1,7 +1,7 @@
-import { getServerComponentSession } from "@/auth";
 import prisma from "@falcon/prisma";
 import { TRPCError } from "@trpc/server";
 import to from "await-to-js";
+import { getServerComponentSession } from "../../next-auth";
 
 export async function checkArticleOwnership({
   articleId,
@@ -16,7 +16,7 @@ export async function checkArticleOwnership({
         id: articleId,
         userId: userId,
       },
-    }),
+    })
   );
 
   if (err) {

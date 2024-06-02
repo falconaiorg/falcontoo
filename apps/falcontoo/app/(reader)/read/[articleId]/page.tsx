@@ -1,5 +1,5 @@
-import { getServerComponentSession } from "@/auth";
-import { server } from "@/server/next";
+import { getServerComponentSession } from "@falcon/lib/next-auth";
+import { server } from "@falcon/lib/server/next";
 import MarkdownWithHighlight from "../../components/markdown/with-highlight";
 import { FilterButton } from "../../components/filter-btn";
 import { AnnotationDrawer } from "../../components/drawer/annotation-drawer";
@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { ReadingProgress } from "./reading-progress";
-import { ai } from "@/server/ai";
+import { ai } from "@falcon/lib/ai";
 
 const markdownText = `
 # Sample Markdown

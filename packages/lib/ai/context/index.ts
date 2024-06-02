@@ -1,6 +1,6 @@
 "use server";
 
-import { ArticleWithContent } from "@/server/next/article";
+import { ArticleWithContent } from "../../server/next/article";
 import { generateArticleContext } from "./generate-context";
 import { getExistingArticleContext } from "./get-existing-context";
 import prisma from "@falcon/prisma";

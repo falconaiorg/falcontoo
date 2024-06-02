@@ -2,7 +2,7 @@
 import { useAtom, useSetAtom } from "jotai";
 
 import { Button } from "@/components/ui/button";
-import { filterAtom } from "@/lib/state/app";
+import { filterAtom } from "@falcon/lib/state/app";
 
 export function FilterButton() {
   const [filter, setFilter] = useAtom(filterAtom);

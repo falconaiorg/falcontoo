@@ -1,6 +1,5 @@
 import express from "express";
 import dotenv from "dotenv";
-import { dummyFunction } from "@falcon/dummy";
 
 dotenv.config();
 
@@ -18,6 +17,5 @@ app.all("/", (req, res, next) => {
 });
 
 app.get("/", (req, res) => {
-  const dummy = dummyFunction();
-  res.send(`Hello from Draco! ${dummy}`);
+  res.send(`Hello from Draco!`);
 });
