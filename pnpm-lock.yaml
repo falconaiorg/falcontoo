@@ -496,9 +496,6 @@ importers:
       '@auth/prisma-adapter':
         specifier: ^2.1.0
         version: 2.1.0(@prisma/client@5.14.0)
-      '@falcon/lib':
-        specifier: workspace:*
-        version: 'link:'
       '@falcon/prisma':
         specifier: workspace:*
         version: link:../prisma
