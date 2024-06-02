@@ -7,7 +7,7 @@ import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
-import { api } from "@/app/_trpc";
+import { api } from "@falcon/trpc/next/client";
 import { ArticleWithContent } from "@falcon/lib/server/next/article";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";

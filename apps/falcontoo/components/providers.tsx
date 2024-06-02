@@ -3,7 +3,7 @@ import { Provider } from "jotai";
 import { SessionProvider } from "next-auth/react";
 import { NextIntlClientProvider } from "next-intl";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import TRPCProvider from "@/app/_trpc/provider";
+import TRPCProvider from "@falcon/trpc/next/client/provider";
 
 const queryClient = new QueryClient();
 

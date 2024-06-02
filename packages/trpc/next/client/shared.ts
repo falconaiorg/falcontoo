@@ -1,6 +1,6 @@
-import { AppRouter } from "@/server/router";
 import { type inferRouterInputs, type inferRouterOutputs } from "@trpc/server";
 import superjson from "superjson";
+import { AppRouter } from "../server/router";
 export const transformer = superjson;
 
 function getBaseUrl() {

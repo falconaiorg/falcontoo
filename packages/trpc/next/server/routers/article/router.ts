@@ -1,8 +1,6 @@
 import prisma from "@falcon/prisma";
-import { authenticatedProcedure, router } from "@/server/trpc";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
-import { t } from "@/server/trpc";
 import { checkArticleOwnership } from "@falcon/lib/ai/auth";
 import { saveAsVector } from "@falcon/lib/ai/rag/save";
 import { ZAddOrUpdateArticle, ZDoesArticleExist } from "./schema";
@@ -11,6 +9,7 @@ import { parseArticle } from "@falcon/lib/parser";
 import to from "await-to-js";
 import { server } from "@falcon/lib/server/next";
 import { saveArticle } from "@falcon/lib/server/next/article/save-article";
+import { authenticatedProcedure, router, t } from "../../trpc";
 
 const ArticleIdSchema = z.object({
   articleId: z.string(),
@@ -116,7 +115,7 @@ export const articleRouter = router({
 
   setReadingProgress: authenticatedProcedure
     .input(
-      z.object({ articleId: z.string(), progress: z.number().min(0).max(100) }),
+      z.object({ articleId: z.string(), progress: z.number().min(0).max(100) })
     )
     .mutation(async ({ input }) => {
       const { articleId, progress } = input;
@@ -128,7 +127,7 @@ export const articleRouter = router({
           data: {
             readingProgress: progress,
           },
-        }),
+        })
       );
       if (err) {
         throw new TRPCError({

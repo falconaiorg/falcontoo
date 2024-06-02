@@ -1,5 +1,5 @@
 "use client";
-import { api } from "@/app/_trpc";
+import { api } from "@falcon/trpc/next/client";
 import {
   AlertDialog,
   AlertDialogTitle,

@@ -128,7 +128,8 @@
     "zod": "^3.23.8",
     "zod-to-json-schema": "^3.23.0",
     "@falcon/prisma": "workspace:*",
-    "@falcon/lib": "workspace:*"
+    "@falcon/lib": "workspace:*",
+    "@falcon/trpc": "workspace:*"
   },
   "devDependencies": {
     "@falcon/tsconfig": "workspace:*",

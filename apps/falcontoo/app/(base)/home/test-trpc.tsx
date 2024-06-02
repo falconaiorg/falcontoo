@@ -1,6 +1,6 @@
 "use client";
 
-import { api } from "../../_trpc";
+import { api } from "@falcon/trpc/next/client";
 
 export function TRPCTest() {
   const { data, error } = api.sessions.getSessions.useQuery(
