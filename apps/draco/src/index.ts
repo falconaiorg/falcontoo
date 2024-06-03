@@ -2,7 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import { getToken } from "next-auth/jwt";
-import { appRouter, createContext } from "@falcon/trpc/node/server";
+import { appRouter, createContext } from "@falcon/trpc/node/server.js";
 const base64Secret = process.env.NEXTAUTH_SECRET;
 import * as trpcExpress from "@trpc/server/adapters/express";
 
