@@ -22,7 +22,9 @@ export default function ExpressTRPCProvider({
   headers: Headers;
   tokens: CookieTokens;
 }) {
-  const url = getUrl();
+  const url = process.env.RENDER
+    ? process.env.RENDER_EXTERNAL_URL + "/trpc/"
+    : "http://localhost:8000/trpc/";
   console.log(`URL: ${url}`);
   const [queryClient] = useState(() => new QueryClient());
   const [trpcClient] = useState(() =>
@@ -34,7 +36,7 @@ export default function ExpressTRPCProvider({
             (op.direction === "down" && op.result instanceof Error),
         }),
         httpBatchLink({
-          url: "http://localhost:8000/trpc/",
+          url,
           headers() {
             const heads = new Map(headers);
             heads.set("authorization", `Bearer ${tokens.sessionToken}`);
