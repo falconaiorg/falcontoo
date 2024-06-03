@@ -17,5 +17,6 @@ declare namespace NodeJS {
     OPENAI_API_KEY: string;
     QDRANT_API_KEY: string;
     QDRANT_URL: string;
+    EXPRESS_LOCAL_PORT: string;
   }
 }

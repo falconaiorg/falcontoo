@@ -7,7 +7,7 @@ import { ViewTransitions } from "next-view-transitions";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import { BottomNav } from "@/components/bottom-nav";
-import { headers } from "next/headers";
+import { headers, cookies } from "next/headers";
 export const maxDuration = 300; // sets max duration for all actions in the app
 
 const montserrat = Montserrat({
@@ -21,11 +21,26 @@ export const metadata: Metadata = {
   manifest: "/manifest.json",
 };
 
+export type CookieTokens = {
+  sessionToken: string | undefined;
+  csrfToken: string | undefined;
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const nextCookies = cookies();
+  const sessionToken = nextCookies.get("next-auth.session-token")?.value;
+  console.log(`Session token: ${sessionToken}`);
+
+  const csrfToken = nextCookies
+    .get("next-auth.csrf-token")
+    ?.value?.split("|")[0];
+
+  console.log(`CSRF token: ${csrfToken}`);
+
   return (
     <ViewTransitions>
       <html lang="en">
@@ -36,7 +51,10 @@ export default function RootLayout({
               defaultTheme="dark"
               disableTransitionOnChange
             >
-              <Providers headers={headers()}>
+              <Providers
+                headers={headers()}
+                tokens={{ sessionToken, csrfToken }}
+              >
                 <div className="scrollbar-sm h-full w-full max-w-screen-sm overflow-y-auto ">
                   {children}
                 </div>

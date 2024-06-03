@@ -4,22 +4,31 @@
   "description": "NodeJs backend for Falcon",
   "main": "index.js",
   "scripts": {
+    "clean": "rimraf node_modules",
     "build": "tsc",
-    "dev-base": "nodemon --exec ts-node ./src/index.ts",
-    "dev": "console-ninja pnpm dev-base"
+    "start": "tsx dist/index.js",
+    "dev": "console-ninja tsx watch src/index.ts"
   },
+  "type": "module",
   "keywords": [],
   "author": "Falcon AI",
   "dependencies": {
+    "@falcon/lib": "workspace:*",
+    "@falcon/prisma": "workspace:*",
+    "@falcon/trpc": "workspace:*",
+    "@trpc/server": "11.0.0-rc.366",
+    "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "next-auth": "^4.24.7",
+    "rimraf": "^5.0.1",
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
     "@types/node": "^20.12.12",
-    "nodemon": "^3.1.2",
-    "ts-node": "^10.9.2",
+    "tsx": "^4.11.0",
     "typescript": "^5.4.5"
   }
 }

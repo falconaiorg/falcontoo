@@ -1,31 +1,44 @@
 "use client";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { loggerLink, unstable_httpBatchStreamLink } from "@trpc/client";
+import {
+  httpBatchLink,
+  loggerLink,
+  unstable_httpBatchStreamLink,
+} from "@trpc/client";
 import { useState } from "react";
-import { api } from ".";
 import { transformer, getUrl } from "./shared";
+import { draco } from ".";
 
-export default function TRPCProvider({
+export type CookieTokens = {
+  sessionToken: string | undefined;
+  csrfToken: string | undefined;
+};
+export default function ExpressTRPCProvider({
   children,
   headers,
+  tokens,
 }: {
   children: React.ReactNode;
   headers: Headers;
+  tokens: CookieTokens;
 }) {
+  const url = getUrl();
+  console.log(`URL: ${url}`);
   const [queryClient] = useState(() => new QueryClient());
   const [trpcClient] = useState(() =>
-    api.createClient({
+    draco.createClient({
       links: [
         loggerLink({
           enabled: (op) =>
             process.env.NODE_ENV === "development" ||
             (op.direction === "down" && op.result instanceof Error),
         }),
-        unstable_httpBatchStreamLink({
-          url: getUrl(),
+        httpBatchLink({
+          url: "http://localhost:8000/trpc/",
           headers() {
             const heads = new Map(headers);
-            heads.set("x-trpc-source", "react");
+            heads.set("authorization", `Bearer ${tokens.sessionToken}`);
+            heads.set("x-csrf-token", tokens.csrfToken!); // TODO: Fix this: !
             return Object.fromEntries(heads);
           },
           transformer,
@@ -34,8 +47,8 @@ export default function TRPCProvider({
     })
   );
   return (
-    <api.Provider client={trpcClient} queryClient={queryClient}>
+    <draco.Provider client={trpcClient} queryClient={queryClient}>
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-    </api.Provider>
+    </draco.Provider>
   );
 }

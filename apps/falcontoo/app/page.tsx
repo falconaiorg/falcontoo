@@ -5,7 +5,6 @@ import { auth } from "@falcon/lib/next-auth";
 
 export default async function Home() {
   const session = await auth();
-  console.log(session);
   return (
     <>
       {session ? session.user?.email : ""}

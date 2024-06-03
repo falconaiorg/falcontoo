@@ -3,6 +3,7 @@
   "pipeline": {
     "type-check": {},
     "build": {
+      "cache": false,
       "outputs": [".next/**", "!.next/cache/**"],
       "dotEnv": [
         ".env.production.local",
@@ -12,6 +13,7 @@
       ]
     },
     "dev": {
+      "cache": false,
       "dotEnv": [
         ".env.development.local",
         ".env.local",
