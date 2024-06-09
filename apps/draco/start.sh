@@ -6,10 +6,7 @@
 npx @puppeteer/browsers install chrome@123.0.6312.58
 
 # Get the path to the downloaded Chrome binary
-CHROME_PATH=$(npx @puppeteer/browsers path chrome@123.0.6312.58)/chrome-linux64/chrome
-
-# Export the path to the downloaded Chrome binary
-export CHROME_BIN=$CHROME_PATH
+export CHROME_BIN="/opt/render/project/src/apps/draco/chrome/linux-123.0.6312.58/chrome-linux64/chrome"
 
 # Log the Chrome binary path for debugging
 echo "Chrome binary installed at: $CHROME_BIN"
