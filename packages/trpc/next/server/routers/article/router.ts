@@ -111,14 +111,15 @@ export const articleRouter = router({
       console.log("Parsed URL", parsedUrl);
       console.log(input.url);
       const nextAuthHeaders = getHeaders();
-      const article = (await dracoAxios({
+      const response = await dracoAxios({
         method: "post",
         url: "/parser",
         data: {
           url: input.url,
         },
         headers: nextAuthHeaders,
-      })) as ArticleContent;
+      });
+      const article = response.data as ArticleContent;
       console.log("Parsed article", article);
       const savedArticle = await saveArticle({ articleData: article, userId });
       console.log("Saved article", savedArticle);

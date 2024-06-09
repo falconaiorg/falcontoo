@@ -53,6 +53,7 @@ app.post("/parser", async (req, res) => {
     console.log("Parsed content", parsedContent.data?.url);
     const parsedUrl = await parseUrl({ url: parsedContent.data?.url });
     const article = await parseArticle({ url: parsedUrl });
+    console.log("🟢 Final Article", article);
     res.send(article);
   } catch (error) {
     res.status(400).send(error);
