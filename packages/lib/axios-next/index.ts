@@ -1,9 +1,14 @@
 import axios from "axios";
 import { cookies } from "next/headers";
+import { isDev } from "../utils";
 
-const baseURL = process.env.RENDER
-  ? process.env.RENDER_EXTERNAL_URL + "/"
-  : "http://localhost:8000/";
+// const baseURL = process.env.RENDER
+//   ? process.env.RENDER_EXTERNAL_URL + "/"
+//   : "http://localhost:8000/";
+
+const baseURL = isDev
+  ? "http://localhost:8000"
+  : "https://falcontoo.onrender.com"; // Use env var
 
 const getTokens = () => {
   const nextCookies = cookies();
