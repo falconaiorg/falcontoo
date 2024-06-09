@@ -1,14 +1,14 @@
-import { revalidatePath, revalidateTag } from "next/cache";
 import { ArticleWithContent, ParsedArticle } from "../../../parser/types";
 import { ArticleWithContent as ArticleIncludingContent } from "./get-article";
 import prisma from "@falcon/prisma";
-import { getServerComponentSession } from "../../../next-auth";
 
-export const saveArticle = async (
-  articleData: ArticleWithContent
-): Promise<ArticleIncludingContent> => {
-  const { user } = await getServerComponentSession();
-
+export const saveArticle = async ({
+  articleData,
+  userId,
+}: {
+  userId: string;
+  articleData: ArticleWithContent;
+}): Promise<ArticleIncludingContent> => {
   const { markdownChecksum } = articleData;
 
   const existingContent = await prisma.articleContent.findUnique({
@@ -21,7 +21,7 @@ export const saveArticle = async (
       data: {
         User: {
           connect: {
-            id: user.id,
+            id: userId,
           },
         },
         content: {
@@ -42,15 +42,13 @@ export const saveArticle = async (
         content: true,
       },
     });
-    revalidatePath("/");
-    revalidateTag("articles");
     return newArticle;
   }
   const newArticle = await prisma.article.create({
     data: {
       User: {
         connect: {
-          id: user.id,
+          id: userId,
         },
       },
       content: {
@@ -63,7 +61,5 @@ export const saveArticle = async (
       content: true,
     },
   });
-  revalidatePath("/");
-  revalidateTag("articles");
   return newArticle;
 };

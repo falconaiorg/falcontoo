@@ -10,6 +10,7 @@ import to from "await-to-js";
 import { server } from "@falcon/lib/server/next";
 import { saveArticle } from "@falcon/lib/server/next/article/save-article";
 import { authenticatedProcedure, router, t } from "../../trpc";
+import { revalidatePath, revalidateTag } from "next/cache";
 
 const ArticleIdSchema = z.object({
   articleId: z.string(),
@@ -57,12 +58,14 @@ export const articleRouter = router({
   doesArticleExist: authenticatedProcedure
     .input(ZDoesArticleExist)
     .query(async ({ input, ctx }) => {
+      console.log("Checking if article exists", input.url);
       if (!input.url) {
         throw new TRPCError({
           code: "BAD_REQUEST",
           message: "URL is required",
         });
       }
+      console.log("Checking if article exists", input.url);
 
       const parsedUrl = await parseUrl({ url: input.url });
 
@@ -94,12 +97,13 @@ export const articleRouter = router({
           message: "URL is required",
         });
       }
+      const userId = ctx.user.id;
       console.log("Creating article", input.url);
       const parsedUrl = await parseUrl({ url: input.url });
       console.log("Parsed URL", parsedUrl);
       const article = await parseArticle({ url: parsedUrl });
       console.log("Parsed article", article);
-      const savedArticle = await saveArticle(article);
+      const savedArticle = await saveArticle({ articleData: article, userId });
       console.log("Saved article", savedArticle);
       const [err] = await to(saveAsVector({ article: savedArticle }));
       if (err) {
@@ -110,6 +114,8 @@ export const articleRouter = router({
           cause: err,
         });
       }
+      revalidatePath("/");
+      revalidateTag("articles");
       return savedArticle;
     }),
 
