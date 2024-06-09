@@ -40,6 +40,8 @@ export const parseWebpage = async ({ url }: { url: URL }) => {
   const executablePath = isDev
     ? undefined
     : process.env.CHROMIUM_BIN || "/usr/bin/chromium";
+
+  console.log(`Executable path: ${executablePath}`);
   const href = url.href;
   let browser;
   try {
