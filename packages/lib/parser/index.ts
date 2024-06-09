@@ -1,6 +1,6 @@
 "use server";
 import { Readability } from "@mozilla/readability";
-import { parseWebpage } from "./html/puppeteer";
+import { htmlParser } from "./html";
 import { htmlToMarkdownWithTurndown } from "./markdown";
 import { parseUrl } from "./url";
 import jsdom from "jsdom";
@@ -10,7 +10,12 @@ import { ArticleWithContent, ParsedArticle } from "./types";
 
 export const parseArticle = async function ({ url }: { url: URL }) {
   console.log(`Parsing article: ${url.href}`);
-  const html = await parseWebpage({ url });
+
+  // const html = await htmlParser.serverless({ url });
+  const html = await htmlParser.onServer({ url });
+
+  console.log(`Parsed article: ${html}`);
+
   console.log(`Parsed article: ${url.href}`);
 
   let doc,

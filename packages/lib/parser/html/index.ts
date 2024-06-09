@@ -1,3 +1,11 @@
+import { parseWebpage as serverParser } from "./puppeteer/server";
+import { parseWebpage as serverlessParser } from "./puppeteer/serverless";
+
+export const htmlParser = {
+  serverless: serverlessParser,
+  onServer: serverParser,
+};
+
 // import { Readability, isProbablyReaderable } from "@mozilla/readability";
 // import { TRPCError } from "@trpc/server";
 // import jsdom from "jsdom";

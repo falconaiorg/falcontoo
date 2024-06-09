@@ -3,7 +3,7 @@ import { config as browserConfig } from "./browser-config";
 import chromium from "@sparticuz/chromium";
 
 import puppeteer from "puppeteer-extra";
-import { isDev } from "../../../utils";
+import { isDev } from "../../../../utils";
 
 const content = "dog";
 
