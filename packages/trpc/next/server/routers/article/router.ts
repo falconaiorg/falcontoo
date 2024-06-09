@@ -11,6 +11,9 @@ import { server } from "@falcon/lib/server/next";
 import { saveArticle } from "@falcon/lib/server/next/article/save-article";
 import { authenticatedProcedure, router, t } from "../../trpc";
 import { revalidatePath, revalidateTag } from "next/cache";
+import { dracoAxios, getHeaders } from "@falcon/lib/axios-next";
+import { ArticleWithContent } from "@falcon/lib/server/next/article";
+import { ArticleContent } from "@falcon/lib/parser/types";
 
 const ArticleIdSchema = z.object({
   articleId: z.string(),
@@ -101,7 +104,21 @@ export const articleRouter = router({
       console.log("Creating article", input.url);
       const parsedUrl = await parseUrl({ url: input.url });
       console.log("Parsed URL", parsedUrl);
-      const article = await parseArticle({ url: parsedUrl });
+
+      const ParserBodySchema = z.object({
+        url: z.string(),
+      });
+      console.log("Parsed URL", parsedUrl);
+      console.log(input.url);
+      const nextAuthHeaders = getHeaders();
+      const article = (await dracoAxios({
+        method: "post",
+        url: "/parser",
+        data: {
+          url: input.url,
+        },
+        headers: nextAuthHeaders,
+      })) as ArticleContent;
       console.log("Parsed article", article);
       const savedArticle = await saveArticle({ articleData: article, userId });
       console.log("Saved article", savedArticle);

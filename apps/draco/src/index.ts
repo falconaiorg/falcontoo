@@ -2,9 +2,11 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import { getToken } from "next-auth/jwt";
-import { appRouter, createContext } from "@falcon/trpc/node/server.js";
+import { z } from "zod";
+import { ArticleWithContent } from "@falcon/lib/server/next/article";
+import { parseArticle } from "./parser";
+import { parseUrl } from "./parser/url";
 const base64Secret = process.env.NEXTAUTH_SECRET;
-import * as trpcExpress from "@trpc/server/adapters/express";
 
 dotenv.config();
 
@@ -20,32 +22,42 @@ const PORT = 8000;
 // };
 
 app.use(cors());
+app.use(express.json());
 
 app.all("/", async (req, res, next) => {
-  // const user = await getToken({ req, secret: base64Secret });
-  // if (!user) {
-  //   res.status(401).send("Unauthorized");
-  //   return;
-  // }
-  // console.log(user.name);
-  console.log("Hello from Draco!");
+  const user = await getToken({ req, secret: base64Secret });
+  if (!user) {
+    res.status(401).send("Unauthorized");
+    return;
+  }
+  console.log(user.name);
   next();
 });
 
-app.all("/trpc", async (req, res, next) => {
-  console.log(req.headers);
-  console.log(req.body);
-  console.log("Hello from Draco!");
-  next();
+// Define your schema
+const ParserBodySchema = z.object({
+  url: z.string(),
 });
 
-app.use(
-  "/trpc",
-  trpcExpress.createExpressMiddleware({
-    router: appRouter,
-    createContext,
-  })
-);
+app.post("/parser", async (req, res) => {
+  try {
+    console.log("Request body", req.body);
+    const parsedContent = await ParserBodySchema.safeParse(req.body);
+    console.log("Parsed content", parsedContent);
+
+    if (!parsedContent.success) {
+      res.status(400).send(parsedContent.error);
+      return;
+    }
+    console.log("Parsed content", parsedContent.data);
+    console.log("Parsed content", parsedContent.data?.url);
+    const parsedUrl = await parseUrl({ url: parsedContent.data?.url });
+    const article = await parseArticle({ url: parsedUrl });
+    res.send(article);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
 
 app.listen(PORT, () => {
   console.log(`Server is running at http://${HOST}:${PORT}`);

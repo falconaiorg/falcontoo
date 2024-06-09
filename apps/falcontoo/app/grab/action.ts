@@ -1,9 +1,6 @@
 "use server";
 import { TRPCError } from "@trpc/server";
-import prisma from "@falcon/prisma";
 import { getServerComponentSession } from "@falcon/lib/next-auth";
-import { revalidatePath, revalidateTag } from "next/cache";
-import { ArticleWithContent, ParsedArticle } from "@falcon/lib/parser/types";
 import { redirect } from "next/navigation";
 import { url } from "@/urls";
 import { parseArticle } from "@falcon/lib/parser";
@@ -17,9 +14,17 @@ export async function fetchArticle(articleUrl: string | undefined) {
   if (!articleUrl) {
     return;
   }
+  const session = await getServerComponentSession();
+  if (!session) {
+    throw new TRPCError({
+      code: "UNAUTHORIZED",
+      message: "Login to perform action",
+    });
+  }
+  const userId = session.user.id;
   const parsedUrl = await parseUrl({ url: articleUrl });
   const article = await parseArticle({ url: parsedUrl });
-  const savedArticle = await saveArticle(article);
+  const savedArticle = await saveArticle({ userId, articleData: article });
   const [err] = await to(saveAsVector({ article: savedArticle }));
   if (err) {
     server.article.deleteArticleForUser({ articleId: savedArticle.id });
