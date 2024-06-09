@@ -1,17 +1,29 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
-    "target": "es2017",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
+    // Base configuration
+    "skipLibCheck": true, // Node modules are not type checked
     "esModuleInterop": true,
-    "module": "esnext",
+    "moduleDetection": "force",
+    "allowJs": true, // Allow JavaScript files to be imported
+    "resolveJsonModule": true, // Allow importing JSON files
+    "target": "es2017",
+
+    // Strict type checking
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+
+    // Resolution because we are using esbuild as a bundler
     "moduleResolution": "node",
-    "resolveJsonModule": true,
+    "module": "CommonJS",
+    "noEmit": true,
+
+    "baseUrl": ".",
+    // Because the code is in the src folder
+    "paths": {
+      "@draco/*": ["src/*"]
+    },
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
     "jsx": "preserve"
   },

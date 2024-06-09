@@ -53,6 +53,9 @@ importers:
       esbuild:
         specifier: ^0.21.4
         version: 0.21.4
+      esbuild-node-externals:
+        specifier: ^1.13.1
+        version: 1.13.1(esbuild@0.21.4)
       express:
         specifier: ^4.19.2
         version: 4.19.2
@@ -73,7 +76,7 @@ importers:
         specifier: ^4.17.21
         version: 4.17.21
       '@types/node':
-        specifier: ^20.12.12
+        specifier: ^20.12.13
         version: 20.12.13
       tsx:
         specifier: ^4.11.0
@@ -3781,8 +3784,8 @@ packages:
       - supports-color
     dev: true
 
-  /@maxim_mazurok/gapi.client.androidpublisher-v3@0.0.20240530:
-    resolution: {integrity: sha512-9EgzpD+Q10YZiPyLScQe2613hIo/NA3c3/pHmAEWRBcrVqbn7g2klW+GLKspvHTOfcaDZ40n9zscNSYeJCSkVA==}
+  /@maxim_mazurok/gapi.client.androidpublisher-v3@0.0.20240606:
+    resolution: {integrity: sha512-5xHQOavVeYIEMK0kBvJUtWRsU3Yn7tV8DjgeipGMjWiuHP+x9qDhL2CmCj0TyuhBksRf/WDk5PF4uLge1foHZA==}
     dependencies:
       '@types/gapi.client': 1.0.8
       '@types/gapi.client.discovery-v1': 0.0.4
@@ -5379,7 +5382,7 @@ packages:
     resolution: {integrity: sha512-ITizgxAt4cTHQ7n+pGRTHi/QeWA1MKYliiuZcuR2rjyiyAvR/jdTamKmUYxdtP3lWorR+q/+RFZToFKkCliGnQ==}
     deprecated: use @types/gapi.client.androidpublisher-v3 instead; see https://github.com/Maxim-Mazurok/google-api-typings-generator/issues/652 for details
     dependencies:
-      '@maxim_mazurok/gapi.client.androidpublisher-v3': 0.0.20240530
+      '@maxim_mazurok/gapi.client.androidpublisher-v3': 0.0.20240606
     dev: true
 
   /@types/gapi.client.discovery-v1@0.0.4:
@@ -8257,6 +8260,17 @@ packages:
     dev: true
     optional: true
 
+  /esbuild-node-externals@1.13.1(esbuild@0.21.4):
+    resolution: {integrity: sha512-ho4Lokc6iMB1lWbb2tWJ6otien+3Kfoaxe0fy7NUNgVuLnfmlW+GRINftTVUGtTVY/dapuwUu/CvFylYNwzkMA==}
+    engines: {node: '>=12'}
+    peerDependencies:
+      esbuild: 0.12 - 0.21
+    dependencies:
+      esbuild: 0.21.4
+      find-up: 5.0.0
+      tslib: 2.6.2
+    dev: false
+
   /esbuild-openbsd-64@0.14.47:
     resolution: {integrity: sha512-QpgN8ofL7B9z8g5zZqJE+eFvD1LehRlxr25PBkjyyasakm4599iroUpaj96rdqRlO2ShuyqwJdr+oNqWwTUmQw==}
     engines: {node: '>=12'}
@@ -9105,7 +9119,6 @@ packages:
     dependencies:
       locate-path: 6.0.0
       path-exists: 4.0.0
-    dev: true
 
   /flat-cache@3.2.0:
     resolution: {integrity: sha512-CYcENa+FtcUKLmhhqyctpclsq7QF38pKjZHsGNiSQF5r4FtoKDWabFDl3hzaEQMvT1LHEysw5twgLvpYYb4vbw==}
@@ -11273,7 +11286,6 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       p-locate: 5.0.0
-    dev: true
 
   /lodash._reinterpolate@3.0.0:
     resolution: {integrity: sha512-xYHt68QRoYGjeeM/XOE1uJtvXQAgvszfBhjV4yvsQH0u2i9I6cI6c6/eG4Hh3UAOVn0y/xAXwmTzEay49Q//HA==}
@@ -12675,7 +12687,6 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       yocto-queue: 0.1.0
-    dev: true
 
   /p-locate@4.1.0:
     resolution: {integrity: sha512-R79ZZ/0wAxKGu3oYMlz8jy/kbhsNrS7SKZ7PxEHBgJ5+F2mtFW2fK2cOtBh1cHYkQsbzFV7I+EoRKe6Yt0oK7A==}
@@ -12689,7 +12700,6 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       p-limit: 3.1.0
-    dev: true
 
   /p-map@2.1.0:
     resolution: {integrity: sha512-y3b8Kpd8OAN444hxfBbFfj1FY/RjtTd8tzYwhUqNYXx0fXx2iX4maP4Qr6qhIKbQXI02wTLAda4fYUbDagTUFw==}
@@ -16439,7 +16449,6 @@ packages:
   /yocto-queue@0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
-    dev: true
 
   /zod-to-json-schema@3.22.5(zod@3.23.8):
     resolution: {integrity: sha512-+akaPo6a0zpVCCseDed504KBJUQpEW5QZw7RMneNmKw+fGaML1Z9tUNLnHHAC8x6dzVRO1eB2oEMyZRnuBZg7Q==}
