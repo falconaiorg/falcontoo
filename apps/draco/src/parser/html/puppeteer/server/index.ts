@@ -34,12 +34,13 @@ puppeteer.use(
     blockedTypes: new Set<BlockedType>(["font"]),
   })
 );
-export const isDev = process.env.NODE_ENV === "development";
 
 export const parseWebpage = async ({ url }: { url: URL }) => {
+  const isDev = process.env.NODE_ENV === "development";
+
   const executablePath = isDev
     ? undefined
-    : process.env.CHROMIUM_BIN || "/usr/bin/chromium";
+    : process.env.CHROME_BIN || "/usr/bin/chromium";
 
   console.log(`Executable path: ${executablePath}`);
   const href = url.href;

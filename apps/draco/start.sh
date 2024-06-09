@@ -6,7 +6,7 @@ install_chrome_for_testing() {
     npx @puppeteer/browsers install chrome@123.0.6312.58
     
     # Export the path to the downloaded Chrome binary
-    export CHROMIUM_BIN=$(npx @puppeteer/browsers path chrome@stable)
+    export CHROME_BIN=$(npx @puppeteer/browsers path chrome@123.0.6312.58)/chrome-linux64/chrome
 }
 
 # Function to install Chromium on macOS
