@@ -45,5 +45,4 @@ public/sw.js
 public/workbox-2e6be583.js
 gradle
 tsconfig.tsbuildinfo
-dist
 dependencyTree.json
