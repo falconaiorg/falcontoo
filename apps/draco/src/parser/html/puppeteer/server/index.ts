@@ -84,6 +84,7 @@ export const parseWebpage = async ({ url }: { url: URL }) => {
     throw error;
   } finally {
     if (browser) {
+      console.log(`Closing browser: ${href}`);
       await browser.close();
     }
   }
