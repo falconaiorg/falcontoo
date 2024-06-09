@@ -34,40 +34,54 @@ puppeteer.use(
     blockedTypes: new Set<BlockedType>(["font"]),
   })
 );
+export const isDev = process.env.NODE_ENV === "development";
 
 export const parseWebpage = async ({ url }: { url: URL }) => {
+  const executablePath = isDev
+    ? undefined
+    : process.env.CHROMIUM_BIN || "/usr/bin/chromium";
   const href = url.href;
-  const browser = await puppeteer.launch({
-    headless: true,
-    args: [
-      "--no-sandbox",
-      "--enable-features=SharedArrayBuffer",
-      "--disable-setuid-sandbox",
-      "--allow-running-insecure-content",
-      "--autoplay-policy=user-gesture-required",
-      "--disable-component-update",
-      "--disable-domain-reliability",
-      "--disable-features=AudioServiceOutOfProcess,IsolateOrigins,site-per-process",
-      "--disable-print-preview",
-      "--disable-site-isolation-trials",
-      "--disable-web-security",
-      "--disk-cache-size=33554432",
-      "--hide-scrollbars",
-      "--disable-gpu",
-      "--mute-audio",
-      "--no-default-browser-check",
-      "--no-pings",
-      "--no-sandbox",
-      "--no-zygote",
-      "--disable-extensions",
-    ],
-    
-  });
-  console.log(`Browser launched: ${href}`);
-  const page = await browser.newPage();
-  await page.goto(href);
-  const title = await page.title();
-  const content = await page.content();
-  await browser.close();
-  return content;
+  let browser;
+  try {
+    browser = await puppeteer.launch({
+      headless: true,
+      executablePath,
+      args: [
+        "--no-sandbox",
+        "--enable-features=SharedArrayBuffer",
+        "--disable-setuid-sandbox",
+        "--allow-running-insecure-content",
+        "--autoplay-policy=user-gesture-required",
+        "--disable-component-update",
+        "--disable-domain-reliability",
+        "--disable-features=AudioServiceOutOfProcess,IsolateOrigins,site-per-process",
+        "--disable-print-preview",
+        "--disable-site-isolation-trials",
+        "--disable-web-security",
+        "--disk-cache-size=33554432",
+        "--hide-scrollbars",
+        "--disable-gpu",
+        "--mute-audio",
+        "--no-default-browser-check",
+        "--no-pings",
+        "--no-sandbox",
+        "--no-zygote",
+        "--disable-extensions",
+      ],
+    });
+    console.log(`Browser launched: ${href}`);
+    const page = await browser.newPage();
+    await page.goto(href, { waitUntil: "domcontentloaded" });
+    const title = await page.title();
+    const content = await page.content();
+    console.log(`Page title: ${title}`);
+    return content;
+  } catch (error) {
+    console.error(`Failed to parse webpage: ${error}`);
+    throw error;
+  } finally {
+    if (browser) {
+      await browser.close();
+    }
+  }
 };
