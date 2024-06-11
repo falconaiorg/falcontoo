@@ -1,4 +1,4 @@
-import { parseWebpage as serverParser } from "./puppeteer/server";
+import { parseWebpage as serverParser } from "./puppeteer";
 
 export const htmlParser = {
   onServer: serverParser,
