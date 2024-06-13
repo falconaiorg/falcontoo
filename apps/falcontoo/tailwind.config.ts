@@ -82,11 +82,16 @@ const config = {
             backgroundPosition: "-200% 0",
           },
         },
+        breath: {
+          "0%, 100%": { transform: "scale(0.8)" },
+          "50%": { transform: "scale(1.1)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         shimmer: "shimmer 5s cubic-bezier(0.175, 0.885, 0.32, 1.275) 5",
+        breath: "breath 4s ease-in-out infinite",
       },
     },
   },
