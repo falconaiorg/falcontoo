@@ -1,5 +1,10 @@
 "use client";
-import { BookmarkIcon, AIMagicIcon, UserIcon } from "@/components/icons";
+import {
+  BookmarkIcon,
+  AIMagicIcon,
+  UserIcon,
+  PieChartIcon,
+} from "@/components/icons";
 import { url } from "@/urls";
 import { useSelectedLayoutSegment } from "next/navigation";
 import { motion } from "framer-motion";
@@ -14,16 +19,16 @@ type NavbarSegments = "home" | "notes" | "profile";
 const bottomNavConfig = [
   { href: url.home, Icon: AIMagicIcon, text: "Home", segment: "home" },
   {
-    href: url.notes,
+    href: url.library,
     Icon: BookmarkIcon,
-    text: "Notes",
-    segment: "notes",
+    text: "Library",
+    segment: "library",
   },
   {
-    href: url.profile,
-    Icon: UserIcon,
-    text: "Profile",
-    segment: "profile",
+    href: url.stats,
+    Icon: PieChartIcon,
+    text: "Stats",
+    segment: "stats",
   },
 ] as const;
 
@@ -33,8 +38,8 @@ export const BottomNav = () => {
 
   useEffect(() => {
     router.prefetch(url.home);
-    router.prefetch(url.notes);
-    router.prefetch(url.profile);
+    router.prefetch(url.library);
+    router.prefetch(url.stats);
   }, [router]);
 
   return (
@@ -48,7 +53,7 @@ export const BottomNav = () => {
               key={href}
               href={href}
               className={cn(
-                "relative flex min-w-24 flex-col items-center px-4 py-1",
+                "relative flex min-w-24 flex-col items-center px-3 py-1",
                 {
                   "text-primary": isSelected,
                   "text-slate-600": !isSelected,
@@ -64,8 +69,8 @@ export const BottomNav = () => {
                   <Icon
                     size={
                       cn({
-                        base: isSelected,
-                        sm: !isSelected,
+                        sm: isSelected,
+                        xs: !isSelected,
                       }) as any
                     }
                   />

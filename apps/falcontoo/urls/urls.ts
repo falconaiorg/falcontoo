@@ -3,8 +3,8 @@ const root = ``;
 
 export const url = {
   home: `${root}/home`,
-  notes: `${root}/notes`,
-  profile: `${root}/profile`,
+  library: `${root}/library`,
+  stats: `${root}/stats`,
   session: {
     home: `${root}/session`,
     create: `${root}/session/create`,

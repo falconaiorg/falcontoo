@@ -22,8 +22,6 @@ export const BROWSER_CONFIG = {
     "--disable-extensions",
   ],
   EXECUTABLE_PATH:
-    process.env.NODE_ENV === "development"
-      ? undefined
-      : process.env.CHROME_BIN || "/usr/bin/chromium",
+    process.env.NODE_ENV === "development" ? undefined : process.env.CHROME_BIN,
   IS_HEADLESS: true,
 };

@@ -47,3 +47,6 @@ gradle
 tsconfig.tsbuildinfo
 dependencyTree.json
 dist
+apps/draco/dist/index.js
+apps/draco/dist/index.js
+apps/falcontoo/public/sw.js
