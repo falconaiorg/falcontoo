@@ -30,13 +30,13 @@ jobs:
       - name: Zip artifact for deployment
         run: |
           cd apps/draco
-          zip release.zip ./* -r
+          zip -r ../../release.zip ./*
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
           name: node-app
-          path: apps/draco/release.zip
+          path: release.zip
 
   deploy:
     runs-on: ubuntu-latest
@@ -54,7 +54,7 @@ jobs:
           name: node-app
 
       - name: Unzip artifact for deployment
-        run: unzip apps/draco/release.zip
+        run: unzip release.zip
 
       - name: Login to Azure
         uses: azure/login@v1
