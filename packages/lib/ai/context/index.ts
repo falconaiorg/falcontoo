@@ -10,6 +10,9 @@ export const getArticleContext = async ({
 }: {
   article: ArticleWithContent;
 }): Promise<string> => {
+  // Add a synthetic delay
+  // await new Promise((resolve) => setTimeout(resolve, 10000));
+
   const articleId = article.id;
 
   // Check if the context is already generated, if so, return it

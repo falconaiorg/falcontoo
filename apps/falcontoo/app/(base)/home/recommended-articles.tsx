@@ -20,13 +20,14 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { url } from "@/urls";
 import { useSoundEffect } from "@/hooks/use-sound-effect";
+import { sounds } from "@/sounds";
 
 export function RecommendedArticles({
   articles,
 }: {
   articles: ArticleWithContent[];
 }) {
-  const { playSound } = useSoundEffect("/sounds/snooze.mp3");
+  const { playSound } = useSoundEffect(sounds.snooze);
 
   const router = useRouter();
 

@@ -14,6 +14,10 @@ import {
 import { cn } from "@/lib/utils";
 import { ReadingProgress } from "./reading-progress";
 import { ai } from "@falcon/lib/ai";
+import { Suspense } from "react";
+import { ArticleContext } from "./context/context";
+import { ContextSkeleton } from "./context/context-skeleton";
+import { Link } from "next-view-transitions";
 
 const markdownText = `
 # Sample Markdown
@@ -36,30 +40,32 @@ export default async function ReadPage({
     userId: user.id,
   });
 
-  const context = await ai.context.getArticleContext({
-    article,
-  });
-
   return (
     <div className="flex flex-col space-y-3 px-4 py-4">
       {/* <FilterButton /> */}
-      <Card className="relative bg-grid-small-black/[0.2] dark:bg-grid-small-white/[0.2] ">
-        <CardHeader className="py-4">
-          <CardTitle className="text-sm">Pre-reading</CardTitle>
-          <CardDescription>{context}</CardDescription>
-        </CardHeader>
-      </Card>
-
+      <Suspense fallback={<ContextSkeleton />}>
+        <ArticleContext article={article} />
+      </Suspense>
       <Card className="flex flex-col gap-4">
         <CardHeader>
           <CardTitle>
-            <div className="flex flex-row items-center justify-between">
-              <div>{article.content.title}</div>
+            <div className="flex flex-row items-start justify-between">
+              <div className="w-10/12 text-sm font-medium">
+                {article.content.title}
+              </div>
               <ReadingProgress article={article} />
             </div>
           </CardTitle>
-
-          {/* <p className="text-sm text-gray-500">{article.content.description}</p> */}
+          <CardDescription className="text-xs italic underline decoration-sky-700">
+            <Link
+              href={article.content.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              prefetch={false}
+            >
+              Source
+            </Link>
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <MarkdownWithHighlight
@@ -69,7 +75,7 @@ export default async function ReadPage({
           <AnnotationDrawer />
         </CardContent>
       </Card>
-      <Card
+      {/* <Card
         className={cn(
           "inline-flex animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-slate-400 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50",
         )}
@@ -96,7 +102,7 @@ export default async function ReadPage({
           />
           <AnnotationDrawer />
         </CardContent>
-      </Card>
+      </Card> */}
     </div>
   );
 }

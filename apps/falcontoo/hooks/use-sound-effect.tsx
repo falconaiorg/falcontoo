@@ -2,12 +2,31 @@
 import { soundEnabledAtom } from "@falcon/lib/state/app";
 import { useAtomValue } from "jotai";
 import useSound from "use-sound";
-export const useSoundEffect = (soundUrl: string) => {
+import { vibrate as vibrateNow } from "@falcon/lib/vibrate";
+export const useSoundEffect = (
+  soundUrl: string,
+  {
+    vibrate,
+  }: {
+    vibrate?: "sm" | "md" | "lg";
+  } = {},
+) => {
   const [play, { stop, pause }] = useSound(soundUrl, {
     volume: 0.3,
     soundEnabled: useAtomValue(soundEnabledAtom),
     interrupt: false,
   });
 
-  return { playSound: play, stopSound: stop, pauseSound: pause };
+  const playWithVibrate = () => {
+    if (vibrate) {
+      vibrateNow({ duration: vibrate });
+    }
+    play();
+  };
+
+  return {
+    playSound: playWithVibrate,
+    stopSound: stop,
+    pauseSound: pause,
+  };
 };

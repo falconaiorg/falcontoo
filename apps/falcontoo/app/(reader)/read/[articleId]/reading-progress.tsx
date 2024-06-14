@@ -11,6 +11,9 @@ import { api } from "@falcon/trpc/next/client";
 import { ArticleWithContent } from "@falcon/lib/server/next/article";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { useSoundEffect } from "@/hooks/use-sound-effect";
+import { sounds } from "@/sounds";
+
 const FormSchema = z.object({
   hasRead: z.boolean(),
 });
@@ -21,6 +24,9 @@ export const ReadingProgress = ({
 }: {
   article: ArticleWithContent;
 }) => {
+  const { playSound } = useSoundEffect(sounds.check, {
+    vibrate: "sm",
+  });
   const router = useRouter();
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -58,7 +64,7 @@ export const ReadingProgress = ({
 
   return (
     <div
-      className={cn("relative h-10 w-10 transition-transform duration-200", {})}
+      className={cn("relative h-8 w-8 transition-transform duration-200", {})}
     >
       <CircularProgressbar
         value={percentage}
@@ -82,6 +88,7 @@ export const ReadingProgress = ({
                   <Checkbox
                     checked={field.value}
                     onCheckedChange={(value) => {
+                      value && playSound();
                       field.onChange(value);
                       form.handleSubmit(onSubmit)();
                     }}
