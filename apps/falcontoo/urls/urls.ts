@@ -2,6 +2,9 @@
 const root = ``;
 
 export const url = {
+  auth: {
+    signin: `${root}/auth/sign-in`,
+  },
   home: `${root}/home`,
   library: `${root}/library`,
   stats: `${root}/stats`,

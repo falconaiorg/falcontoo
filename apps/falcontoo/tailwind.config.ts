@@ -91,7 +91,7 @@ const config = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         shimmer: "shimmer 5s cubic-bezier(0.175, 0.885, 0.32, 1.275) 5",
-        breath: "breath 4s ease-in-out infinite",
+        breath: "breath 3s ease-in-out infinite",
       },
     },
   },
@@ -103,6 +103,7 @@ const config = {
     require("tailwind-scrollbar"),
     require("@tailwindcss/container-queries"),
     require("tailwind-capitalize-first-letter"),
+    addVariablesForColors,
     function ({ matchUtilities, theme }: any) {
       matchUtilities(
         {
@@ -130,5 +131,17 @@ const config = {
     },
   ],
 } satisfies Config;
+
+// This plugin adds each Tailwind color as a global CSS variable, e.g. var(--gray-200).
+function addVariablesForColors({ addBase, theme }: any) {
+  let allColors = flattenColorPalette(theme("colors"));
+  let newVars = Object.fromEntries(
+    Object.entries(allColors).map(([key, val]) => [`--${key}`, val]),
+  );
+
+  addBase({
+    ":root": newVars,
+  });
+}
 
 export default config;
