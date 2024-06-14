@@ -17,8 +17,8 @@
   "prisma": {},
   "dependencies": {
     "@auth/prisma-adapter": "^2.1.0",
-    "@prisma/client": "^5.14.0",
-    "prisma": "^5.14.0",
+    "@prisma/client": "^5.15.0",
+    "prisma": "^5.15.0",
     "ts-pattern": "^5.0.6"
   },
   "devDependencies": {
