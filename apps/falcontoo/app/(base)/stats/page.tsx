@@ -5,7 +5,6 @@ import axios from "axios";
 import { cookies, headers } from "next/headers";
 import { auth, getServerComponentSession } from "@falcon/lib/next-auth";
 import { DracoTest } from "./test";
-import { Return } from "@prisma/client/runtime/library";
 
 async function getRoot(
   sessionToken: string | undefined,
