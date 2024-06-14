@@ -109,6 +109,7 @@ model Article {
     userId          String
     layers          Layer[]
     readingProgress Float           @default(0)
+    snoozedUntil    DateTime?
     context         ArticleContext?
 }
 
@@ -141,6 +142,7 @@ model ArticleContent {
     articles         Article[]
     layers           Layer[]
     isEmbedded       Boolean   @default(false)
+    estimatedTime    Int       @default(5)
 }
 
 model Layer {
