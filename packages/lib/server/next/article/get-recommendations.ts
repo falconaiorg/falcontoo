@@ -1,45 +1,26 @@
 import { getArticlesbyUserId } from "./get-articles";
-// 1 month
 const ONE_DAY = 1000 * 60 * 60 * 24;
-const ONE_MONTH = 1000 * 60 * 60 * 24 * 30;
+const ONE_MONTH = ONE_DAY * 30;
 const FRESH_ARTICLE_THRESHOLD = ONE_MONTH;
 
-const config = {
-  weights: {
-    unreadStatus: 10,
-    deferredStatus: -5,
+const calculateScore = (
+  article: Awaited<ReturnType<typeof getArticlesbyUserId>>[0]
+): number => {
+  const weights = {
     estimatedReadingTimeMultiplier: -1,
     dateAddedMultiplier: 1,
-  },
-  deferralPeriodDays: 7,
-};
-
-const calculateScore = (
-  article: Awaited<ReturnType<typeof getArticlesbyUserId>>[0],
-  config: any
-): number => {
+  };
   let score = 0;
-
-  // Unread status
-  if (article.readingProgress < 1) {
-    score += config.weights.unreadStatus;
-  }
-
-  // Snoozed status
-  if (article.snoozedUntil && article.snoozedUntil > new Date()) {
-    score += config.weights.snoozedStatus;
-  }
 
   // Estimated reading time
   score +=
-    article.content.estimatedTime *
-    config.weights.estimatedReadingTimeMultiplier;
+    article.content.estimatedTime * weights.estimatedReadingTimeMultiplier;
 
   // Date added (older articles get higher scores)
   const daysSinceAdded =
     (new Date().getTime() - article.createdAt.getTime()) /
     (1000 * 60 * 60 * 24);
-  score += daysSinceAdded * config.weights.dateAddedMultiplier;
+  score += daysSinceAdded * weights.dateAddedMultiplier;
 
   return score;
 };
@@ -113,7 +94,7 @@ export const getRecommendedArticles = async ({
 
   const scoredArticles = freshArticles.map((article) => ({
     ...article,
-    score: calculateScore(article, config),
+    score: calculateScore(article),
   }));
   scoredArticles.sort((a, b) => b.score - a.score);
   console.log("scoredArticles", scoredArticles);
