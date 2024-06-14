@@ -162,4 +162,29 @@ export const articleRouter = router({
       }
       return true;
     }),
+
+  snoozeArticle: authenticatedProcedure
+    .input(
+      z.object({
+        articleId: z.string(),
+        snoozeDate: z.date(),
+      })
+    )
+    .mutation(async ({ input }) => {
+      const { articleId, snoozeDate } = input;
+      const [err, article] = await to(
+        server.article.snoozeArticle({
+          articleId,
+          snoozeDate,
+        })
+      );
+      if (err) {
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "Failed to snooze article",
+          cause: err,
+        });
+      }
+      return article;
+    }),
 });
