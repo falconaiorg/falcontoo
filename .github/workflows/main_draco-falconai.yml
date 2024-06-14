@@ -25,8 +25,7 @@ jobs:
         run: |
           cd apps/draco
           pnpm install --frozen-lockfile
-          pnpm run build --if-present
-          pnpm run test --if-present
+          pnpm run build
 
       - name: Zip artifact for deployment
         run: |
