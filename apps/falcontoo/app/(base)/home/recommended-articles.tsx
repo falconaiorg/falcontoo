@@ -13,19 +13,23 @@ import {
 import { motion } from "framer-motion";
 import { useState } from "react";
 import {
-  SnoozeOptionValue,
   getSnoozeDate,
-  snoozeOptions,
+  snoozeOptions
 } from "./snooze-config";
 import { format } from "date-fns-tz";
-import { server } from "@falcon/lib/server/next";
 import { api } from "@falcon/trpc/next/client";
+import { useRouter } from "next/navigation";
+import { cn } from "@/lib/utils";
+import Link from "next/link";
+import { url } from "@/urls";
 
 export function RecommendedArticles({
   articles,
 }: {
   articles: ArticleWithContent[];
 }) {
+  const router = useRouter();
+
   const [selectedArticleId, setSelectedArticleId] = useState<string | null>(
     null,
   );
@@ -75,8 +79,21 @@ export function RecommendedArticles({
     });
   };
   return (
-    <div className="mt-20 flex w-full flex-col items-center space-y-10">
-      {displayedArticles.map((article) => (
+    <div
+      className={cn("mt-24 flex w-full flex-col items-center space-y-8", {
+        "mt-36 justify-center": displayedArticles.length === 0,
+      })}
+    >
+      {displayedArticles.length === 0 && (
+        <div className="flex w-full flex-col items-center space-y-4">
+          <h1 className="font-serif text-xl font-bold">Congratulations!!</h1>
+          <h2>You are all done</h2>
+          {articles.length > 0 && (
+            <Button onClick={() => router.refresh()}>Load More</Button>
+          )}
+        </div>
+      )}
+      {displayedArticles.map((article, index) => (
         <motion.h1
           key={article.id}
           initial={{ opacity: 0.5, y: 100 }}
@@ -86,17 +103,28 @@ export function RecommendedArticles({
             duration: 0.8,
             ease: "easeInOut",
           }}
-          className=" w-11/12 bg-gradient-to-br bg-clip-text py-4"
+          className=" w-11/12 bg-gradient-to-br bg-clip-text"
         >
-          <Card key={article.id}>
+          <Card
+            key={article.id}
+            className={cn("border-none shadow-inner", {
+              "shadow-cyan-500": index === 0,
+              "shadow-cyan-700": index === 1,
+              "shadow-cyan-900": index === 2,
+            })}
+          >
             <CardHeader>
-              <CardTitle>{article.content.title}</CardTitle>
-              <CardDescription>
-                {format(article.createdAt, "MMM d, h:mm a")}
+              <CardTitle className="line-clamp-2 text-sm font-medium">
+                {article.content.title}
+              </CardTitle>
+              <CardDescription className="flex flex-row justify-between text-xs">
+                <div>{format(article.createdAt, "MMM d")}</div>
+                <div>{100 - article.readingProgress}% left</div>
               </CardDescription>
             </CardHeader>
             <CardFooter className="flex flex-row items-center justify-end space-x-4">
               <Button
+                size={"sm"}
                 variant={"outline"}
                 onClick={() => {
                   setSelectedArticleId(article.id);
@@ -105,7 +133,11 @@ export function RecommendedArticles({
               >
                 Snooze
               </Button>
-              <Button variant={"default"}>Read</Button>
+              <Link href={url.reader.read({ articleId: article.id })}>
+                <Button variant={"default"} size={"sm"}>
+                  Read
+                </Button>
+              </Link>
             </CardFooter>
           </Card>
         </motion.h1>
