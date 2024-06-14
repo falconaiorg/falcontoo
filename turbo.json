@@ -12,6 +12,9 @@
         ".env"
       ]
     },
+    "clean": {
+      "cache": false
+    },
     "dev": {
       "cache": false,
       "dotEnv": [
