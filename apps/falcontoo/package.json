@@ -136,6 +136,7 @@
     "@bubblewrap/cli": "^1.21.0",
     "@falcon/tsconfig": "workspace:*",
     "@next/bundle-analyzer": "^14.2.3",
+    "@prisma/nextjs-monorepo-workaround-plugin": "^5.15.0",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/container-queries": "^0.1.1",
     "@tailwindcss/typography": "^0.5.13",

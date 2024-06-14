@@ -478,6 +478,9 @@ importers:
       '@next/bundle-analyzer':
         specifier: ^14.2.3
         version: 14.2.4
+      '@prisma/nextjs-monorepo-workaround-plugin':
+        specifier: ^5.15.0
+        version: 5.15.0
       '@tailwindcss/aspect-ratio':
         specifier: ^0.4.2
         version: 0.4.2(tailwindcss@3.4.4)
@@ -4021,6 +4024,10 @@ packages:
     resolution: {integrity: sha512-1GULDkW4+/VQb73vihxCBSc4Chc2x88MA+O40tcZFjmBzG4/fF44PaXFxUqKSFltxU9L9GIMLhh0Gfkk/pUbtg==}
     dependencies:
       '@prisma/debug': 5.15.0
+
+  /@prisma/nextjs-monorepo-workaround-plugin@5.15.0:
+    resolution: {integrity: sha512-aIrt8gkTIcZz+kNWV3MwnsHQfGOIoFRK8GsmPPIZWqinGSpPZ729fH7T1Jwlbo+YyUaVPgI1HCsBKRl1qn6d0g==}
+    dev: true
 
   /@puppeteer/browsers@2.2.3:
     resolution: {integrity: sha512-bJ0UBsk0ESOs6RFcLXOt99a3yTDcOKlzfjad+rhFwdaG1Lu/Wzq58GHYCDTlZ9z6mldf4g+NTb+TXEfe0PpnsQ==}

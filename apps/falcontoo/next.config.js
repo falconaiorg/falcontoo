@@ -1,3 +1,5 @@
+const { PrismaPlugin } = require("@prisma/nextjs-monorepo-workaround-plugin");
+
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
 });
@@ -14,6 +16,9 @@ const nextConfig = {
     config,
     { buildId, dev, isServer, defaultLoaders, nextRuntime, webpack },
   ) => {
+    if (isServer) {
+      config.plugins = [...config.plugins, new PrismaPlugin()];
+    }
     // add externals
     config.externals = config.externals || [];
     config.externals.push(
