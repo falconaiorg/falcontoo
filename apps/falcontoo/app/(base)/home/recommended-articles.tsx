@@ -12,22 +12,22 @@ import {
 } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import { useState } from "react";
-import {
-  getSnoozeDate,
-  snoozeOptions
-} from "./snooze-config";
+import { getSnoozeDate, snoozeOptions } from "./snooze-config";
 import { format } from "date-fns-tz";
 import { api } from "@falcon/trpc/next/client";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { url } from "@/urls";
+import { useSoundEffect } from "@/hooks/use-sound-effect";
 
 export function RecommendedArticles({
   articles,
 }: {
   articles: ArticleWithContent[];
 }) {
+  const { playSound } = useSoundEffect("/sounds/snooze.mp3");
+
   const router = useRouter();
 
   const [selectedArticleId, setSelectedArticleId] = useState<string | null>(
@@ -52,6 +52,7 @@ export function RecommendedArticles({
     snoozeDate: Date;
   }) => {
     setIsOpen(false);
+    playSound();
     setDisplayedArticles((prevArticles) => {
       const updatedArticles = prevArticles.filter(
         (article) => article.id !== articleId,
@@ -119,7 +120,9 @@ export function RecommendedArticles({
               </CardTitle>
               <CardDescription className="flex flex-row justify-between text-xs">
                 <div>{format(article.createdAt, "MMM d")}</div>
-                <div>{100 - article.readingProgress}% left</div>
+                <div className="font-semibold tracking-tight">
+                  {100 - article.readingProgress}% left
+                </div>
               </CardDescription>
             </CardHeader>
             <CardFooter className="flex flex-row items-center justify-end space-x-4">
