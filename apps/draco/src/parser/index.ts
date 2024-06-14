@@ -2,7 +2,6 @@
 import { Readability } from "@mozilla/readability";
 import { htmlParser } from "./html";
 import { htmlToMarkdownWithTurndown } from "./markdown";
-import { parseUrl } from "./url";
 import jsdom from "jsdom";
 import { TRPCError } from "@trpc/server";
 import { createChecksum } from "./checksum";
