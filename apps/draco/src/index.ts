@@ -3,7 +3,6 @@ import dotenv from "dotenv";
 import cors from "cors";
 import { getToken } from "next-auth/jwt";
 import { z } from "zod";
-import { ArticleWithContent } from "@falcon/lib/server/next/article";
 import { parseArticle } from "./parser";
 import { parseUrl } from "./parser/url";
 const base64Secret = process.env.NEXTAUTH_SECRET;
@@ -12,7 +11,7 @@ dotenv.config();
 
 const app = express();
 const HOST = process.env.HOST || "localhost";
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 
 // const corsOptions = {
 //   origin: "http://localhost:3000", // your frontend URL
