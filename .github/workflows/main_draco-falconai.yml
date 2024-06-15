@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - "apps/draco/**"
+      - ".github/workflows/main_draco-falconai.yml"
   workflow_dispatch:
 
 jobs:
@@ -23,7 +24,7 @@ jobs:
       - name: Install pnpm
         run: npm install -g pnpm
 
-      - name: Install dependencies
+      - name: Install dependencies at root
         run: pnpm install
 
       - name: Build and test app
@@ -34,17 +35,24 @@ jobs:
           echo "Build completed. Listing files:"
           ls -la
 
-      - name: Zip artifact for deployment
+      - name: Create deployment package
         run: |
           cd apps/draco
-          zip -r ../../release.zip ./* ../../node_modules
+          pnpm deploy --target-directory=../../release
+          echo "Deployment package created. Listing files:"
+          ls -la ../../release
+
+      - name: Zip artifact for deployment
+        run: |
+          cd release
+          zip -r ../release.zip .
           echo "Artifact zipped. Listing files in the zip:"
-          unzip -l ../../release.zip
+          unzip -l ../release.zip
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
-          name: node-app
+          name: draco-app
           path: release.zip
 
   deploy:
