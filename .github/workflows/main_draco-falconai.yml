@@ -25,7 +25,7 @@ jobs:
         run: npm install -g pnpm
 
       - name: Install dependencies at root
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
 
       - name: Build and test app
         run: |
@@ -38,7 +38,7 @@ jobs:
       - name: Create deployment package
         run: |
           mkdir -p release
-          pnpm --filter=@falcon/draco --prod deploy release
+          pnpm -F @falcon/draco --prod deploy release
           echo "Deployment package created. Listing files:"
           ls -la release
 
@@ -72,10 +72,7 @@ jobs:
 
       - name: Unzip artifact for deployment
         run: |
-          unzip release.zip -d release
-          cd release
-          echo "Artifact unzipped. Listing files:"
-          ls -la
+          unzip release.zip
 
       - name: Login to Azure
         uses: azure/login@v1
