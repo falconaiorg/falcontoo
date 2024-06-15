@@ -26,7 +26,7 @@ jobs:
       - name: npm install, build, and test
         run: |
           cd apps/draco
-          pnpm install --frozen-lockfile
+          pnpm install
           pnpm run build
 
       - name: Zip artifact for deployment
