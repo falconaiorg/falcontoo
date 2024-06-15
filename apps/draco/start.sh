@@ -18,6 +18,9 @@ else
     ROOT=$AZURE_ROOT
 fi
 
+# Log the ROOT directory for debugging
+echo "ROOT directory is set to: $ROOT"
+
 # Set the CHROME_BIN environment variable
 export CHROME_BIN="$ROOT/$CHROME_LOCATION"
 
