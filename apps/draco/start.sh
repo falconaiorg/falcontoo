@@ -33,6 +33,8 @@ else
 fi
 
 # Start your application
+export PORT=${PORT:-8080}
+
 echo "Starting Node.js application..."
 
 node dist/index.js
