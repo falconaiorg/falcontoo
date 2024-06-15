@@ -38,22 +38,23 @@ jobs:
       - name: Create deployment package
         run: |
           cd apps/draco
+          mkdir -p ../../release 
           pnpm deploy --target-directory=../../release
           echo "Deployment package created. Listing files:"
           ls -la ../../release
 
       - name: Zip artifact for deployment
         run: |
-          cd release
+          cd ../../release
           zip -r ../release.zip .
-          echo "Artifact zipped. Listing files in the zip:"
-          unzip -l ../release.zip
+          echo "Artifact zipped. Listing files:"
+          ls -la ../release.zip
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
           name: draco-app
-          path: release.zip
+          path: ../release.zip
 
   deploy:
     runs-on: ubuntu-latest
@@ -68,11 +69,12 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v3
         with:
-          name: node-app
+          name: draco-app
 
       - name: Unzip artifact for deployment
         run: |
-          unzip release.zip
+          unzip release.zip -d release
+          cd release
           echo "Artifact unzipped. Listing files:"
           ls -la
 
