@@ -37,15 +37,14 @@ jobs:
 
       - name: Create deployment package
         run: |
-          cd apps/draco
-          mkdir -p ../../release 
-          pnpm deploy --target-directory=../../release
+          mkdir -p release
+          pnpm --filter=@falcon/draco --prod deploy release
           echo "Deployment package created. Listing files:"
-          ls -la ../../release
+          ls -la release
 
       - name: Zip artifact for deployment
         run: |
-          cd ../../release
+          cd release
           zip -r ../release.zip .
           echo "Artifact zipped. Listing files:"
           ls -la ../release.zip
@@ -54,7 +53,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: draco-app
-          path: ../release.zip
+          path: release.zip
 
   deploy:
     runs-on: ubuntu-latest
