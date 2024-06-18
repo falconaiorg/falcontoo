@@ -43,7 +43,8 @@
     "NEXT_PUBLIC_API_ENDPOINT",
     "OPENAI_API_KEY",
     "QDRANT_API_KEY",
-    "QDRANT_URL"
+    "QDRANT_URL",
+    "PRISMA_SKIP_POSTINSTALL_GENERATE"
   ],
   "globalDependencies": ["tsconfig.json"]
 }

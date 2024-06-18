@@ -111,14 +111,24 @@ export const articleRouter = router({
       console.log("Parsed URL", parsedUrl);
       console.log(input.url);
       const nextAuthHeaders = getHeaders();
-      const response = await dracoAxios({
-        method: "post",
-        url: "/parser",
-        data: {
-          url: input.url,
-        },
-        headers: nextAuthHeaders,
-      });
+      const [errDraco, response] = await to(
+        dracoAxios({
+          method: "post",
+          url: "/parser",
+          data: {
+            url: input.url,
+          },
+          headers: nextAuthHeaders,
+        })
+      );
+      if (errDraco) {
+        console.log("Error parsing article", errDraco);
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "Error parsing article",
+          cause: errDraco,
+        });
+      }
       const article = response.data as ArticleContent;
       console.log("Parsed article", article);
       const savedArticle = await saveArticle({ articleData: article, userId });

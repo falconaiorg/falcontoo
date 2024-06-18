@@ -6,9 +6,11 @@ import { isDev } from "../utils";
 //   ? process.env.RENDER_EXTERNAL_URL + "/"
 //   : "http://localhost:8000/";
 
-const baseURL = isDev
-  ? "http://localhost:8000"
-  : "https://falcontoo.onrender.com"; // Use env var
+const baseURL = !isDev
+  ? "https://draco-engine-falconai-guauchhbahhzanep.centralindia-01.azurewebsites.net"
+  : "http://localhost:8000/"; // Use env var
+
+console.log(`baseURL: ${baseURL}`);
 
 const getTokens = () => {
   const nextCookies = cookies();
