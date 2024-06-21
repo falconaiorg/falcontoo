@@ -8,6 +8,7 @@ export const url = {
   home: `${root}/home`,
   library: `${root}/library`,
   stats: `${root}/stats`,
+  settings: `${root}/settings`,
   session: {
     home: `${root}/session`,
     create: `${root}/session/create`,

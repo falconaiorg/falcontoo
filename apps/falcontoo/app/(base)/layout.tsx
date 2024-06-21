@@ -1,4 +1,4 @@
-import { BottomNav } from "@/components/bottom-nav";
+import { BottomNav } from "./bottom-nav";
 
 export default async function BaseLayout({
   children,
@@ -6,7 +6,7 @@ export default async function BaseLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div>
+    <div className="h-full">
       {children}
       <BottomNav />
     </div>

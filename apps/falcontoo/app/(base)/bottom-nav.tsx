@@ -4,6 +4,7 @@ import {
   AIMagicIcon,
   UserIcon,
   PieChartIcon,
+  SettingsCogIcon,
 } from "@/components/icons";
 import { url } from "@/urls";
 import { useSelectedLayoutSegment } from "next/navigation";
@@ -14,7 +15,7 @@ import { useEffect } from "react";
 import { vibrate } from "@falcon/lib/vibrate";
 import { Link } from "next-view-transitions";
 
-type NavbarSegments = "home" | "notes" | "profile";
+type NavbarSegments = "home" | "notes" | "profile" | "settings" | "stats";
 
 const bottomNavConfig = [
   { href: url.home, Icon: AIMagicIcon, text: "Home", segment: "home" },
@@ -25,11 +26,17 @@ const bottomNavConfig = [
     segment: "library",
   },
   {
-    href: url.stats,
-    Icon: PieChartIcon,
-    text: "Stats",
-    segment: "stats",
+    href: url.settings,
+    Icon: SettingsCogIcon,
+    text: "Settings",
+    segment: "settings",
   },
+  // {
+  //   href: url.stats,
+  //   Icon: PieChartIcon,
+  //   text: "Stats",
+  //   segment: "stats",
+  // },
 ] as const;
 
 export const BottomNav = () => {
@@ -39,7 +46,8 @@ export const BottomNav = () => {
   useEffect(() => {
     router.prefetch(url.home);
     router.prefetch(url.library);
-    router.prefetch(url.stats);
+    // router.prefetch(url.stats);
+    router.prefetch(url.settings);
   }, [router]);
 
   return (

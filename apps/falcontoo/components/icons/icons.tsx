@@ -32,6 +32,7 @@ import {
   UserIcon as UserIconSolid,
   ChevronUpIcon as ChevronUpIconSolid,
   ChevronDownIcon as ChevronDownIconSolid,
+  Cog6ToothIcon as SettingsCog,
 } from "@heroicons/react/24/solid";
 import { XCircleIcon } from "@heroicons/react/24/outline";
 import { FaFilePdf } from "react-icons/fa";
@@ -103,7 +104,7 @@ export default BaseIcon;
 export type IconProps = Omit<BaseIconProps, "Icon">;
 export type FalconIcon = React.FC<IconProps>;
 
-export const Settings: React.FC<IconProps> = (props) => (
+export const SettingsIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props} Icon={WrenchScrewdriverIcon} />
 );
 
@@ -269,4 +270,8 @@ export const ChevronUpIcon: React.FC<IconProps> = (props) => (
 
 export const ChevronDownIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props} Icon={ChevronDownIconSolid} />
+);
+
+export const SettingsCogIcon: React.FC<IconProps> = (props) => (
+  <BaseIcon {...props} Icon={SettingsCog} />
 );
