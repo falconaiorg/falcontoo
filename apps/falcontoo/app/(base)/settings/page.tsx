@@ -38,7 +38,9 @@ export default async function SettingsPage() {
             className="underline decoration-cyan-400"
           >
             {CONSTANTS.helpEmail}.
-          </Link>{" "}
+          </Link>
+          <br />
+          <br />
           {"Here's what is in store for you:"}
         </p>
       </section>
