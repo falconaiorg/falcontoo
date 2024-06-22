@@ -16,7 +16,6 @@
 4. User marks an article as read.
 5. User saves the second article.
 6. User can see context using saved articles.
-   1.
 7. User can flow into related yet unread articles.
 
 ## Launch Two

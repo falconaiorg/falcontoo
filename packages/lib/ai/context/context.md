@@ -71,6 +71,9 @@
    Ans: Yes
 3. How do we chunk?
    Ans: Initially, by paragraphs, later we can do more semantic chunking.
+## Algorithm
+
+1. search 
 
    ## Phase one
 
