@@ -1,6 +1,8 @@
 export const roadmap = {
   now: ["Credibility Analysis"],
   soon: [
+    "Import chrome bookmarks",
+    "Export as chrome bookmarks",
     "Timed reading sessions",
     "Better article context",
     "Track reading progress",
