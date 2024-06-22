@@ -131,6 +131,8 @@
   - Maybe people don't need a reader that much, but instead need a reading assistant or a manager. I mean a butler that helps them be more efficent.
 - ### Social Aspect of Articles
   - People may share article as a social currency, ie they might share it with others.
+- ### About Me
+  - An about me section along with domains that I am interested in may also be a useful thing to implement.
 
 ## Risks
 
