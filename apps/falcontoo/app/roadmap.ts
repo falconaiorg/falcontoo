@@ -1,7 +1,12 @@
 export const roadmap = {
-  now: ["Track reading progress"],
-  soon: ["Timed reading sessions", "Better article context"],
+  now: ["Credibility Analysis"],
+  soon: [
+    "Timed reading sessions",
+    "Better article context",
+    "Track reading progress",
+  ],
   later: [
+    "Article Reflections Practice",
     "Chat with the article",
     "Better image and video support in the reader",
     "Improved speed of saving new articles",
