@@ -24,7 +24,7 @@ export default async function SettingsPage() {
   }
   const firstName = getFirstName(user.name);
   return (
-    <div className="flex h-full flex-col space-y-8 overflow-y-auto px-6 py-10 text-slate-300">
+    <div className="flex h-full flex-col space-y-8 overflow-y-auto px-6 py-10 pb-32 text-slate-300 scrollbar-thin">
       <section className="flex flex-col space-y-3">
         <h1 className={cn("text-3xl font-thin", crimsonPro)}>
           Hello, {firstName}!
