@@ -1,10 +1,10 @@
 export const roadmap = {
   now: ["Track reading progress"],
-  soon: ["Timed reading sessions", "Generate better article context"],
+  soon: ["Timed reading sessions", "Better article context"],
   later: [
-    "Allow readers to chat with the article",
-    "Improve image and video support in the reader",
-    "Improve the speed of saving new articles",
+    "Chat with the article",
+    "Better image and video support in the reader",
+    "Improved speed of saving new articles",
     "Font and Color Customization",
     "Highlights and Notes",
     "Light Mode",
