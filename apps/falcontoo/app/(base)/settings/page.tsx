@@ -31,15 +31,15 @@ export default async function SettingsPage() {
         </h1>
         <p className={cn(lora)}>Your wish, is our command.</p>
         <p className={cn(lora)}>
-          If you face any issues or have any suggestions, feel free to to react
-          out to us at{" "}
+          {`If you face any issues or have any suggestions, feel free to to react
+          out to us at`}{" "}
           <Link
             href={`mailto ${CONSTANTS.helpEmail}`}
             className="underline decoration-cyan-400"
           >
             {CONSTANTS.helpEmail}.
           </Link>{" "}
-          Here's what is in store for you:
+          {"Here's what is in store for you:"}
         </p>
       </section>
       <section className="flex flex-col space-y-3">
@@ -51,7 +51,9 @@ export default async function SettingsPage() {
             </h2>
             <div className="flex flex-col space-y-1">
               {roadmap.now.map((item) => (
-                <p className={cn(lora)}>{item}</p>
+                <p className={cn(lora)} key={item}>
+                  {item}
+                </p>
               ))}
             </div>
           </div>
@@ -61,7 +63,9 @@ export default async function SettingsPage() {
             </h2>
             <div className="flex flex-col space-y-1">
               {roadmap.soon.map((item) => (
-                <p className={cn(lora)}>{item}</p>
+                <p className={cn(lora)} key={item}>
+                  {item}
+                </p>
               ))}
             </div>
           </div>
@@ -71,7 +75,9 @@ export default async function SettingsPage() {
             </h2>
             <div className="flex flex-col space-y-1">
               {roadmap.later.map((item) => (
-                <p className={cn(lora)}>{item}</p>
+                <p className={cn(lora)} key={item}>
+                  {item}
+                </p>
               ))}
             </div>
           </div>
