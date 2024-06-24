@@ -4,14 +4,38 @@
   "icons": [
     {
       "purpose": "maskable any",
-      "sizes": "512x512",
-      "src": "/pwa/icons/icon512_maskable.png",
+      "sizes": "48x48",
+      "src": "/pwa/android/android-launchericon-48-48.png",
+      "type": "image/png"
+    },
+    {
+      "purpose": "maskable any",
+      "sizes": "72x72",
+      "src": "/pwa/android/android-launchericon-72-72.png",
+      "type": "image/png"
+    },
+    {
+      "purpose": "maskable any",
+      "sizes": "96x96",
+      "src": "/pwa/android/android-launchericon-96-96.png",
+      "type": "image/png"
+    },
+    {
+      "purpose": "maskable any",
+      "sizes": "144x144",
+      "src": "/pwa/android/android-launchericon-144-144.png",
       "type": "image/png"
     },
     {
       "purpose": "maskable any",
       "sizes": "192x192",
-      "src": "/pwa/icons/icon192_maskable.png",
+      "src": "/pwa/android/android-launchericon-192-192.png",
+      "type": "image/png"
+    },
+    {
+      "purpose": "maskable any",
+      "sizes": "512x512",
+      "src": "/pwa/android/android-launchericon-512-512.png",
       "type": "image/png"
     }
   ],
@@ -30,7 +54,7 @@
   "display": "fullscreen",
   "dir": "auto",
   "lang": "en-GB",
-  "name": "Lex by FalconAI",
+  "name": "Lex Reader",
   "short_name": "Lex",
   "screenshots": [
     {
@@ -48,6 +72,6 @@
       "label": "Test Creation page"
     }
   ],
-  "description": "Learn better with Lex - the study buddy for your school, college, and life.",
+  "description": "Lex: Read, Learn, Repeat.",
   "categories": ["education"]
 }
