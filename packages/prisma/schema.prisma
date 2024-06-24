@@ -121,9 +121,10 @@ model ArticleContext {
     updatedAt      DateTime @updatedAt
     Article        Article  @relation(fields: [articleId], references: [id])
     articleId      String   @unique
-    markdown       String
+    markdown       String?
     linkedArticles String[] // top K articles related to this article
     isStale        Boolean  @default(false)
+    analysis       Json?
 }
 
 model ArticleContent {
