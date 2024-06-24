@@ -75,14 +75,14 @@ export function GrabArticle({ url }: { url: string }) {
     createArticleAndRedirect,
   ]);
 
-  if (isLoading) return <FullScreenMessage text={"Loading Article..."} />;
+  if (isLoading) return <FullScreenMessage text={"Removing Ads"} />;
   if (error) return <FullScreenMessage text={"Error Occurred"} />;
   if (isCreationPending)
-    return <FullScreenMessage text={"Creating Article..."} />;
+    return <FullScreenMessage text={"Saving to Lex's Memory"} />;
   if (creationError) return <FullScreenMessage text={"Error Occurred"} />;
   if (isCreationSuccess)
     return <FullScreenMessage text={"Article Created Successfully"} />;
-  if (isRedirecting) return <FullScreenMessage text={"Redirecting..."} />;
+  if (isRedirecting) return <FullScreenMessage text={"Opening Reader"} />;
 
   return (
     <div>
