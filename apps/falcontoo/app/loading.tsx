@@ -1,4 +1,4 @@
-import { LexLoading } from "@/components/loading/lex-loading";
+import { LexLoading } from "@/components/loading/base-loading";
 
 export default function Loading() {
   return (
