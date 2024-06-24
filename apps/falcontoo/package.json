@@ -158,7 +158,6 @@
     "postcss": "^8.4.38",
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.14",
-    "prisma": "^5.14.0",
     "tailwind-capitalize-first-letter": "^1.0.4",
     "tailwind-merge": "^2.3.0",
     "tailwind-scrollbar": "^3.1.0",
