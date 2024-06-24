@@ -8,27 +8,32 @@ import { generateArticleAnalysis } from "./generate-analysis";
 import { Z_AnalysisSchema } from "./schema";
 import { z } from "zod";
 
-export const getArticleContext = async ({
-  article,
+export const getArticleAnalysis = async ({
+  articleId,
 }: {
-  article: ArticleWithContent;
+  articleId: string;
 }): Promise<z.infer<typeof Z_AnalysisSchema>> => {
   // Add a synthetic delay
   // await new Promise((resolve) => setTimeout(resolve, 10000));
 
-  const articleId = article.id;
-
-  const existingAnalysis = await getExistingAnalysis({
-    articleId,
-  });
+  const { analysis: existingAnalysis, articleMarkdown } =
+    await getExistingAnalysis({
+      articleId,
+    });
 
   console.log("existingAnalysis", existingAnalysis);
   if (existingAnalysis) {
     return existingAnalysis;
   }
 
+  if (!articleMarkdown) {
+    throw new TRPCError({
+      code: "NOT_FOUND",
+      message: "Article not found",
+    });
+  }
   const analysis = await generateArticleAnalysis({
-    content: article.content.markdown,
+    content: articleMarkdown,
   });
 
   console.log("analysis", analysis);

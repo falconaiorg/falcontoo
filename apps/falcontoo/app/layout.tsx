@@ -54,7 +54,7 @@ export default function RootLayout({
                 headers={headers()}
                 tokens={{ sessionToken, csrfToken }}
               >
-                <div className="scrollbar-sm h-full w-full overflow-y-auto scrollbar-track-transparent">
+                <div className="scrollbar-sm h-full w-full overflow-y-auto scrollbar-hide scrollbar-track-transparent">
                   {children}
                 </div>
               </Providers>

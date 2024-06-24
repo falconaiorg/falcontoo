@@ -12,26 +12,6 @@ import Link from "next/link";
 import { url } from "@/urls";
 import { ArticleWithContent } from "@falcon/lib/server/next/article";
 
-export const ArticleCard = ({ article }: { article: ArticleWithContent }) => (
-  <Card className="flex h-32 flex-row items-center justify-between px-1">
-    <CardHeader>
-      <CardTitle className="line-clamp-2 text-sm font-medium leading-5">
-        {article.content.title}
-      </CardTitle>
-      <CardDescription className="line-clamp-3 text-xs">
-        {article.content.description}
-      </CardDescription>
-    </CardHeader>
-    <Image
-      src={"/lex.png"}
-      alt="Thumbnail"
-      className="h-10 w-10"
-      width={10}
-      height={10}
-    />
-  </Card>
-);
-
 export const ArticleList = ({
   articles,
 }: {
@@ -53,3 +33,22 @@ export const ArticleList = ({
     </div>
   );
 };
+export const ArticleCard = ({ article }: { article: ArticleWithContent }) => (
+  <Card className="flex h-32 flex-row items-center justify-between px-1">
+    <CardHeader>
+      <CardTitle className="line-clamp-2 text-sm font-medium leading-5">
+        {article.content.title}
+      </CardTitle>
+      <CardDescription className="line-clamp-3 text-xs">
+        {article.content.description}
+      </CardDescription>
+    </CardHeader>
+    <Image
+      src={"/lex.png"}
+      alt="Thumbnail"
+      className="h-10 w-10"
+      width={10}
+      height={10}
+    />
+  </Card>
+);
