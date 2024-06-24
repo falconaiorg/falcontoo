@@ -63,43 +63,52 @@ export const ReadingProgress = ({
   const percentage = form.watch("hasRead") ? 100 : 0;
 
   return (
-    <div
-      className={cn("relative h-8 w-8 transition-transform duration-200", {})}
-    >
-      <CircularProgressbar
-        value={percentage}
-        text={undefined}
-        styles={buildStyles({
-          strokeLinecap: "butt",
-          pathTransitionDuration: 0.75,
-          pathColor: `hsl(var(--primary))`,
-          trailColor: "hsl(var(--secondary))",
-        })}
-      />
+    <div className="flex items-center space-x-2">
+      <div
+        className={cn("relative h-8 w-8 transition-transform duration-200", {})}
+      >
+        <CircularProgressbar
+          value={percentage}
+          text={undefined}
+          styles={buildStyles({
+            strokeLinecap: "butt",
+            pathTransitionDuration: 0.75,
+            pathColor: `hsl(var(--primary))`,
+            trailColor: "hsl(var(--secondary-background))",
+          })}
+        />
 
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)}>
-          <FormField
-            control={form.control}
-            name="hasRead"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <Checkbox
-                    checked={field.value}
-                    onCheckedChange={(value) => {
-                      value && playSound();
-                      field.onChange(value);
-                      form.handleSubmit(onSubmit)();
-                    }}
-                    className=" absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform border-2 border-secondary data-[state=checked]:h-5 data-[state=checked]:w-5 data-[state=checked]:border-transparent data-[state=checked]:bg-transparent data-[state=checked]:font-bold data-[state=checked]:text-primary"
-                  />
-                </FormControl>
-              </FormItem>
-            )}
-          />
-        </form>
-      </Form>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)}>
+            <FormField
+              control={form.control}
+              name="hasRead"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <Checkbox
+                      checked={field.value}
+                      onCheckedChange={(value) => {
+                        value && playSound();
+                        field.onChange(value);
+                        form.handleSubmit(onSubmit)();
+                      }}
+                      className=" absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform border-2 border-secondary data-[state=checked]:h-5 data-[state=checked]:w-5 data-[state=checked]:border-transparent data-[state=checked]:bg-transparent data-[state=checked]:font-bold data-[state=checked]:text-primary"
+                    />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+          </form>
+        </Form>
+      </div>
+      <div
+        className={cn("text-secondary text-sm", {
+          "text-primary": form.watch("hasRead"),
+        })}
+      >
+        {form.watch("hasRead") ? "Read" : "Mark as Read"}
+      </div>
     </div>
   );
 };

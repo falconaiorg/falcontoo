@@ -23,34 +23,34 @@ export async function Article({ articleId }: { articleId: string }) {
     userId: user.id,
   });
   return (
-    <Card className="flex flex-col gap-4">
-      <CardHeader>
-        <CardTitle>
-          <div className="flex flex-row items-start justify-between">
-            <div className="w-10/12 text-sm font-medium">
-              {article.content.title}
-            </div>
-            <ReadingProgress article={article} />
-          </div>
+    <Card className="flex flex-col gap-4 border-none">
+      <CardHeader className="px-2">
+        <CardTitle className="w-10/12 font-medium">
+          {article.content.title}
         </CardTitle>
-        <CardDescription className="text-xs italic underline decoration-sky-700">
+        <CardDescription className="underline decoration-sky-700 underline-offset-2">
           <Link
             href={article.content.url}
             target="_blank"
             rel="noopener noreferrer"
             prefetch={false}
           >
-            Source
+            Read in browser
           </Link>
         </CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="p-2">
         <MarkdownWithHighlight
           markdownText={article.content.markdown}
           searchWords={searchWords}
         />
         <AnnotationDrawer />
       </CardContent>
+      <CardFooter className="flex items-center justify-center">
+        <div className="w-1/3">
+          <ReadingProgress article={article} />
+        </div>
+      </CardFooter>
     </Card>
   );
   {
