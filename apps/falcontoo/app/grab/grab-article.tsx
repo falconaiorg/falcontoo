@@ -15,12 +15,14 @@ import { useRouter } from "next/navigation";
 import to from "await-to-js";
 import Link from "next/link";
 import { FullScreenMessage } from "@/components/full-screen-message";
+import useNoSleep from "@/hooks/use-no-sleep";
 export const testArticle =
   "https://substack.com/home/post/p-144117118?source=queue";
 
 export function GrabArticle({ url }: { url: string }) {
   const router = useRouter();
   const [isRedirecting, setIsRedirecting] = useState(false);
+  const { enableNoSleep, disableNoSleep } = useNoSleep();
 
   const {
     data: article,
@@ -48,15 +50,17 @@ export function GrabArticle({ url }: { url: string }) {
   });
 
   const createArticleAndRedirect = useCallback(async () => {
+    enableNoSleep();
     const [err, article] = await to(createArticle({ url: url }));
+    disableNoSleep();
     if (err) {
       console.log(err);
       return;
     }
     setIsRedirecting(true);
-    router.push(urlRouter.reader.read({ articleId: article?.id }));
+    router.push(urlRouter.library);
     setIsRedirecting(false);
-  }, [createArticle, router, url]);
+  }, [createArticle, router, url, enableNoSleep, disableNoSleep]);
 
   useEffect(() => {
     const createArticleIfNotExists = async () => {
@@ -82,7 +86,7 @@ export function GrabArticle({ url }: { url: string }) {
   if (creationError) return <FullScreenMessage text={"Error Occurred"} />;
   if (isCreationSuccess)
     return <FullScreenMessage text={"Article Created Successfully"} />;
-  if (isRedirecting) return <FullScreenMessage text={"Opening Reader"} />;
+  if (isRedirecting) return <FullScreenMessage text={"Opening Libarary"} />;
 
   return (
     <div>
