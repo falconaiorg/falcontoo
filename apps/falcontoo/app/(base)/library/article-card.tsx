@@ -12,19 +12,6 @@ import Link from "next/link";
 import { url } from "@/urls";
 import { ArticleWithContent } from "@falcon/lib/server/next/article";
 
-const dummyArticleData = [
-  {
-    title: "How to use Lex in a very very long article title",
-    author: "FalconAI is a very very long author name",
-    thumbnail: "lex.png",
-  },
-  {
-    title: "How to use Lex",
-    author: "FalconAI",
-    thumbnail: "lex.png",
-  },
-];
-
 export const ArticleCard = ({ article }: { article: ArticleWithContent }) => (
   <Card className="flex h-32 flex-row items-center justify-between px-1">
     <CardHeader>
@@ -51,7 +38,7 @@ export const ArticleList = ({
   articles: ArticleWithContent[];
 }) => {
   return (
-    <div className="flex flex-col gap-4 pb-96 mt-8">
+    <div className="mt-8 flex flex-col gap-4 pb-96">
       {articles.map((article) => (
         <Link
           href={url.reader.read({ articleId: article.id })}
@@ -60,7 +47,7 @@ export const ArticleList = ({
           <ArticleCard article={article} />
         </Link>
       ))}
-      <div className="text-center text-xl font-bold text-slate-700 mt-10">
+      <div className="mt-10 text-center text-xl font-bold text-slate-700">
         {"That's all folks!"}
       </div>
     </div>
