@@ -18,6 +18,7 @@ import { Suspense } from "react";
 import { ArticleContext } from "./context/context";
 import { ContextSkeleton } from "./context/context-skeleton";
 import { Link } from "next-view-transitions";
+import { ArticleCredibility } from "./context/analysis";
 
 const markdownText = `
 # Sample Markdown
@@ -40,11 +41,15 @@ export default async function ReadPage({
     userId: user.id,
   });
 
+  const analysis = await ai.analysis.getArticleContext({
+    article,
+  });
+
   return (
     <div className="flex flex-col space-y-3 px-4 py-4">
       {/* <FilterButton /> */}
       <Suspense fallback={<ContextSkeleton />}>
-        <ArticleContext article={article} />
+        <ArticleContext article={article} analysis={analysis} />
       </Suspense>
       <Card className="flex flex-col gap-4">
         <CardHeader>
@@ -75,7 +80,7 @@ export default async function ReadPage({
           <AnnotationDrawer />
         </CardContent>
       </Card>
-      <Card
+      {/* <Card
         className={cn(
           "inline-flex animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-slate-400 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50",
         )}
@@ -102,7 +107,7 @@ export default async function ReadPage({
           />
           <AnnotationDrawer />
         </CardContent>
-      </Card>
+      </Card> */}
     </div>
   );
 }

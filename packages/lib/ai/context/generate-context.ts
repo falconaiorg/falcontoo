@@ -29,10 +29,52 @@ export const getContentIdsOfReadArticles = async () => {
     },
     select: {
       contentId: true,
+      content: {
+        select: {
+          title: true,
+          description: true,
+          markdown: true,
+          url: true,
+        },
+      },
     },
   });
 
   const contentIds = contentIddata.map(({ contentId }) => contentId);
+
+  return contentIds;
+};
+
+const getArticlesWithSimilarContent = ({
+  article,
+}: {
+  article: ArticleWithContent;
+}) => {
+  const { content } = article;
+  const { title, description, markdown } = content;
+
+  const articlesWithSimilarContent = prisma.article.findMany({
+    where: {},
+  });
+
+  return articlesWithSimilarContent;
+};
+
+const getContentIdsOfArticlesToSearch = async ({
+  article,
+}: {
+  article: ArticleWithContent;
+}) => {
+  const contentIdsOfReadArticles = await getContentIdsOfReadArticles();
+
+  // Remove the current article from the list of articles to search
+  const contentIds = contentIdsOfReadArticles.filter(
+    (contentId) => contentId !== article.id
+  );
+
+  const articlesWithSimilarContent = getArticlesWithSimilarContent({
+    article,
+  });
 
   return contentIds;
 };

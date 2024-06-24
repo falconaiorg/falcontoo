@@ -33,6 +33,8 @@ import {
   ChevronUpIcon as ChevronUpIconSolid,
   ChevronDownIcon as ChevronDownIconSolid,
   Cog6ToothIcon as SettingsCog,
+  ExclamationCircleIcon,
+  EllipsisHorizontalCircleIcon,
 } from "@heroicons/react/24/solid";
 import { XCircleIcon } from "@heroicons/react/24/outline";
 import { FaFilePdf } from "react-icons/fa";
@@ -104,174 +106,230 @@ export default BaseIcon;
 export type IconProps = Omit<BaseIconProps, "Icon">;
 export type FalconIcon = React.FC<IconProps>;
 
-export const SettingsIcon: React.FC<IconProps> = (props) => (
+const SettingsIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props} Icon={WrenchScrewdriverIcon} />
 );
 
-export const StudentIcon: React.FC<IconProps> = (props) => (
+const StudentIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props} Icon={FaceSmileIcon} />
 );
 
-export const TeacherIcon: React.FC<IconProps> = (props) => (
+const TeacherIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props} Icon={AcademicCapIcon} />
 );
 
-export const SchoolIcon: React.FC<IconProps> = (props) => (
+const SchoolIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props} Icon={BuildingLibraryIcon} />
 );
 
-export const AdminIcon: React.FC<IconProps> = (props) => (
+const AdminIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props} Icon={UserCircleIcon} />
 );
 
-export const DeleteIcon: React.FC<IconProps> = (props) => (
+const DeleteIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props} Icon={TrashIcon} />
 );
 
-export const AddIcon: React.FC<IconProps> = (props) => (
+const AddIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props} Icon={PlusIcon} />
 );
 
-export const MinusIcon: React.FC<IconProps> = (props) => (
+const MinusIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props} Icon={MinusIconSolid} />
 );
 
-export const CrossCircleIcon: React.FC<IconProps> = (props) => (
+const CrossCircleIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props} Icon={XCircleIcon} />
 );
 
-export const CrossIcon: React.FC<IconProps> = (props) => (
+const CrossIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props} Icon={XMarkIcon} />
 );
 
-export const MediaIcon: React.FC<IconProps> = (props) => (
+const MediaIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props} Icon={PhotoIcon} />
 );
 
-export const PlayIcon: React.FC<IconProps> = (props) => (
+const PlayIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props} Icon={PlayIconSolid} />
 );
 
-export const DocumentFileIcon: React.FC<IconProps> = (props) => (
+const DocumentFileIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props} Icon={FaFileWord} />
 );
 
-export const PdfFileIcon: React.FC<IconProps> = (props) => (
+const PdfFileIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props} Icon={FaFilePdf} />
 );
 
-export const ImageFileIcon: React.FC<IconProps> = (props) => (
+const ImageFileIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props} Icon={FaFileImage} />
 );
 
-export const TextFileIcon: React.FC<IconProps> = (props) => (
+const TextFileIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props} Icon={FaFileLines} />
 );
 
-export const AttachmentIcon: React.FC<IconProps> = (props) => (
+const AttachmentIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props} Icon={PaperClipIcon} />
 );
 
-export const MaximizeIcon: React.FC<IconProps> = (props) => (
+const MaximizeIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props} Icon={ArrowsPointingOutIcon} />
 );
 
-export const MinimizeIcon: React.FC<IconProps> = (props) => (
+const MinimizeIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props} Icon={ArrowsPointingInIcon} />
 );
 
-export const LoadingIcon: React.FC<IconProps> = (props) => (
+const LoadingIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props} Icon={FaSpinner} className="animate-spin" />
 );
 
-export const CheckmarkIcon: React.FC<IconProps> = (props) => (
+const CheckmarkIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props} Icon={FaCheck} />
 );
 
-export const AIMagicIcon: React.FC<IconProps> = (props) => (
+const AIMagicIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props} Icon={SparklesIcon} />
 );
 
-export const FolderIcon: React.FC<IconProps> = (props) => (
+const FolderIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props} Icon={HiFolderIcon} />
 );
 
-export const EditIcon: React.FC<IconProps> = (props) => (
+const EditIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props} Icon={PencilSquareIcon} />
 );
 
-export const LeftArrowIcon: React.FC<IconProps> = (props) => (
+const LeftArrowIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props} Icon={ArrowLeftIcon} />
 );
 
-export const HomeIcon: React.FC<IconProps> = (props) => (
+const HomeIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props} Icon={HomeIconSolid} />
 );
 
-export const SlidersIcon = React.forwardRef<SVGSVGElement, IconProps>(
-  (props) => <BaseIcon {...props} Icon={FiSliders} />,
-);
+const SlidersIcon = React.forwardRef<SVGSVGElement, IconProps>((props) => (
+  <BaseIcon {...props} Icon={FiSliders} />
+));
 
-export const ScreenIcon = React.forwardRef<SVGSVGElement, IconProps>(
-  (props) => <BaseIcon {...props} Icon={FiAirplay} />,
-);
+const ScreenIcon = React.forwardRef<SVGSVGElement, IconProps>((props) => (
+  <BaseIcon {...props} Icon={FiAirplay} />
+));
 
-export const ToolIcon = React.forwardRef<SVGSVGElement, IconProps>((props) => (
+const ToolIcon = React.forwardRef<SVGSVGElement, IconProps>((props) => (
   <BaseIcon {...props} Icon={FiTool} />
 ));
 
-export const BellIcon: React.FC<IconProps> = (props) => (
+const BellIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props} Icon={BellIconSolid} />
 );
 
-export const BellRingingIcon: React.FC<IconProps> = (props) => (
+const BellRingingIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props} Icon={BellAlertIcon} />
 );
 
-export const PieChartIcon: React.FC<IconProps> = (props) => (
+const PieChartIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props} Icon={ChartPieIcon} />
 );
 
-export const ArrowUpIcon: React.FC<IconProps> = (props) => (
+const ArrowUpIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props} Icon={ArrowUpIconSolid} />
 );
 
-export const ArrowDownIcon: React.FC<IconProps> = (props) => (
+const ArrowDownIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props} Icon={ArrowDownIconSolid} />
 );
 
-export const CheckBadgeIcon: React.FC<IconProps> = (props) => (
+const CheckBadgeIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props} Icon={CheckBadgeIconSolid} />
 );
 
-export const CameraIcon: React.FC<IconProps> = (props) => (
+const CameraIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props} Icon={CameraIconSolid} />
 );
 
-export const CalendarIcon: React.FC<IconProps> = (props) => (
+const CalendarIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props} Icon={CalendarIconSolid} />
 );
 
-export const BookmarkIcon: React.FC<IconProps> = (props) => (
+const BookmarkIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props} Icon={BookmarkIconSolid} />
 );
 
-export const BookOpenIcon: React.FC<IconProps> = (props) => (
+const BookOpenIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props} Icon={BookOpenIconSolid} />
 );
 
-export const UserIcon: React.FC<IconProps> = (props) => (
+const UserIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props} Icon={UserIconSolid} />
 );
 
-export const ChevronUpIcon: React.FC<IconProps> = (props) => (
+const ChevronUpIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props} Icon={ChevronUpIconSolid} />
 );
 
-export const ChevronDownIcon: React.FC<IconProps> = (props) => (
+const ChevronDownIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props} Icon={ChevronDownIconSolid} />
 );
 
-export const SettingsCogIcon: React.FC<IconProps> = (props) => (
+const SettingsCogIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props} Icon={SettingsCog} />
 );
+
+const ExclamationIcon: React.FC<IconProps> = (props) => (
+  <BaseIcon {...props} Icon={ExclamationCircleIcon} />
+);
+
+const EllipsisIcon: React.FC<IconProps> = (props) => (
+  <BaseIcon {...props} Icon={EllipsisHorizontalCircleIcon} />
+);
+
+export {
+  SettingsIcon,
+  StudentIcon,
+  TeacherIcon,
+  SchoolIcon,
+  AdminIcon,
+  DeleteIcon,
+  AddIcon,
+  MinusIcon,
+  CrossCircleIcon,
+  CrossIcon,
+  MediaIcon,
+  PlayIcon,
+  DocumentFileIcon,
+  PdfFileIcon,
+  ImageFileIcon,
+  TextFileIcon,
+  AttachmentIcon,
+  MaximizeIcon,
+  MinimizeIcon,
+  LoadingIcon,
+  CheckmarkIcon,
+  AIMagicIcon,
+  FolderIcon,
+  EditIcon,
+  LeftArrowIcon,
+  HomeIcon,
+  SlidersIcon,
+  ScreenIcon,
+  ToolIcon,
+  BellIcon,
+  BellRingingIcon,
+  PieChartIcon,
+  ArrowUpIcon,
+  ArrowDownIcon,
+  CheckBadgeIcon,
+  CameraIcon,
+  CalendarIcon,
+  BookmarkIcon,
+  BookOpenIcon,
+  UserIcon,
+  ChevronUpIcon,
+  ChevronDownIcon,
+  SettingsCogIcon,
+  ExclamationIcon,
+  EllipsisIcon,
+};

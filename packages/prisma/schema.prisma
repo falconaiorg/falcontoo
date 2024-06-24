@@ -116,15 +116,16 @@ model Article {
 // Check if the context is stale, if so, regenerate it
 
 model ArticleContext {
-    id             String   @id @default(cuid())
-    createdAt      DateTime @default(now())
-    updatedAt      DateTime @updatedAt
-    Article        Article  @relation(fields: [articleId], references: [id])
-    articleId      String   @unique
-    markdown       String?
-    linkedArticles String[] // top K articles related to this article
-    isStale        Boolean  @default(false)
-    analysis       Json?
+    id              String   @id @default(cuid())
+    createdAt       DateTime @default(now())
+    updatedAt       DateTime @updatedAt
+    Article         Article  @relation(fields: [articleId], references: [id])
+    articleId       String   @unique
+    markdown        String?
+    linkedArticles  String[] // top K articles related to this article
+    isStale         Boolean  @default(false)
+    analysis        Json?
+    analysisVersion String?
 }
 
 model ArticleContent {
