@@ -49,18 +49,6 @@ export default async function SettingsPage() {
         <div className={cn("flex flex-col space-y-4", lora)}>
           <div className="flex flex-col space-y-1">
             <h2 className={cn("text-xl text-green-500", crimsonPro)}>
-              In 1 Day
-            </h2>
-            <div className="flex flex-col space-y-1">
-              {roadmap.now.map((item) => (
-                <p className={cn(lora)} key={item}>
-                  {item}
-                </p>
-              ))}
-            </div>
-          </div>
-          <div className="flex flex-col space-y-1">
-            <h2 className={cn("text-xl text-orange-500", crimsonPro)}>
               In 1 Week
             </h2>
             <div className="flex flex-col space-y-1">
@@ -72,11 +60,23 @@ export default async function SettingsPage() {
             </div>
           </div>
           <div className="flex flex-col space-y-1">
-            <h2 className={cn("text-xl text-sky-500", crimsonPro)}>
+            <h2 className={cn("text-xl text-orange-500", crimsonPro)}>
               In 1 Month
             </h2>
             <div className="flex flex-col space-y-1">
               {roadmap.later.map((item) => (
+                <p className={cn(lora)} key={item}>
+                  {item}
+                </p>
+              ))}
+            </div>
+          </div>
+          <div className="flex flex-col space-y-1">
+            <h2 className={cn("text-xl text-sky-500", crimsonPro)}>
+              Known Issues
+            </h2>
+            <div className="flex flex-col space-y-1">
+              {roadmap.issues.map((item) => (
                 <p className={cn(lora)} key={item}>
                   {item}
                 </p>

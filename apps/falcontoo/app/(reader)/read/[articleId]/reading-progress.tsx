@@ -21,6 +21,7 @@ const FormSchema = z.object({
 // TODO Fix opmitimistic updates, currently state does not reset to previous state if the request fails
 export const ReadingProgress = ({
   article,
+  
 }: {
   article: ArticleWithContent;
 }) => {

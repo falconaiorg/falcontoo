@@ -1,19 +1,15 @@
 export const roadmap = {
-  now: ["Credibility Analysis"],
-  soon: [
-    "Import chrome bookmarks",
-    "Export as chrome bookmarks",
-    "Timed reading sessions",
-    "Better article context",
-    "Track reading progress",
-  ],
+  soon: ["Timed reading sessions", "Font and Color Customization"],
   later: [
-    "Article Reflections Practice",
-    "Chat with the article",
-    "Better image and video support in the reader",
-    "Improved speed of saving new articles",
-    "Font and Color Customization",
+    "Auto-track reading progress",
+    "Import chrome bookmarks",
     "Highlights and Notes",
-    "Light Mode",
+    "Chat with the article",
+  ],
+  backlog: ["Light Mode", "Article to Podcast", "Article Reflections Practice"],
+  issues: [
+    "Code-blocks not showing properly in the reader",
+    "Saving the article is slow",
+    "Bugs in image and videos in the reader",
   ],
 };
