@@ -47,9 +47,7 @@ export async function Article({ articleId }: { articleId: string }) {
         <AnnotationDrawer />
       </CardContent>
       <CardFooter className="flex items-center justify-center">
-        <div className="w-1/3">
-          <ReadingProgress article={article} />
-        </div>
+        <ReadingProgress article={article} />
       </CardFooter>
     </Card>
   );
