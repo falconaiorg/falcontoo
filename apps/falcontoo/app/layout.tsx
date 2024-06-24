@@ -15,8 +15,8 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "FalconTwo",
-  description: "Study with Falcon",
+  title: "Lex Reader",
+  description: "Read, Learn, Repeat.",
   manifest: "/manifest.json",
 };
 
