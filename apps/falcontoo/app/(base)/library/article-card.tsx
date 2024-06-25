@@ -7,48 +7,39 @@ import {
   CardContent,
   CardDescription,
 } from "@/components/ui/card";
-import Image from "next/image";
-import Link from "next/link";
-import { url } from "@/urls";
-import { ArticleWithContent } from "@falcon/lib/server/next/article";
+import { motion } from "framer-motion";
+import { format } from "date-fns-tz";
 
-export const ArticleList = ({
-  articles,
-}: {
-  articles: ArticleWithContent[];
-}) => {
-  return (
-    <div className="mt-8 flex flex-col gap-4 pb-96">
-      {articles.map((article) => (
-        <Link
-          href={url.reader.read({ articleId: article.id })}
-          key={article.id}
-        >
-          <ArticleCard article={article} />
-        </Link>
-      ))}
-      <div className="mt-10 text-center text-xl font-bold text-slate-700">
-        {"That's all folks!"}
-      </div>
-    </div>
-  );
-};
+import { ArticleWithContent } from "@falcon/lib/server/next/article";
+import { cn } from "@/lib/utils";
+
 export const ArticleCard = ({ article }: { article: ArticleWithContent }) => (
-  <Card className="flex h-32 flex-row items-center justify-between px-1">
-    <CardHeader>
-      <CardTitle className="line-clamp-2 text-sm font-medium leading-5">
-        {article.content.title}
-      </CardTitle>
-      <CardDescription className="line-clamp-3 text-xs">
-        {article.content.description}
-      </CardDescription>
-    </CardHeader>
-    <Image
-      src={"/lex.png"}
-      alt="Thumbnail"
-      className="h-10 w-10"
-      width={10}
-      height={10}
-    />
-  </Card>
+  <motion.div
+    className="cursor-pointer"
+    whileTap={{
+      scale: 0.98,
+      transition: { type: "spring", stiffness: 300, damping: 20 },
+    }}
+  >
+    <Card
+      className={cn("flex h-32 flex-row items-center justify-between px-1", {
+        "border-neutral-700": article.readingProgress !== 100,
+        "brightness-75": article.readingProgress === 100,
+      })}
+    >
+      <CardHeader>
+        <CardTitle className="line-clamp-2 text-sm font-medium leading-5">
+          {article.content.title}
+        </CardTitle>
+        <CardDescription className="line-clamp-2 text-xs">
+          {article.content.description}
+        </CardDescription>
+        <CardDescription className="flex flex-row justify-between text-xs">
+          <div className="font-semibold tracking-tight">
+            {article.readingProgress === 100 ? "Read" : `Unread`}
+          </div>
+        </CardDescription>{" "}
+      </CardHeader>
+    </Card>
+  </motion.div>
 );

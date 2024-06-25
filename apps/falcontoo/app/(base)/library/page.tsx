@@ -1,5 +1,5 @@
 import { getServerComponentSession } from "@falcon/lib/next-auth";
-import { ArticleList } from "./article-card";
+import { ArticleList } from "./article-list";
 import { server } from "@falcon/lib/server/next";
 import Link from "next/link";
 import { testArticles } from "./test-article";
