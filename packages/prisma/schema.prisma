@@ -104,6 +104,54 @@ model User {
     // Reading Sessions
     readingSessions ReadingSession[]
     sprints         Sprint[]
+    settings        Settings?
+    about           About?
+}
+
+model About {
+    id               String   @id @default(cuid())
+    userId           String   @unique
+    user             User     @relation(fields: [userId], references: [id])
+    bio              String?
+    location         String?
+    education        String?
+    work             String?
+    favouriteGenres  String[]
+    favouriteAuthors String[]
+    favouriteTopics  String[]
+}
+
+model Settings {
+    id                 String  @id @default(cuid())
+    userId             String  @unique
+    user               User    @relation(fields: [userId], references: [id])
+    // Notifications
+    emailNotifications Boolean @default(true)
+    pushNotifications  Boolean @default(true)
+
+    // Appearance
+    theme Theme @default(DARK)
+
+    // Typography
+    fontFamily String @default("Inter")
+    fontSize   Int    @default(14)
+    lineHeight Float  @default(1.5)
+    padding    Int    @default(10)
+
+    // Reading
+    readingSpeed Int @default(200)
+
+    // AI 
+    aiVoice AIVoice @default(AUTO)
+}
+
+enum AIVoice {
+    AUTO
+}
+
+enum Theme {
+    LIGHT
+    DARK
 }
 
 model UserStats {
@@ -147,6 +195,7 @@ model Article {
 
     // Stats
     readingProgress Float @default(0)
+    rating          Int   @default(0)
 }
 
 // Check if the context is stale, if so, regenerate it
