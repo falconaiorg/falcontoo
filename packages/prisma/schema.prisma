@@ -96,21 +96,57 @@ model User {
 
     // Chat
     chats Chat[]
+
+    // Stats
+    stats      UserStats?
+    dailyStats DailyUserStats[]
+
+    // Reading Sessions
+    readingSessions ReadingSession[]
+    sprints         Sprint[]
+}
+
+model UserStats {
+    id                 String    @id @default(cuid())
+    userId             String    @unique
+    user               User      @relation(fields: [userId], references: [id])
+    totalReadingTime   Int       @default(0)
+    currentStreak      Int       @default(0)
+    longestStreak      Int       @default(0)
+    bestReadingDay     DateTime?
+    bestReadingDayTime Int       @default(0)
+}
+
+model DailyUserStats {
+    id           String   @id @default(cuid())
+    date         DateTime
+    userId       String
+    user         User     @relation(fields: [userId], references: [id])
+    totalTime    Int      @default(0)
+    activeTime   Int      @default(0)
+    articlesRead Int      @default(0)
+
+    @@unique([date, userId])
 }
 
 model Article {
-    id              String          @id @default(cuid())
-    createdAt       DateTime        @default(now())
-    updatedAt       DateTime        @updatedAt
+    id              String            @id @default(cuid())
+    createdAt       DateTime          @default(now())
+    updatedAt       DateTime          @updatedAt
     annotations     Annotation[]
     contentId       String
-    content         ArticleContent  @relation(fields: [contentId], references: [id])
-    User            User            @relation(fields: [userId], references: [id])
+    content         ArticleContent    @relation(fields: [contentId], references: [id])
+    User            User              @relation(fields: [userId], references: [id])
     userId          String
     layers          Layer[]
-    readingProgress Float           @default(0)
     snoozedUntil    DateTime?
     context         ArticleContext?
+    // Reading Sessions
+    sessionArticles SessionArticles[]
+    sprintArticles  SprintArticle[]
+
+    // Stats
+    readingProgress Float @default(0)
 }
 
 // Check if the context is stale, if so, regenerate it
@@ -147,6 +183,72 @@ model ArticleContent {
     estimatedTime    Int       @default(5)
 }
 
+// Reading Sprint 
+
+model Sprint {
+    id             String          @id @default(cuid())
+    userId         String
+    user           User            @relation(fields: [userId], references: [id])
+    createdAt      DateTime        @default(now())
+    startedAt      DateTime?
+    completedAt    DateTime?
+    duration       Int // Duration in minutes
+    status         SprintStatus
+    sprintArticles SprintArticle[]
+}
+
+model SprintArticle {
+    id          String    @id @default(cuid())
+    sprintId    String
+    sprint      Sprint    @relation(fields: [sprintId], references: [id])
+    articleId   String
+    article     Article   @relation(fields: [articleId], references: [id])
+    order       Int // Order of the article in the sprint
+    isCompleted Boolean   @default(false)
+    startedAt   DateTime?
+    completedAt DateTime?
+}
+
+enum SprintStatus {
+    CREATED
+    IN_PROGRESS
+    COMPLETED
+    ABANDONED
+}
+
+// Reading Sessions
+
+model ReadingSession {
+    id              String            @id @default(cuid())
+    createdAt       DateTime          @default(now()) // used as start time
+    updatedAt       DateTime          @default(now()) // used as end time
+    userId          String
+    user            User              @relation(fields: [userId], references: [id])
+    sessionArticles SessionArticles[]
+    // Stats
+    activeTime      Int               @default(0)
+    idleTime        Int               @default(0)
+    totalTime       Int               @default(0)
+    completed       Boolean           @default(false)
+    startTime       DateTime          @default(now())
+    endTime         DateTime? // New field
+}
+
+model SessionArticles {
+    id               String         @id @default(cuid())
+    readingSessionId String
+    articleId        String
+    readingSession   ReadingSession @relation(fields: [readingSessionId], references: [id])
+    article          Article        @relation(fields: [articleId], references: [id])
+    // Stats
+    activeTime       Int            @default(0)
+    idleTime         Int            @default(0)
+    totalTime        Int            @default(0)
+
+    @@unique([readingSessionId, articleId])
+}
+
+// Layers
 model Layer {
     id               String            @id @default(cuid())
     createdAt        DateTime          @default(now())
