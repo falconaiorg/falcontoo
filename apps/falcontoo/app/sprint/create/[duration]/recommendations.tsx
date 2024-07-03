@@ -15,7 +15,8 @@ import { useState } from "react";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { SprintDuration } from "@/app/(base)/home/start-sprint";
 import { api } from "@falcon/trpc/next/client";
-
+import { useSoundEffect } from "@/hooks/use-sound-effect";
+import { sounds } from "@/sounds";
 const ArticleCard = ({
   type,
   action,
@@ -62,11 +63,19 @@ export function Recommendations({
   articles: ArticleRec[];
   duration: SprintDuration;
 }) {
+  const { playSound: playAddSound } = useSoundEffect(sounds.check, {
+    vibrate: "md",
+  });
+  const { playSound: playRemoveSound } = useSoundEffect(sounds.snooze, {
+    vibrate: "md",
+  });
   const apiUtils = api.useUtils();
+  const [redirecting, setRedirecting] = useState(false);
 
   const { mutate: createSprintWithArticles, isPending } =
     api.sprint.createSprintWithArticles.useMutation({
       onSuccess: ({ sprint }) => {
+        setRedirecting(true);
         router.push(url.sprint.read({ sprintId: sprint.id }));
         apiUtils.sprint.invalidate();
       },
@@ -96,6 +105,7 @@ export function Recommendations({
   };
 
   const addArticleToSprint = (article: ArticleRec) => {
+    playAddSound();
     setSprintArticles((prev) => [
       ...prev,
       { articleId: article.articleId, order: prev.length },
@@ -111,6 +121,7 @@ export function Recommendations({
   };
 
   const removeArticleFromSprint = (articleId: string) => {
+    playRemoveSound();
     setSprintArticles((prev) =>
       prev.filter((sprintArticle) => sprintArticle.articleId !== articleId),
     );
@@ -139,7 +150,7 @@ export function Recommendations({
           <Button
             variant={"default"}
             onClick={createSession}
-            disabled={isPending || sprintArticles.length === 0}
+            disabled={isPending || sprintArticles.length === 0 || redirecting}
           >
             {isPending ? "Creating..." : "Start Sprint"}
           </Button>

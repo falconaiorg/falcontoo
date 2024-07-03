@@ -15,6 +15,7 @@ export function SprintArticles({
   articles: ArticleWithContent[];
 }) {
   const parent = useRef(null);
+  
 
   useEffect(() => {
     parent.current && autoAnimate(parent.current);

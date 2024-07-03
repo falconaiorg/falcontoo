@@ -3,7 +3,16 @@ import { url } from "@/urls";
 import { ArticleRec, Recommendations } from "./recommendations";
 import { server } from "@falcon/lib/server/next";
 import { getServerComponentSession } from "@falcon/lib/next-auth";
-
+import { Articles } from "./articles";
+import { Suspense } from "react";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+} from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 const dummyArticles: ArticleRec[] = [
   {
     articleId: "1",
@@ -73,24 +82,26 @@ export default async function CreateSessionPage({
   params: { duration: string };
 }) {
   const { duration } = params;
-  const { user } = await getServerComponentSession();
-  const articles = await server.article.getRecommendedArticles({
-    userId: user.id,
-  });
-
-  const preparedArticles = articles.map((article) => ({
-    articleId: article.id,
-    title: article.content.title,
-    readingProgress: article.readingProgress,
-  }));
 
   return (
     <div className="h-full p-2">
       <BackBar link={url.home} noText />
-      <Recommendations
-        articles={preparedArticles}
-        duration={Number(duration)}
-      />
+      <Suspense
+        fallback={
+          <div className="flex flex-col space-y-4">
+            <Card className="border-cyan-600">
+              <CardHeader className="flex flex-row items-start justify-between">
+                <CardTitle>Generating Recommendations</CardTitle>
+              </CardHeader>
+              <CardContent className="h-screen px-0">
+                <Skeleton className="h-full w-full" />
+              </CardContent>
+            </Card>
+          </div>
+        }
+      >
+        <Articles duration={Number(duration)} />
+      </Suspense>
     </div>
   );
 }

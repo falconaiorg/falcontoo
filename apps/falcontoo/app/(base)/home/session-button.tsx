@@ -1,6 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import { ButtonProps } from "@/components/ui/button";
+import { vibrate as vibrateNow } from "@falcon/lib/vibrate";
 
 type RoundButtonProps = {
   children: React.ReactNode;
@@ -11,6 +12,7 @@ export const RoundButton = ({ children, ...props }: RoundButtonProps) => {
     <button
       {...props}
       className="relative flex h-20 w-20 items-center justify-center"
+      onClick={() => vibrateNow()}
     >
       {/* Outer Ring */}
       <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-600 to-blue-300 p-1 shadow-lg">

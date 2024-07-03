@@ -19,9 +19,13 @@ export default async function HomePage() {
     <div className="container mx-auto grid grid-cols-1 gap-4 p-4 pb-96 md:grid-cols-2">
       {/* <SessionProgress /> */}
       <StartSprint />
-      <UserStats />
-      <WeeklyActivity />
-      <Suspense fallback={<Skeleton className="h-64" />}>
+      <Suspense fallback={<Skeleton className="h-40 rounded" />}>
+        <UserStats />
+      </Suspense>
+      <Suspense fallback={<Skeleton className="h-56 rounded" />}>
+        <WeeklyActivity />
+      </Suspense>
+      <Suspense fallback={<Skeleton className="h-64 rounded" />}>
         <ReadingHistory />
       </Suspense>
     </div>
