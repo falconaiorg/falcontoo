@@ -10,10 +10,10 @@ export const url = {
   stats: `${root}/stats`,
   settings: `${root}/settings`,
   session: {
-    home: `${root}/session`,
-    create: `${root}/session/create`,
-    edit: `${root}/session/edit`,
-    view: `${root}/session/view`,
+    create: ({ duration }: { duration: string }) =>
+      `${root}/session/create/${duration}`,
+    read: ({ sessionId }: { sessionId: string }) =>
+      `${root}/session/read/${sessionId}`,
   },
   reader: {
     read: ({ articleId }: { articleId: string }) => `${root}/read/${articleId}`,
