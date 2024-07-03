@@ -37,7 +37,7 @@ export const getExistingAnalysis = async ({
   }
   const validatedAnalysis = Z_AnalysisSchema.safeParse(context.analysis);
   if (validatedAnalysis.success) {
-    console.log("validatedAnalysis", validatedAnalysis.data);
+    //console.log("validatedAnalysis", validatedAnalysis.data);
     return {
       articleMarkdown: undefined,
       analysis: validatedAnalysis.data,

@@ -13,12 +13,12 @@ This is a paragraph with some **bold text**, _italic text_, and a [link](https:/
 
 > This is a blockquote with some *italic text*.
 
-Here is some inline code: \`console.log("Hello, world!");\`
+Here is some inline code: \`//console.log("Hello, world!");\`
 
 \`\`\`javascript
 // This is a code block
 function greet() {
-  console.log("Hello, world!");
+  //console.log("Hello, world!");
 }
 \`\`\`
 

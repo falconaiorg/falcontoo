@@ -25,7 +25,7 @@ export default function ExpressTRPCProvider({
   const url = process.env.RENDER
     ? process.env.RENDER_EXTERNAL_URL + "/trpc/"
     : "http://localhost:8000/trpc/";
-  console.log(`URL: ${url}`);
+  //console.log(`URL: ${url}`);
   const [queryClient] = useState(() => new QueryClient());
   const [trpcClient] = useState(() =>
     draco.createClient({
@@ -46,7 +46,7 @@ export default function ExpressTRPCProvider({
           transformer,
         }),
       ],
-    })
+    }),
   );
   return (
     <draco.Provider client={trpcClient} queryClient={queryClient}>

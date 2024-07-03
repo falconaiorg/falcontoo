@@ -10,7 +10,7 @@ const baseURL = !isDev
   ? "https://draco-engine-falconai-guauchhbahhzanep.centralindia-01.azurewebsites.net"
   : "http://localhost:8000/"; // Use env var
 
-console.log(`baseURL: ${baseURL}`);
+//console.log(`baseURL: ${baseURL}`);
 
 const getTokens = () => {
   const nextCookies = cookies();

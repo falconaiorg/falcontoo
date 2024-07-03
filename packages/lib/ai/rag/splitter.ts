@@ -25,7 +25,7 @@ export const split = async function ({
       contentId: article.content.id,
       author: article.content.author,
     };
-    console.log(metadata);
+    //console.log(metadata);
 
     const documentArray = await mdSplitter.createDocuments(
       [articleMarkdown],

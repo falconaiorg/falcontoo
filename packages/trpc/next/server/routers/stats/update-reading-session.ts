@@ -26,7 +26,7 @@ async function updateUserStats({
 }: UserStatsUpdate) {
   const now = new Date();
   const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  console.log("Updating user stats");
+  //console.log("Updating user stats");
   try {
     await prisma.$transaction(async (tx) => {
       await updateUserStatsTable(tx, userId, totalTime, now);
@@ -38,7 +38,7 @@ async function updateUserStats({
         idleTime,
         totalTime,
         isCompleted,
-        now
+        now,
       );
       await updateSessionArticles(
         tx,
@@ -46,10 +46,10 @@ async function updateUserStats({
         articleId,
         activeTime,
         idleTime,
-        totalTime
+        totalTime,
       );
     });
-    console.log("User stats updated successfully");
+    //console.log("User stats updated successfully");
   } catch (error) {
     console.error("Error updating user stats:", error);
     throw error;
@@ -60,7 +60,7 @@ async function updateUserStatsTable(
   tx: Prisma.TransactionClient,
   userId: string,
   totalTime: number,
-  now: Date
+  now: Date,
 ) {
   const userStats = await tx.userStats.findUnique({ where: { userId } });
   const lastUpdate = await getLastUpdateDate(tx, userId);
@@ -69,7 +69,7 @@ async function updateUserStatsTable(
   const currentStreak = calculateStreak(
     lastUpdate,
     today,
-    userStats?.currentStreak || 0
+    userStats?.currentStreak || 0,
   );
 
   await tx.userStats.upsert({
@@ -90,7 +90,7 @@ async function updateUserStatsTable(
         userStats && totalTime > userStats.bestReadingDayTime ? now : undefined,
       bestReadingDayTime: Math.max(
         userStats?.bestReadingDayTime || 0,
-        totalTime
+        totalTime,
       ),
     },
   });
@@ -98,7 +98,7 @@ async function updateUserStatsTable(
 
 async function getLastUpdateDate(
   tx: Prisma.TransactionClient,
-  userId: string
+  userId: string,
 ): Promise<Date> {
   const lastDailyStats = await tx.dailyUserStats.findFirst({
     where: { userId },
@@ -111,11 +111,11 @@ async function getLastUpdateDate(
 function calculateStreak(
   lastUpdate: Date,
   today: Date,
-  currentStreak: number
+  currentStreak: number,
 ): number {
   const oneDayMs = 24 * 60 * 60 * 1000;
   const diffDays = Math.round(
-    (today.getTime() - lastUpdate.getTime()) / oneDayMs
+    (today.getTime() - lastUpdate.getTime()) / oneDayMs,
   );
 
   if (diffDays === 0) return currentStreak; // Same day, streak unchanged
@@ -128,7 +128,7 @@ async function updateDailyUserStats(
   userId: string,
   today: Date,
   activeTime: number,
-  totalTime: number
+  totalTime: number,
 ) {
   await tx.dailyUserStats.upsert({
     where: { date_userId: { date: today, userId } },
@@ -154,7 +154,7 @@ async function updateReadingSession(
   idleTime: number,
   totalTime: number,
   isCompleted: boolean,
-  now: Date
+  now: Date,
 ) {
   await tx.readingSession.update({
     where: { id: readingSessionId },
@@ -174,7 +174,7 @@ async function updateSessionArticles(
   articleId: string,
   activeTime: number,
   idleTime: number,
-  totalTime: number
+  totalTime: number,
 ) {
   await tx.sessionArticles.upsert({
     where: { readingSessionId_articleId: { readingSessionId, articleId } },

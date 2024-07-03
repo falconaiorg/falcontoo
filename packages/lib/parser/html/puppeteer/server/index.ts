@@ -63,7 +63,7 @@ export const parseWebpage = async ({ url }: { url: URL }) => {
     ],
     
   });
-  console.log(`Browser launched: ${href}`);
+  //console.log(`Browser launched: ${href}`);
   const page = await browser.newPage();
   await page.goto(href);
   const title = await page.title();

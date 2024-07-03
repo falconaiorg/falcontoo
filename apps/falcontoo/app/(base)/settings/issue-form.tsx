@@ -33,7 +33,7 @@ export const ReportIssue = () => {
   function onSubmit(values: z.infer<typeof issueSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    console.log(values);
+    //console.log(values);
   }
 
   return (

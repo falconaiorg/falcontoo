@@ -25,7 +25,7 @@ Harmonic Labyrinth of the dreaded Majotaur?`,
 
   const response = await vectorStore.similaritySearch("scared", 2);
 
-  console.log(response);
+  //console.log(response);
 
   /*
 [

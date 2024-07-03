@@ -45,7 +45,7 @@ export function GrabArticle({ url }: { url: string }) {
     error: creationError,
   } = api.articles.createArticle.useMutation({
     onSuccess(data, variables, context) {
-      console.log("Article created", data);
+      //console.log("Article created", data);
     },
   });
 
@@ -54,7 +54,7 @@ export function GrabArticle({ url }: { url: string }) {
     const [err, article] = await to(createArticle({ url: url }));
     disableNoSleep();
     if (err) {
-      console.log(err);
+      //console.log(err);
       return;
     }
     setIsRedirecting(true);

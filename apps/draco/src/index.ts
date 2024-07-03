@@ -29,7 +29,7 @@ app.all("/", async (req, res, next) => {
     res.status(401).send("Unauthorized");
     return;
   }
-  console.log(user.name);
+  //console.log(user.name);
   next();
 });
 
@@ -40,19 +40,19 @@ const ParserBodySchema = z.object({
 
 app.post("/parser", async (req, res) => {
   try {
-    console.log("Request body", req.body);
+    //console.log("Request body", req.body);
     const parsedContent = await ParserBodySchema.safeParse(req.body);
-    console.log("Parsed content", parsedContent);
+    //console.log("Parsed content", parsedContent);
 
     if (!parsedContent.success) {
       res.status(400).send(parsedContent.error);
       return;
     }
-    console.log("Parsed content", parsedContent.data);
-    console.log("Parsed content", parsedContent.data?.url);
+    //console.log("Parsed content", parsedContent.data);
+    //console.log("Parsed content", parsedContent.data?.url);
     const parsedUrl = await parseUrl({ url: parsedContent.data?.url });
     const article = await parseArticle({ url: parsedUrl });
-    console.log("🟢 Final Article", article);
+    //console.log("🟢 Final Article", article);
     res.send(article);
   } catch (error) {
     res.status(400).send(error);
@@ -60,7 +60,7 @@ app.post("/parser", async (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Server is running at http://${HOST}:${PORT}`);
+  //console.log(`Server is running at http://${HOST}:${PORT}`);
 });
 
 app.get("/", (req, res) => {

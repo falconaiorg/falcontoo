@@ -30,13 +30,13 @@ export const embedInQdrant = async function ({
         url: process.env.QDRANT_URL,
         apiKey: process.env.QDRANT_API_KEY,
         collectionName: "articles",
-      }
+      },
     );
 
     await vectorStore.addDocuments(documents);
-    console.log("Documents added to Qdrant");
+    //console.log("Documents added to Qdrant");
   } catch (e) {
-    console.log(e);
+    //console.log(e);
     throw new TRPCError({
       code: "INTERNAL_SERVER_ERROR",
       message: "Error embedding the article content.",

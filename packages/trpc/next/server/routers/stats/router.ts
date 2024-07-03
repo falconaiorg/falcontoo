@@ -24,14 +24,14 @@ const ZUpdateReadingSession = z.object({
 export const statsRouter = router({
   createReadingSession: authenticatedProcedure.mutation(
     async ({ ctx, input }) => {
-      console.log(input);
+      //console.log(input);
 
       const [error, session] = await to(
         prisma.readingSession.create({
           data: {
             userId: ctx.user.id,
           },
-        })
+        }),
       );
       if (error) {
         throw new TRPCError({
@@ -41,7 +41,7 @@ export const statsRouter = router({
       }
       const readingSessionId = session.id;
       return { readingSessionId };
-    }
+    },
   ),
   getSessionHistory: authenticatedProcedure.query(async ({ ctx }) => {
     const [error, sessions] = await to(
@@ -65,7 +65,7 @@ export const statsRouter = router({
             take: 5,
           },
         },
-      })
+      }),
     );
     if (error) {
       throw new TRPCError({
@@ -85,7 +85,7 @@ export const statsRouter = router({
           date: "desc",
         },
         take: 7,
-      })
+      }),
     );
     if (error) {
       throw new TRPCError({
@@ -101,7 +101,7 @@ export const statsRouter = router({
         where: {
           userId: ctx.user.id,
         },
-      })
+      }),
     );
     if (error) {
       throw new TRPCError({

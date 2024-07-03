@@ -4,7 +4,7 @@ const ONE_MONTH = ONE_DAY * 30;
 const FRESH_ARTICLE_THRESHOLD = ONE_MONTH;
 
 const calculateScore = (
-  article: Awaited<ReturnType<typeof getArticlesbyUserId>>[0]
+  article: Awaited<ReturnType<typeof getArticlesbyUserId>>[0],
 ): number => {
   const weights = {
     estimatedReadingTimeMultiplier: -1,
@@ -40,7 +40,7 @@ const getFreshArticles = ({
   do {
     const thresholdDate = new Date(Date.now() - threshold);
     freshArticles = articles.filter(
-      (article) => article.createdAt > thresholdDate
+      (article) => article.createdAt > thresholdDate,
     );
 
     threshold *= 2;
@@ -59,13 +59,13 @@ export const getRecommendedArticles = async ({
 }) => {
   const articles = await getArticlesbyUserId({ userId });
 
-  console.log("articles", articles);
+  //console.log("articles", articles);
 
   const unReadArticles = articles.filter(
-    (article) => article.readingProgress !== 100
+    (article) => article.readingProgress !== 100,
   );
 
-  console.log("unReadArticles", unReadArticles);
+  //console.log("unReadArticles", unReadArticles);
 
   if (unReadArticles.length === 0) {
     return [];
@@ -79,7 +79,7 @@ export const getRecommendedArticles = async ({
     articles: unReadArticles,
   });
 
-  console.log("freshArticles", freshArticles);
+  //console.log("freshArticles", freshArticles);
 
   if (freshArticles.length === 0) {
     return articles;
@@ -88,7 +88,7 @@ export const getRecommendedArticles = async ({
   // then first push the fresh articles to the top of the list and then return the list.
   if (freshArticles.length <= 3) {
     return freshArticles.concat(
-      unReadArticles.filter((article) => !freshArticles.includes(article))
+      unReadArticles.filter((article) => !freshArticles.includes(article)),
     );
   }
 
@@ -97,11 +97,11 @@ export const getRecommendedArticles = async ({
     score: calculateScore(article),
   }));
   scoredArticles.sort((a, b) => b.score - a.score);
-  console.log("scoredArticles", scoredArticles);
+  //console.log("scoredArticles", scoredArticles);
 
   // remove the score from the o from the articles before returning them
   const articlesWithoutScore = scoredArticles.map(
-    ({ score, ...article }) => article
+    ({ score, ...article }) => article,
   );
 
   return articlesWithoutScore;

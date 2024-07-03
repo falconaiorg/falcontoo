@@ -69,7 +69,7 @@ const getContentIdsOfArticlesToSearch = async ({
 
   // Remove the current article from the list of articles to search
   const contentIds = contentIdsOfReadArticles.filter(
-    (contentId) => contentId !== article.id
+    (contentId) => contentId !== article.id,
   );
 
   const articlesWithSimilarContent = getArticlesWithSimilarContent({
@@ -132,7 +132,7 @@ const searchArticles = async ({
       ],
     },
   }));
-  console.log(searches);
+  //console.log(searches);
 
   const results = await client.searchBatch(collectionName, {
     searches: currentArticleEmbeddings.map((point) => ({
@@ -157,7 +157,7 @@ const searchArticles = async ({
 
   const relevantChunks = topKChunks;
 
-  console.log(topKChunks);
+  //console.log(topKChunks);
 
   let chunkMarkdown = "# Top 5 Relevant Chunks\n\n";
 
@@ -198,7 +198,7 @@ const searchArticles = async ({
 
   const relevantArticles = contentIdScores;
 
-  console.log("Top 3 Recommended Articles:", contentIdScores);
+  //console.log("Top 3 Recommended Articles:", contentIdScores);
 
   return { relevantChunks, relevantArticles, chunkMarkdown };
 };
@@ -217,7 +217,7 @@ export const generateArticleContext = async ({
   // Get all the articles the user has read
   const readContentIds = await getContentIdsOfReadArticles();
 
-  console.log(readContentIds);
+  //console.log(readContentIds);
 
   // Loop though each chunk of the current article,
   // and find top-k similar chunks from the articles the user has read
@@ -259,7 +259,7 @@ Context:
 `,
   });
 
-  console.log(text);
+  //console.log(text);
 
   return text;
 };

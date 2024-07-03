@@ -6,12 +6,12 @@ export const sessionsRouter = router({
     .input(
       z.object({
         dog: z.string(),
-      })
+      }),
     )
     .query(async ({ ctx, input }) => {
       const userId = ctx.user.id;
       input.dog;
-      console.log(userId);
+      //console.log(userId);
       return input;
     }),
 });

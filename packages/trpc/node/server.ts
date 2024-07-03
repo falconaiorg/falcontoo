@@ -56,12 +56,12 @@ export const publicProcedure = t.procedure;
 
 export const appRouter = t.router({
   getUser: t.procedure.input(z.string()).query((opts) => {
-    console.log(opts.input); // string
+    //console.log(opts.input); // string
     opts.input; // string
     return { id: opts.input, name: "Bilbo" };
   }),
   test: t.procedure.query((opts) => {
-    console.log(opts.input); // undefined
+    //console.log(opts.input); // undefined
     return { name: "Bilbo" };
   }),
   createUser: t.procedure
@@ -73,18 +73,18 @@ export const appRouter = t.router({
   createArticle: t.procedure
     .input(ZAddOrUpdateArticle)
     .mutation(async ({ ctx, input }) => {
-      console.log("Creating article", input.url);
+      //console.log("Creating article", input.url);
       if (!input.url) {
         throw new TRPCError({
           code: "BAD_REQUEST",
           message: "URL is required",
         });
       }
-      console.log("Creating article", input.url);
+      //console.log("Creating article", input.url);
       const parsedUrl = await parseUrl({ url: input.url });
-      console.log("Parsed URL", parsedUrl);
+      //console.log("Parsed URL", parsedUrl);
       const article = await parseArticle({ url: parsedUrl });
-      console.log("Parsed article", article);
+      //console.log("Parsed article", article);
       const savedArticle = await saveArticle({
         articleData: article,
         userId: ctx.user.id,

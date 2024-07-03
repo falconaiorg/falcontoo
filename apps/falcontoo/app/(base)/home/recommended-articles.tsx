@@ -35,7 +35,7 @@ export function RecommendedArticles({
     null,
   );
 
-  console.log(articles.length);
+  //console.log(articles.length);
   const { mutateAsync: snoozeArticle } =
     api.articles.snoozeArticle.useMutation();
   const [isOpen, setIsOpen] = useState(false);
@@ -43,7 +43,7 @@ export function RecommendedArticles({
     articles.slice(0, 3),
   );
 
-  console.log(displayedArticles.length);
+  //console.log(displayedArticles.length);
 
   const handleSnooze = async ({
     articleId,

@@ -32,13 +32,13 @@ export default function RootLayout({
 }>) {
   const nextCookies = cookies();
   const sessionToken = nextCookies.get("next-auth.session-token")?.value;
-  console.log(`Session token: ${sessionToken}`);
+  //console.log(`Session token: ${sessionToken}`);
 
   const csrfToken = nextCookies
     .get("next-auth.csrf-token")
     ?.value?.split("|")[0];
 
-  console.log(`CSRF token: ${csrfToken}`);
+  //console.log(`CSRF token: ${csrfToken}`);
 
   return (
     <ViewTransitions>

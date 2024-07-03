@@ -61,14 +61,14 @@ export const articleRouter = router({
   doesArticleExist: authenticatedProcedure
     .input(ZDoesArticleExist)
     .query(async ({ input, ctx }) => {
-      console.log("Checking if article exists", input.url);
+      //console.log("Checking if article exists", input.url);
       if (!input.url) {
         throw new TRPCError({
           code: "BAD_REQUEST",
           message: "URL is required",
         });
       }
-      console.log("Checking if article exists", input.url);
+      //console.log("Checking if article exists", input.url);
 
       const parsedUrl = await parseUrl({ url: input.url });
 
@@ -101,15 +101,15 @@ export const articleRouter = router({
         });
       }
       const userId = ctx.user.id;
-      console.log("Creating article", input.url);
+      //console.log("Creating article", input.url);
       const parsedUrl = await parseUrl({ url: input.url });
-      console.log("Parsed URL", parsedUrl);
+      //console.log("Parsed URL", parsedUrl);
 
       const ParserBodySchema = z.object({
         url: z.string(),
       });
-      console.log("Parsed URL", parsedUrl);
-      console.log(input.url);
+      //console.log("Parsed URL", parsedUrl);
+      //console.log(input.url);
       const nextAuthHeaders = getHeaders();
       const [errDraco, response] = await to(
         dracoAxios({
@@ -122,7 +122,7 @@ export const articleRouter = router({
         })
       );
       if (errDraco) {
-        console.log("Error parsing article", errDraco);
+        //console.log("Error parsing article", errDraco);
         throw new TRPCError({
           code: "INTERNAL_SERVER_ERROR",
           message: "Error parsing article",
@@ -130,9 +130,9 @@ export const articleRouter = router({
         });
       }
       const article = response.data as ArticleContent;
-      console.log("Parsed article", article);
+      //console.log("Parsed article", article);
       const savedArticle = await saveArticle({ articleData: article, userId });
-      console.log("Saved article", savedArticle);
+      //console.log("Saved article", savedArticle);
       revalidatePath("/");
       revalidateTag("articles");
       return savedArticle;

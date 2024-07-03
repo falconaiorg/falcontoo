@@ -7,7 +7,7 @@ export function TRPCTest() {
     { dog: "bobby" },
     {},
   );
-  console.log(data);
+  //console.log(data);
 
   return <>{"data"}</>;
 }

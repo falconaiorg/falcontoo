@@ -58,7 +58,7 @@ export function AnnotationDrawer() {
   return (
     <Drawer
       onOpenChange={(open) => {
-        console.log("open", open);
+        //console.log("open", open);
         setHasSelectionChange(open);
         if (!open) {
           clearSelection();

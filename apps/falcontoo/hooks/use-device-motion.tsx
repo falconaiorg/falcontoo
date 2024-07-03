@@ -24,7 +24,7 @@ export const useDeviceMotion = () => {
         y: acceleration?.y ?? 0,
         z: acceleration?.z ?? 0,
       });
-      console.log(acceleration);
+      //console.log(acceleration);
       if (
         acceleration &&
         lastAcceleration.x !== null &&

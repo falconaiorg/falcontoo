@@ -4,6 +4,24 @@ import { Article } from "./article";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ArticleSkeleton } from "./article-skeleton";
+import { HomeIcon } from "@/components/icons";
+import { FloatingNav } from "@/components/ui/acc/floating-navbar";
+const dummyNavItems = [
+  {
+    name: "Home",
+    link: "/home",
+  },
+  {
+    name: "Profile",
+    link: "/profile",
+  },
+  {
+    name: "Messages",
+    link: "/messages",
+  },
+];
+
+const dummyClassName = "custom-navbar-class";
 
 export default async function ReadPage({
   params,
@@ -11,9 +29,10 @@ export default async function ReadPage({
   params: { articleId: string };
 }) {
   const articleId = params.articleId;
+  //console.log(articleId);
 
   return (
-    <div className="flex flex-col space-y-3 px-1.5 py-4">
+    <div className="relative flex flex-col space-y-3 px-1.5 py-4">
       {/* <FilterButton /> */}
       <Suspense fallback={<ContextSkeleton />}>
         <ArticleContext articleId={articleId} />

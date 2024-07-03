@@ -8,7 +8,7 @@ export async function snoozeArticle({
   articleId: string;
   snoozeDate: Date;
 }) {
-  console.log("articleId", articleId);
+  //console.log("articleId", articleId);
   const [err, updatedArticle] = await to(
     prisma.article.update({
       where: {
@@ -17,11 +17,11 @@ export async function snoozeArticle({
       data: {
         snoozedUntil: snoozeDate,
       },
-    })
+    }),
   );
 
   if (err) {
-    console.log(err);
+    //console.log(err);
     throw new Error("Failed to snooze article");
   }
   return updatedArticle;

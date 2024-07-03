@@ -64,7 +64,7 @@ export function PromptForm({
           size="icon"
           className="absolute left-0 top-[14px] size-8 rounded-full bg-background p-0 sm:left-4"
           onClick={() => {
-            console.log("New Chat");
+            //console.log("New Chat");
           }}
         >
           <CameraIcon size="xxs" />

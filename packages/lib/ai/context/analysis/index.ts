@@ -21,7 +21,7 @@ export const getArticleAnalysis = async ({
       articleId,
     });
 
-  console.log("existingAnalysis", existingAnalysis);
+  //console.log("existingAnalysis", existingAnalysis);
   if (existingAnalysis) {
     return existingAnalysis;
   }
@@ -36,7 +36,7 @@ export const getArticleAnalysis = async ({
     content: articleMarkdown,
   });
 
-  console.log("analysis", analysis);
+  //console.log("analysis", analysis);
 
   await prisma.articleContext.upsert({
     where: {

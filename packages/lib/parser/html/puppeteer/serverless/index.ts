@@ -10,7 +10,7 @@ const content = "dog";
 export const parseWebpage = async ({ url }: { url: URL }) => {
   const href = url.href;
   const executablePath = await chromium.executablePath();
-  console.log(`Parsing webpage: ${href}`);
+  //console.log(`Parsing webpage: ${href}`);
 
   let puppeteerConfig: any;
 
@@ -28,7 +28,7 @@ export const parseWebpage = async ({ url }: { url: URL }) => {
   }
 
   const browser = await puppeteer.launch(puppeteerConfig);
-  console.log(`Browser launched: ${href}`);
+  //console.log(`Browser launched: ${href}`);
   const page = await browser.newPage();
   await page.goto(href);
   const title = await page.title();
@@ -38,7 +38,7 @@ export const parseWebpage = async ({ url }: { url: URL }) => {
 };
 
 /**
- *   console.log(`Parsing webpage: ${url.href}`);
+ *   //console.log(`Parsing webpage: ${url.href}`);
   const executablePath = await chromium.executablePath();
   // "/opt/nodejs/node_modules/@sparticuz/chromium/bin",
  * {

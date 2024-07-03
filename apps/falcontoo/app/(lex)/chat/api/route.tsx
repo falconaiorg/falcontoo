@@ -71,11 +71,11 @@ const toolMessage: CoreMessage = {
 
 export async function POST(req: Request) {
   const { messages } = (await req.json()) as { messages: CoreMessage[] };
-  console.log(messages);
+  //console.log(messages);
 
   const all = [...messages, toolCallMessage, toolMessage];
 
-  console.log(all);
+  //console.log(all);
 
   const response = await streamText({
     model: openai("gpt-3.5-turbo"),
@@ -83,11 +83,11 @@ export async function POST(req: Request) {
     messages: all,
   });
 
-  console.log(response);
+  //console.log(response);
 
   const aiStream = response.toAIStream();
 
-  console.log(aiStream);
+  //console.log(aiStream);
 
   return new StreamingTextResponse(aiStream);
 }

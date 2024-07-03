@@ -8,14 +8,14 @@ import { createChecksum } from "./checksum";
 import { ArticleWithContent, ParsedArticle } from "./types";
 
 export const parseArticle = async function ({ url }: { url: URL }) {
-  console.log(`Parsing article: ${url.href}`);
+  //console.log(`Parsing article: ${url.href}`);
 
   // const html = await htmlParser.serverless({ url });
   const html = await htmlParser.onServer({ url });
 
-  console.log(`Parsed article: ${html}`);
+  //console.log(`Parsed article: ${html}`);
 
-  console.log(`Parsed article: ${url.href}`);
+  //console.log(`Parsed article: ${url.href}`);
 
   let doc,
     reader: Readability<string>,
@@ -28,11 +28,11 @@ export const parseArticle = async function ({ url }: { url: URL }) {
     publishedAt;
 
   try {
-    console.log("Parsing article with JSDOM");
+    //console.log("Parsing article with JSDOM");
     doc = new jsdom.JSDOM(html, {
       url: url.href,
     });
-    console.log("Parsed article with JSDOM");
+    //console.log("Parsed article with JSDOM");
   } catch (err) {
     console.error("Error at JSDOM parser", err);
     throw new TRPCError({
@@ -42,9 +42,9 @@ export const parseArticle = async function ({ url }: { url: URL }) {
     });
   }
   try {
-    console.log("Creating Readability instance");
+    //console.log("Creating Readability instance");
     reader = new Readability(doc.window.document);
-    console.log("Created Readability instance");
+    //console.log("Created Readability instance");
   } catch (err) {
     console.error("Error at Readability construction", err);
     throw new TRPCError({
@@ -54,9 +54,9 @@ export const parseArticle = async function ({ url }: { url: URL }) {
     });
   }
   try {
-    console.log("Parsing article with Readability");
+    //console.log("Parsing article with Readability");
     articleWithReadability = reader.parse();
-    console.log("Parsed article with Readability");
+    //console.log("Parsed article with Readability");
     if (!articleWithReadability) {
       console.error("No article with readability");
       throw new TRPCError({
@@ -65,17 +65,17 @@ export const parseArticle = async function ({ url }: { url: URL }) {
         cause: new Error(`Parser Readability failed to parse the content`),
       });
     }
-    console.log("Article with readability", articleWithReadability);
+    //console.log("Article with readability", articleWithReadability);
     title = articleWithReadability?.title;
     description = articleWithReadability?.excerpt;
     author = articleWithReadability?.byline || "unknown";
     thumbnail = articleWithReadability?.siteName;
     publishedAt = new Date(articleWithReadability?.publishedTime);
-    console.log("Title", title);
-    console.log("Description", description);
-    console.log("Author", author);
-    console.log("Thumbnail", thumbnail);
-    console.log("Published At", publishedAt);
+    //console.log("Title", title);
+    //console.log("Description", description);
+    //console.log("Author", author);
+    //console.log("Thumbnail", thumbnail);
+    //console.log("Published At", publishedAt);
   } catch (err) {
     console.error("Error at Readability parser", err);
     throw new TRPCError({
@@ -85,7 +85,7 @@ export const parseArticle = async function ({ url }: { url: URL }) {
     });
   }
   try {
-    console.log("Converting HTML to Markdown");
+    //console.log("Converting HTML to Markdown");
     markdown = htmlToMarkdownWithTurndown(articleWithReadability.content);
   } catch (err) {
     console.error("Error at markdown conversion", err);
@@ -106,7 +106,7 @@ export const parseArticle = async function ({ url }: { url: URL }) {
     publishedAt,
     markdownChecksum: createChecksum(markdown),
   };
-  console.log(`Parsed article: ${url.href}`);
+  //console.log(`Parsed article: ${url.href}`);
 
   return articleObject;
 };

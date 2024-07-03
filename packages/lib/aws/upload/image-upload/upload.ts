@@ -29,7 +29,7 @@ export const uploadToDigitalOcean = async (formData: FormData) => {
     });
 
     upload.on("httpUploadProgress", (progress) => {
-      console.log(progress);
+      //console.log(progress);
     });
 
     const stored = await upload.promise();

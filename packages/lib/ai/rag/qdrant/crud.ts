@@ -11,10 +11,10 @@ export const deleteCollection = async function (collectionName: string) {
     });
     const test = await client.deleteCollection(collectionName);
     if (test) {
-      console.log("Collection deleted");
+      //console.log("Collection deleted");
     }
   } catch (e) {
-    console.log(e);
+    //console.log(e);
     throw new TRPCError({
       code: "NOT_IMPLEMENTED",
       message: "Error deleting collection.",
@@ -45,11 +45,11 @@ export const createCollection = async function ({
       },
     });
     if (isCreated) {
-      console.log("Collection created");
+      //console.log("Collection created");
     }
     return isCreated;
   } catch (e) {
-    console.log(e);
+    //console.log(e);
     throw new TRPCError({
       code: "NOT_IMPLEMENTED",
       message: "Error creating collection.",

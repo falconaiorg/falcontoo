@@ -30,9 +30,9 @@ export const Timer = ({
 
   const { getActiveTime, getIdleTime, getElapsedTime } = useIdleTimer({
     onIdle: () => {
-      console.log("I'm idle");
+      //console.log("I'm idle");
     },
-    onActive: () => console.log("I'm active"),
+    onActive: () => {},//console.log("I'm active"),
     timeout: IDLE_TIMEOUT,
     onAction: () => {},
     debounce: 500,
@@ -42,7 +42,7 @@ export const Timer = ({
     api.stats.createReadingSession.useMutation({
       retry: 3,
       onSuccess: (data) => {
-        console.log("Reading session created", data);
+        //console.log("Reading session created", data);
         setReadingSessionId(data.readingSessionId);
         updateSession();
       },
@@ -67,10 +67,10 @@ export const Timer = ({
 
   useEffect(() => {
     if (!readingSessionId && !isCreatingSession) {
-      console.log("Creating reading session");
+      //console.log("Creating reading session");
       createReadingSession();
     } else {
-      console.log("Reading session already exists", readingSessionId);
+      //console.log("Reading session already exists", readingSessionId);
     }
   }, [readingSessionId, createReadingSession, isCreatingSession]);
 
@@ -84,7 +84,7 @@ export const Timer = ({
     const activeTimeDelta = activeTime - lastSentActiveTime;
     const idleTimeDelta = idleTime - lastSentIdleTime;
 
-    console.log("Updating session");
+    //console.log("Updating session");
     updateReadingSession({
       activeTime: activeTimeDelta,
       idleTime: idleTimeDelta,
@@ -102,10 +102,10 @@ export const Timer = ({
 
   useUnmount(() => {
     if (getElapsedTime() > UPDATE_THRESHOLD_ELAPSED_TIME) {
-      console.log("unmounting");
+      //console.log("unmounting");
       updateSession();
     } else {
-      console.log("Not updating session, active time is too low");
+      //console.log("Not updating session, active time is too low");
     }
   });
 

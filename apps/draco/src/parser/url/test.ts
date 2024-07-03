@@ -25,9 +25,9 @@ export const testUrlParser = async () => {
   for (const url of testUrls) {
     try {
       await parseUrl({ url });
-      console.log(`✅ Success: ${url}`);
+      //console.log(`✅ Success: ${url}`);
     } catch (err) {
-      console.log(`❌ Error: ${url}`);
+      //console.log(`❌ Error: ${url}`);
     }
   }
 };

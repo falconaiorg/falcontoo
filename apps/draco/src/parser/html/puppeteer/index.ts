@@ -9,35 +9,35 @@ const { BROWSER_ARGS, EXECUTABLE_PATH, IS_HEADLESS } = BROWSER_CONFIG;
 let browser: Browser;
 
 const handleDisconnection = async () => {
-  console.log("Browser disconnected, reconnecting...");
+  //console.log("Browser disconnected, reconnecting...");
   try {
     const childProcess = browser.process();
     if (childProcess) {
       childProcess.kill("SIGINT");
     }
     if (browser) {
-      console.log("Closing existing browser instance...");
+      //console.log("Closing existing browser instance...");
       await browser.close(); // Ensure existing browser is closed
     }
     await startBrowser();
   } catch (error) {
-    console.log("Error restarting browser:", error);
+    //console.log("Error restarting browser:", error);
   }
 };
 
 const startBrowser = async () => {
   try {
-    console.log(`Executable path: ${EXECUTABLE_PATH}`);
-    console.log(`Headless mode: ${IS_HEADLESS}`);
+    //console.log(`Executable path: ${EXECUTABLE_PATH}`);
+    //console.log(`Headless mode: ${IS_HEADLESS}`);
     browser = (await puppeteerWithPlugins.launch({
       headless: IS_HEADLESS,
       executablePath: EXECUTABLE_PATH,
       args: BROWSER_ARGS,
     })) as Browser;
-    console.log(`Browser launched`);
+    //console.log(`Browser launched`);
     browser.on("disconnected", handleDisconnection);
   } catch (error) {
-    console.log(`Failed to start browser: ${error}`);
+    //console.log(`Failed to start browser: ${error}`);
   }
 };
 
@@ -45,7 +45,7 @@ const startBrowser = async () => {
 (async () => await startBrowser())();
 
 const gracefulShutdown = async () => {
-  console.log("Graceful shutdown initiated");
+  //console.log("Graceful shutdown initiated");
   if (browser) {
     try {
       // // Close all browser contexts
@@ -59,9 +59,9 @@ const gracefulShutdown = async () => {
       // }
       // // Close the browser
       await browser.close();
-      console.log("Browser closed successfully");
+      //console.log("Browser closed successfully");
     } catch (error) {
-      console.log("Error closing browser:", error);
+      //console.log("Error closing browser:", error);
     } finally {
       process.exit(0);
     }
@@ -70,12 +70,12 @@ const gracefulShutdown = async () => {
 };
 
 process.on("SIGINT", async () => {
-  console.log("Received SIGINT");
+  //console.log("Received SIGINT");
   await gracefulShutdown();
 });
 
 process.on("SIGTERM", async () => {
-  console.log("Received SIGTERM");
+  //console.log("Received SIGTERM");
   await gracefulShutdown();
 });
 
@@ -88,7 +88,7 @@ export const parseWebpage = async ({ url }: { url: URL }): Promise<string> => {
     await page.goto(href, { waitUntil: "domcontentloaded" });
     const title = await page.title();
     const content = await page.content();
-    console.log(`Page title: ${title}`);
+    //console.log(`Page title: ${title}`);
     return content;
   } catch (error) {
     console.error(`Failed to parse webpage: ${error}`);

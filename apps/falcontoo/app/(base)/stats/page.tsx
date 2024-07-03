@@ -17,7 +17,7 @@ async function getRoot(
         "X-CSRF-Token": csrfToken,
       },
     });
-    console.log(response.data);
+    //console.log(response.data);
     return response.data;
   } catch (error) {
     console.error(`Error making GET request: ${error}`);
@@ -28,31 +28,31 @@ export type NextCookies = ReturnType<typeof cookies>;
 
 export default async function NotesPage() {
   const session = await getServerComponentSession();
-  console.log("Session");
-  console.log(session);
+  //console.log("Session");
+  //console.log(session);
   const requestHeaders = headers();
   const testCookies = cookies();
-  console.log(testCookies);
+  //console.log(testCookies);
   const sessionToken = testCookies.get("next-auth.session-token")?.value;
   const all = testCookies.getAll();
   all.forEach((cookie) => {
-    console.log(cookie);
+    //console.log(cookie);
   });
 
   const csrfToken = testCookies
     .get("next-auth.csrf-token")
     ?.value?.split("|")[0];
 
-  console.log(`Session token: ${sessionToken}`);
-  console.log(`CSRF token: ${csrfToken}`);
+  //console.log(`Session token: ${sessionToken}`);
+  //console.log(`CSRF token: ${csrfToken}`);
 
   const token = requestHeaders.get("cookie")?.split(" ")[1]; // Extract the token from the authorization header
-  console.log(`Received a request with JWT: ${token}`);
-  console.log(requestHeaders);
-  console.log("NotesPage");
+  //console.log(`Received a request with JWT: ${token}`);
+  //console.log(requestHeaders);
+  //console.log("NotesPage");
 
   const root = await getRoot(sessionToken, csrfToken);
-  console.log(root);
+  //console.log(root);
   return (
     <div className="px-4 py-2">
       {testArticles.map((article) => (

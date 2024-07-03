@@ -5,9 +5,9 @@ export const transformer = superjson;
 
 // TODO Fix this to work with CORS reequest from 3000 to 8000
 function getBaseUrl() {
-  console.log("process.env.WEBSITE_SITE_NAME", process.env.WEBSITE_SITE_NAME);
-  console.log("process.env.WEBSITE_HOSTNAME", process.env.WEBSITE_HOSTNAME);
-  console.log("process.env.PORT", process.env.PORT);
+  //console.log("process.env.WEBSITE_SITE_NAME", process.env.WEBSITE_SITE_NAME);
+  //console.log("process.env.WEBSITE_HOSTNAME", process.env.WEBSITE_HOSTNAME);
+  //console.log("process.env.PORT", process.env.PORT);
 
   if (typeof window !== "undefined") return "";
   if (process.env.WEBSITE_SITE_NAME)
@@ -17,7 +17,7 @@ function getBaseUrl() {
 
 export function getUrl() {
   const baseUrl = getBaseUrl();
-  console.log("baseUrl", baseUrl);
+  //console.log("baseUrl", baseUrl);
   return baseUrl + "/trpc";
 }
 

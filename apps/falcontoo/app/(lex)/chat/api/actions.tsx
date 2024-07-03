@@ -34,7 +34,7 @@ const getFormattedMessages = function ({
 const submitUserMessage = async (userMessageContent: string) => {
   "use server";
   const aiState = getMutableAIState<typeof AI>();
-  console.log(aiState.get());
+  //console.log(aiState.get());
 
   const existingState = aiState.get();
   const existingMessages = existingState.messages;
@@ -50,7 +50,7 @@ const submitUserMessage = async (userMessageContent: string) => {
     ...existingState,
     messages: [...existingMessages, userMessage],
   });
-  console.log(aiState.get());
+  //console.log(aiState.get());
 
   let textStream: undefined | ReturnType<typeof createStreamableValue<string>>;
   let textNode: undefined | React.ReactNode;
@@ -59,7 +59,7 @@ const submitUserMessage = async (userMessageContent: string) => {
     provider: "openai",
     messages: aiState.get().messages,
   });
-  console.log(aiState.get());
+  //console.log(aiState.get());
 
   const result = await streamUI({
     initial: <SpinnerMessage />,
@@ -67,7 +67,7 @@ const submitUserMessage = async (userMessageContent: string) => {
     system: systemPrompt,
     messages: messages,
     text: ({ content, done, delta }) => {
-      console.log(aiState.get());
+      //console.log(aiState.get());
 
       if (!textStream) {
         textStream = createStreamableValue("");
@@ -75,7 +75,7 @@ const submitUserMessage = async (userMessageContent: string) => {
       }
 
       if (done) {
-        console.log(aiState.get());
+        //console.log(aiState.get());
         textStream.done();
         aiState.done({
           ...aiState.get(),
@@ -88,7 +88,7 @@ const submitUserMessage = async (userMessageContent: string) => {
             },
           ],
         });
-        console.log(aiState.get());
+        //console.log(aiState.get());
       } else {
         textStream.update(delta);
       }
@@ -105,7 +105,7 @@ const submitUserMessage = async (userMessageContent: string) => {
           context: z.string().describe("The context relevant to the note."),
         }),
         generate: async function* ({ context, note }) {
-          console.log(aiState.get());
+          //console.log(aiState.get());
 
           yield <SpinnerMessage />;
           aiState.done({
@@ -124,7 +124,7 @@ const submitUserMessage = async (userMessageContent: string) => {
               },
             ],
           });
-          console.log(aiState.get());
+          //console.log(aiState.get());
           return (
             <Note
               note={note}
@@ -151,11 +151,11 @@ export const AI = createAI<AIState, UIState>({
   initialAIState: { id: nanoid(), messages: [] },
   onSetAIState: async (aiState) => {
     "use server";
-    console.log(aiState);
+    //console.log(aiState);
   },
   onGetUIState: async (aiState) => {
     "use server";
-    console.log(aiState);
+    //console.log(aiState);
     return [];
   },
 });

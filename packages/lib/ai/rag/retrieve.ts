@@ -87,5 +87,5 @@ export const queryVectorStore = async (query: string) => {
   const response = await vectorStore.similaritySearch(query, 5);
 
   return response;
-  console.log(response);
+  //console.log(response);
 };

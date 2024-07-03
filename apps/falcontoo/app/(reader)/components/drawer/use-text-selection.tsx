@@ -31,7 +31,7 @@ export const useTextSelection = () => {
   }, []);
 
   const clearSelection = useCallback(() => {
-    console.log("Clear selection called");
+    //console.log("Clear selection called");
     if (selectionData.selection) {
       selectionData.selection.removeAllRanges();
       setSelectionData(INITIAL_STATE);
@@ -42,12 +42,12 @@ export const useTextSelection = () => {
   const handleSelectionChange = useCallback(() => {
     const selection = document.getSelection();
     if (selection && selection.rangeCount > 0 && !selection.isCollapsed) {
-      console.log(selection.toString());
-      console.log(selection.rangeCount);
+      //console.log(selection.toString());
+      //console.log(selection.rangeCount);
       updateSelectionData(selection);
       setHasSelectionChange(true);
     } else {
-      console.log("No selection");
+      //console.log("No selection");
       // Don't reset selectionData if the selection is collapsed
       if (selection && selection.isCollapsed) {
         return;
@@ -67,7 +67,7 @@ export const useTextSelection = () => {
   }, []);
 
   useEffect(() => {
-    console.log("Adding event listeners");
+    //console.log("Adding event listeners");
     document.addEventListener("selectstart", handleSelectStart);
     document.addEventListener(
       "selectionchange",
@@ -76,7 +76,7 @@ export const useTextSelection = () => {
     document.addEventListener("contextmenu", (e) => e.preventDefault());
 
     return () => {
-      console.log("Removing event listeners");
+      //console.log("Removing event listeners");
       document.removeEventListener(
         "selectionchange",
         debouncedHandleSelectionChange,
@@ -89,9 +89,9 @@ export const useTextSelection = () => {
   const hasSelection =
     selectionData?.text && selectionData?.text?.length > 0 ? true : false;
 
-  console.log(hasSelectionChange);
-  console.log(hasSelection);
-  console.log(selectionData.text);
+  //console.log(hasSelectionChange);
+  //console.log(hasSelection);
+  //console.log(selectionData.text);
 
   return {
     ...selectionData,
