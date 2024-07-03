@@ -1,3 +1,5 @@
+import { SprintDuration } from "@/app/(base)/home/start-sprint";
+
 // Dragon urls
 const root = ``;
 
@@ -9,11 +11,12 @@ export const url = {
   library: `${root}/library`,
   stats: `${root}/stats`,
   settings: `${root}/settings`,
-  session: {
-    create: ({ duration }: { duration: string }) =>
-      `${root}/session/create/${duration}`,
-    read: ({ sessionId }: { sessionId: string }) =>
-      `${root}/session/read/${sessionId}`,
+  sprint: {
+    allSprints: `${root}/sprint`,
+    create: ({ duration }: { duration: SprintDuration }) =>
+      `${root}/sprint/create/${duration}`,
+    read: ({ sprintId }: { sprintId: string }) =>
+      `${root}/sprint/read/${sprintId}`,
   },
   reader: {
     read: ({ articleId }: { articleId: string }) => `${root}/read/${articleId}`,

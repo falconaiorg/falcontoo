@@ -18,14 +18,12 @@ export default async function HomePage() {
   return (
     <div className="container mx-auto grid grid-cols-1 gap-4 p-4 pb-96 md:grid-cols-2">
       {/* <SessionProgress /> */}
+      <StartSprint />
       <UserStats />
       <WeeklyActivity />
       <Suspense fallback={<Skeleton className="h-64" />}>
         <ReadingHistory />
       </Suspense>
-      <Soon>
-        <StartSprint />
-      </Soon>
     </div>
     // <LampContainer className="h-full">
     //   {/* <RecommendedArticles articles={articles} /> */}

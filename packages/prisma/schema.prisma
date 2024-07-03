@@ -241,7 +241,7 @@ model Sprint {
     createdAt      DateTime        @default(now())
     startedAt      DateTime?
     completedAt    DateTime?
-    duration       Int // Duration in minutes
+    duration       Int // Duration in milliseconds
     status         SprintStatus
     sprintArticles SprintArticle[]
 }

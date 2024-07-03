@@ -9,7 +9,7 @@ import { Suspense, useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { CheckBadgeIcon } from "@/components/icons";
-export function SessionArticles({
+export function SprintArticles({
   articles,
 }: {
   articles: ArticleWithContent[];

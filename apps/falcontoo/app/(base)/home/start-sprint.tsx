@@ -10,10 +10,12 @@ import { url } from "@/urls";
 import Link from "next/link";
 import { RoundButton } from "./session-button";
 
+export type SprintDuration = number;
+
 const sessions = [
-  { title: "Session 1", duration: "5" },
-  { title: "Session 2", duration: "15" },
-  { title: "Session 3", duration: "30" },
+  { title: "Session 1", duration: 5 },
+  { title: "Session 2", duration: 15 },
+  { title: "Session 3", duration: 30 },
 ];
 
 export const StartSprint = () => (
@@ -25,7 +27,7 @@ export const StartSprint = () => (
       <div className="flex justify-around">
         {sessions.map((session) => (
           <Link
-            href={url.session.create({ duration: session.duration })}
+            href={url.sprint.create({ duration: session.duration })}
             key={session.title}
           >
             <RoundButton>{session.duration} Min</RoundButton>
