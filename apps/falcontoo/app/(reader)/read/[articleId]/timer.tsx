@@ -28,11 +28,11 @@ export const Timer = ({
   const [lastSentActiveTime, setLastSentActiveTime] = useState(0);
   const [lastSentIdleTime, setLastSentIdleTime] = useState(0);
 
-  const { getActiveTime, getIdleTime, getElapsedTime } = useIdleTimer({
+  const { getActiveTime, getIdleTime, getElapsedTime, isIdle } = useIdleTimer({
     onIdle: () => {
       //console.log("I'm idle");
     },
-    onActive: () => {},//console.log("I'm active"),
+    onActive: () => {}, //console.log("I'm active"),
     timeout: IDLE_TIMEOUT,
     onAction: () => {},
     debounce: 500,
@@ -75,7 +75,7 @@ export const Timer = ({
   }, [readingSessionId, createReadingSession, isCreatingSession]);
 
   const updateSession = async () => {
-    if (!readingSessionId) {
+    if (!readingSessionId || isIdle()) {
       return;
     }
     const activeTime = getActiveTime();
