@@ -8,11 +8,11 @@ import { AIState, Message, UIState } from "./types";
 import { nanoid } from "nanoid";
 import { openai } from "@ai-sdk/openai";
 import { systemPrompt } from "./system-prompt";
-import { BotMessage } from "@/app/draco/chat/rsc/bot-message";
+import { BotMessage } from "@/app/(app)/draco/chat/rsc/bot-message";
 import { date, z } from "zod";
 import { Note } from "../components/note";
-import { BotCard } from "@/app/draco/chat/rsc/bot-card";
-import { SpinnerMessage } from "@/app/draco/chat/rsc/spinner-message";
+import { BotCard } from "@/app/(app)/draco/chat/rsc/bot-card";
+import { SpinnerMessage } from "@/app/(app)/draco/chat/rsc/spinner-message";
 
 // Using any here is a problem, but the code does not work without it.
 const getFormattedMessages = function ({

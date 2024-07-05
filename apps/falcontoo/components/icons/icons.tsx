@@ -35,6 +35,7 @@ import {
   Cog6ToothIcon as SettingsCog,
   ExclamationCircleIcon,
   EllipsisHorizontalCircleIcon,
+  AdjustmentsHorizontalIcon,
 } from "@heroicons/react/24/solid";
 import { XCircleIcon } from "@heroicons/react/24/outline";
 import { FaFilePdf } from "react-icons/fa";
@@ -44,6 +45,7 @@ import {
   FaFileLines,
   FaSpinner,
   FaCheck,
+  FaFont,
 } from "react-icons/fa6";
 import { FiSliders, FiAirplay, FiTool } from "react-icons/fi";
 
@@ -76,14 +78,14 @@ const colorMapping = {
   slate: "text-slate-400",
 };
 
-type BaseIconProps = {
+export type BaseIconProps = {
   Icon: ComponentType<React.SVGProps<SVGSVGElement>> | ExoticComponent<any>;
   size?: keyof typeof sizeMapping;
   color?: keyof typeof colorMapping;
   className?: string;
 };
 
-const BaseIcon: React.FC<BaseIconProps> = ({
+export const BaseIcon: React.FC<BaseIconProps> = ({
   Icon,
   size = "base",
   color = "currentColor",
@@ -286,6 +288,14 @@ const EllipsisIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props} Icon={EllipsisHorizontalCircleIcon} />
 );
 
+const FontIcon: React.FC<IconProps> = (props) => (
+  <BaseIcon {...props} Icon={FaFont} />
+);
+
+const AdjustmentsIcon = React.forwardRef<SVGSVGElement, IconProps>(
+  (props) => <BaseIcon {...props} Icon={AdjustmentsHorizontalIcon} />,
+);
+
 export {
   SettingsIcon,
   StudentIcon,
@@ -332,4 +342,6 @@ export {
   SettingsCogIcon,
   ExclamationIcon,
   EllipsisIcon,
+  FontIcon,
+  AdjustmentsIcon,
 };

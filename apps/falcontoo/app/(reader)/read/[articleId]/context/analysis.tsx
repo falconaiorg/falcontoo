@@ -303,7 +303,7 @@ export function ArticleCredibility({
   return (
     <div className="flex w-full flex-col space-y-4 p-1 text-muted-foreground">
       {/* <HeroSection badges={topBadges} /> */}
-      <h1 className="font-serif text-sm">Analysis</h1>
+      
       <ClickbaitSection analysis={analysis} badge={sections.clickbait} />
       {analysis.expertiseMismatch.authorDetected && (
         <ExpertiseSection analysis={analysis} badge={sections.expertise} />

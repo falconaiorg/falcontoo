@@ -6,7 +6,7 @@ export function ContextSkeleton() {
   return (
     <Card className="min-h-42 relative bg-grid-small-black/[0.2] dark:bg-grid-small-white/[0.2] ">
       <CardHeader>
-        <CardTitle className="font-serif text-sm">Pre-reading</CardTitle>
+        <CardTitle className="font-serif text-sm">Analysis</CardTitle>
         <Skeleton className="h-3" />
         <Skeleton className="h-3" />
         <Skeleton className="h-3" />

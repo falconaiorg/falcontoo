@@ -13,7 +13,7 @@ import { AddIcon, MinusIcon } from "@/components/icons";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
-import { SprintDuration } from "@/app/(base)/home/start-sprint";
+import { SprintDuration } from "@/app/(app)/(base)/home/start-sprint";
 import { api } from "@falcon/trpc/next/client";
 import { useSoundEffect } from "@/hooks/use-sound-effect";
 import { sounds } from "@/sounds";

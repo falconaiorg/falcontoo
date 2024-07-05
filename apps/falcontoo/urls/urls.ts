@@ -1,4 +1,4 @@
-import { SprintDuration } from "@/app/(base)/home/start-sprint";
+import { SprintDuration } from "@/app/(app)/(base)/home/start-sprint";
 
 // Dragon urls
 const root = ``;

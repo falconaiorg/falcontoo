@@ -1,6 +1,6 @@
 import { ThemeProvider } from "next-themes";
 
-export default function ReaderLayout({
+export default function AppLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -8,7 +8,7 @@ export default function ReaderLayout({
   return (
     <ThemeProvider
       attribute="class"
-      defaultTheme="light"
+      defaultTheme="dark"
       disableTransitionOnChange
     >
       {children}

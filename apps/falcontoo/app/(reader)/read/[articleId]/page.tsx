@@ -6,6 +6,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { ArticleSkeleton } from "./article-skeleton";
 import { HomeIcon } from "@/components/icons";
 import { FloatingNav } from "@/components/ui/acc/floating-navbar";
+import { Styler } from "./theme/styler";
 const dummyNavItems = [
   {
     name: "Home",
@@ -34,6 +35,7 @@ export default async function ReadPage({
   return (
     <div className="relative flex flex-col space-y-3 px-1.5 py-4">
       {/* <FilterButton /> */}
+   
       <Suspense fallback={<ContextSkeleton />}>
         <ArticleContext articleId={articleId} />
       </Suspense>

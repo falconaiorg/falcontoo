@@ -1,11 +1,7 @@
 {
   "extends": "@falcon/tsconfig/nextjs.json",
   "compilerOptions": {
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "strictNullChecks": true,
     "incremental": false,
     "baseUrl": ".",
@@ -15,9 +11,7 @@
       }
     ],
     "paths": {
-      "@/*": [
-        "./*"
-      ]
+      "@/*": ["./*"]
     },
     "allowJs": true
   },
@@ -28,9 +22,8 @@
     ".next/types/**/*.ts",
     "app/(lex)/chat/api/actions.tsx",
     "app/(lex)/chat/components/example-messages.tsx",
-    "server/ai/rag/qdrant/index.ts"
+    "server/ai/rag/qdrant/index.ts",
+    "tailwind/tw-plugins.mjs"
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }

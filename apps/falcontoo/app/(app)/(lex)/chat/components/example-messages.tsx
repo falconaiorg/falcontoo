@@ -1,5 +1,5 @@
-import { UIState } from "@/app/draco/chat/actions";
-import { BotMessage } from "@/app/draco/chat/rsc/bot-message";
+import { UIState } from "@/app/(app)/draco/chat/actions";
+import { BotMessage } from "@/app/(app)/draco/chat/rsc/bot-message";
 import BookRack from "./bookrack";
 import { Upload } from "./upload";
 import { ScreenshotCapture } from "./screenshot";

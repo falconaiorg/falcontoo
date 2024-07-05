@@ -7,6 +7,7 @@ import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import { cn } from "@/lib/utils";
+import { testMarkdown } from "./testMarkdown";
 
 const MarkdownWithHighlight = ({
   markdownText,
@@ -15,13 +16,14 @@ const MarkdownWithHighlight = ({
   markdownText: string;
   searchWords?: string[];
 }) => {
+  console.log("markdownText", markdownText);
   const [hasFilter] = useAtom(filterAtom);
   const hasHighlight = !!(hasFilter && searchWords && searchWords.length > 0);
 
   return (
     <MemoizedReactMarkdown
       className={cn(
-        "prose break-words dark:prose-invert prose-p:leading-relaxed prose-pre:p-0",
+        "prose break-words dark:prose-invert prose-p:leading-relaxed prose-pre:p-0 scrollbar-thin",
       )}
       remarkPlugins={[remarkGfm, remarkMath]}
       rehypePlugins={[rehypeKatex]}
@@ -52,7 +54,8 @@ const MarkdownWithHighlight = ({
           format.image({ node, className, children, src, alt, ...props }),
       }}
     >
-      {markdownText}
+      {/* {markdownText} */}
+      {testMarkdown}
     </MemoizedReactMarkdown>
   );
 };

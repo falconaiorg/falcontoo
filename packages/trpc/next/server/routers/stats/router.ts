@@ -8,19 +8,6 @@ import {
   updateUserStats,
 } from "./update-reading-session";
 
-const ZCreateReadingSession = z.object({
-  activeTime: z.number(),
-  idleTime: z.number(),
-  totalTime: z.number(),
-});
-
-const ZUpdateReadingSession = z.object({
-  activeTime: z.number(),
-  idleTime: z.number(),
-  totalTime: z.number(),
-  readingSessionId: z.string(),
-});
-
 export const statsRouter = router({
   createReadingSession: authenticatedProcedure.mutation(
     async ({ ctx, input }) => {
@@ -31,7 +18,7 @@ export const statsRouter = router({
           data: {
             userId: ctx.user.id,
           },
-        }),
+        })
       );
       if (error) {
         throw new TRPCError({
@@ -41,7 +28,7 @@ export const statsRouter = router({
       }
       const readingSessionId = session.id;
       return { readingSessionId };
-    },
+    }
   ),
   getSessionHistory: authenticatedProcedure.query(async ({ ctx }) => {
     const [error, sessions] = await to(
@@ -65,7 +52,7 @@ export const statsRouter = router({
             take: 5,
           },
         },
-      }),
+      })
     );
     if (error) {
       throw new TRPCError({
@@ -85,7 +72,7 @@ export const statsRouter = router({
           date: "desc",
         },
         take: 7,
-      }),
+      })
     );
     if (error) {
       throw new TRPCError({
@@ -101,7 +88,7 @@ export const statsRouter = router({
         where: {
           userId: ctx.user.id,
         },
-      }),
+      })
     );
     if (error) {
       throw new TRPCError({

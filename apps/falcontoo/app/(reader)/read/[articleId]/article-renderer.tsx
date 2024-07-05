@@ -12,6 +12,8 @@ import { ReadingProgress } from "./reading-progress";
 import { Link } from "next-view-transitions";
 import { Timer } from "./timer";
 import { ArticleWithContent } from "@falcon/lib/server/next/article";
+import { MarkdownWithHighlightNew } from "../../components/markdown/md-with-highlight";
+import { Styler } from "./theme/styler";
 const searchWords = [
   "This is a sample markdown text. The words 'sample' and 'markdown'",
 ];
@@ -35,7 +37,12 @@ export function ArticleRenderer({ article }: { article: ArticleWithContent }) {
         </CardDescription>
       </CardHeader>
       <CardContent className="p-2">
-        <MarkdownWithHighlight
+        {/* <MarkdownWithHighlight
+          markdownText={article.content.markdown}
+          searchWords={searchWords}
+        /> */}
+      
+        <MarkdownWithHighlightNew
           markdownText={article.content.markdown}
           searchWords={searchWords}
         />
