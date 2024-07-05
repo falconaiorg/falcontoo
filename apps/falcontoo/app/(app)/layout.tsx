@@ -10,6 +10,7 @@ export default function AppLayout({
       attribute="class"
       defaultTheme="dark"
       disableTransitionOnChange
+      forcedTheme="dark"
     >
       {children}
     </ThemeProvider>

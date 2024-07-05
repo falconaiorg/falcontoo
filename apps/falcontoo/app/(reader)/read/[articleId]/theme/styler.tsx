@@ -26,6 +26,7 @@ import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { AdjustmentsIcon } from "@/components/icons";
 
 export const Styler = ({ className }: { className?: string }) => {
+  console.log("Styler");
   return (
     <Popover>
       <PopoverTrigger asChild className={className}>

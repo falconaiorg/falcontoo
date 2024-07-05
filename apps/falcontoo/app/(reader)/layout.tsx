@@ -1,17 +1,10 @@
 import { ThemeProvider } from "next-themes";
+import { ReaderThemeProvider } from "./reader-theme-provider";
 
 export default function ReaderLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <ThemeProvider
-      attribute="class"
-      defaultTheme="light"
-      disableTransitionOnChange
-    >
-      {children}
-    </ThemeProvider>
-  );
+  return <ReaderThemeProvider>{children}</ReaderThemeProvider>;
 }
