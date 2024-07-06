@@ -46,7 +46,7 @@ export function ArticleRenderer({ article }: { article: ArticleWithContent }) {
           markdownText={article.content.markdown}
           searchWords={searchWords}
         />
-        <AnnotationDrawer />
+        {/* <AnnotationDrawer /> */}
       </CardContent>
       <CardFooter className="flex items-center justify-center">
         <ReadingProgress article={article} />
