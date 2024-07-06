@@ -1,7 +1,12 @@
 "use client";
 import { useState, useEffect } from "react";
 import UAParser from "ua-parser-js";
-
+// Extend the Navigator interface
+declare global {
+  interface Navigator {
+    standalone?: boolean;
+  }
+}
 export const useUserAgent = () => {
   const [userAgentInfo, setUserAgentInfo] = useState<UAParser.IResult | null>(
     null,
@@ -19,13 +24,14 @@ export const useUserAgent = () => {
       setIsChrome(true);
     }
 
-    // Check if the app is running as a PWA
-    const isStandalone =
-      window.matchMedia("(display-mode: standalone)").matches ||
-      (window.navigator as any).standalone;
-    setIsPWA(isStandalone);
+    // Determine if the app is running as a PWA
+    let displayMode = "browser";
+    const mqStandAlone = "(display-mode: standalone)";
+    if (navigator.standalone || window.matchMedia(mqStandAlone).matches) {
+      displayMode = "standalone";
+    }
+    setIsPWA(displayMode === "standalone");
   }, []);
 
   return { userAgentInfo, isChrome, isPWA };
 };
-
