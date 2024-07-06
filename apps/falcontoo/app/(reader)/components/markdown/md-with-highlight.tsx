@@ -69,9 +69,9 @@ export const MarkdownWithHighlightNew = ({
           format.code({ node, className, children, ...props }),
       }}
     >
-      {/* {markdownText} */}
+      {markdownText}
 
-      {"new markdown text \n\n " + testMarkdown}
+      {/* {"new markdown text \n\n " + testMarkdown} */}
     </MemoizedReactMarkdown>
   );
 };
