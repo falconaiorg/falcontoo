@@ -139,19 +139,23 @@ const SectionBadge: React.FC<{ badge: Badge }> = ({ badge }) => {
     <div
       className={cn(
         "flex w-full items-center justify-between p-1 pr-4",
-        badge.type === "positive"
-          ? "bg-emerald-800"
-          : badge.type === "negative"
-            ? "bg-red-800"
-            : badge.type === "neutral" && isObservation
-              ? "bg-transparent"
-              : "bg-amber-800",
-        "text-xs font-semibold text-white",
+        "border-b text-xs font-semibold text-secondary",
       )}
     >
-      <div>{badge.text}</div>
+      <div className="text-primary">{badge.text}</div>
       {!isObservation && (
-        <div className="flex items-center space-x-2">
+        <div
+          className={cn(
+            "flex items-center space-x-2",
+            badge.type === "positive"
+              ? "text-emerald-700"
+              : badge.type === "negative"
+                ? "text-red-700"
+                : badge.type === "neutral" && isObservation
+                  ? "text-transparent"
+                  : "text-amber-700",
+          )}
+        >
           {testResult.icon}
           <div>{testResult.result}</div>
         </div>
@@ -162,7 +166,7 @@ const SectionBadge: React.FC<{ badge: Badge }> = ({ badge }) => {
 const ClickbaitSection: React.FC<SectionProps> = ({ analysis, badge }) => (
   <section className={cn("flex flex-col space-y-2", fonts.serif.lora)}>
     <SectionBadge badge={badge} />
-    <p className="text-xs text-gray-300">{analysis.clickbait.comments}</p>
+    <p className="text-xs">{analysis.clickbait.comments}</p>
   </section>
 );
 
@@ -179,35 +183,27 @@ const ExpertiseSection: React.FC<SectionProps> = ({ analysis, badge }) => (
         author.
       </div>
     </Badge>
-    <p className="text-xs text-gray-300">
-      {analysis.expertiseMismatch.comments}
-    </p>
-    <p className="text-xs text-gray-300">
-      {analysis.expertiseMismatch.authorName}
-    </p>
+    <p className="text-xs">{analysis.expertiseMismatch.comments}</p>
+    <p className="text-xs">{analysis.expertiseMismatch.authorName}</p>
     <div className="flex flex-col space-y-2">
       <div className="flex items-center space-x-2">
-        <h2 className="text-xs text-gray-400">Content Domain:</h2>
+        <h2 className="text-xs">Content Domain:</h2>
         <div className="flex space-x-1">
           {analysis.domain.map((domain) => (
-            <Badge
-              key={domain}
-              variant="outline"
-              className="text-xs font-thin text-gray-400"
-            >
+            <Badge key={domain} variant="outline" className="text-xs font-thin">
               {domain}
             </Badge>
           ))}
         </div>
       </div>
       <div className="flex items-center space-x-2">
-        <h2 className="text-xs text-gray-400">Author Experience:</h2>
+        <h2 className="text-xs">Author Experience:</h2>
         <div className="flex space-x-1">
           {analysis.expertiseMismatch.authorExperience.map((experience) => (
             <Badge
               key={experience}
               variant="outline"
-              className="text-xs font-thin text-gray-400"
+              className="text-xs font-thin"
             >
               {experience}
             </Badge>
@@ -224,9 +220,7 @@ const LogicalFallaciesSection: React.FC<SectionProps> = ({
 }) => (
   <section className={cn("flex flex-col space-y-2", fonts.serif.lora)}>
     <SectionBadge badge={badge} />
-    <p className="text-xs text-gray-300">
-      {analysis.logicalFallacies.comments}
-    </p>
+    <p className="text-xs">{analysis.logicalFallacies.comments}</p>
   </section>
 );
 
@@ -235,16 +229,12 @@ const BiasSection: React.FC<SectionProps> = ({ analysis, badge }) => (
     <SectionBadge badge={badge} />
     <div className="flex flex-col space-y-1">
       <div className="flex items-center space-x-2">
-        <h2 className="text-xs text-gray-400">Political Bias:</h2>
-        <div className="text-xs text-gray-300">
-          {analysis.bias["political-bias"]}
-        </div>
+        <h2 className="text-xs">Political Bias:</h2>
+        <div className="text-xs">{analysis.bias["political-bias"]}</div>
       </div>
       <div className="flex items-center space-x-2">
-        <h2 className="text-xs text-gray-400">Sensationalism:</h2>
-        <div className="text-xs text-gray-300">
-          {analysis.bias.sensationalism}
-        </div>
+        <h2 className="text-xs">Sensationalism:</h2>
+        <div className="text-xs">{analysis.bias.sensationalism}</div>
       </div>
     </div>
   </section>
@@ -253,23 +243,21 @@ const BiasSection: React.FC<SectionProps> = ({ analysis, badge }) => (
 const NewsSection: React.FC<SectionProps> = ({ badge, analysis }) => (
   <section className={cn("flex flex-col space-y-2", fonts.serif.lora)}>
     <SectionBadge badge={badge} />
-    <p className="text-xs text-gray-300">This is a news article.</p>
+    <p className="text-xs">This is a news article.</p>
   </section>
 );
 
 const Opinion: React.FC<SectionProps> = ({ badge, analysis }) => (
   <section className={cn("flex flex-col space-y-2", fonts.serif.lora)}>
     <SectionBadge badge={badge} />
-    <p className="pl-2 text-xs text-gray-300">{analysis.opinion.comments}</p>
+    <p className="pl-2 text-xs">{analysis.opinion.comments}</p>
   </section>
 );
 
 const ContentMarketing: React.FC<SectionProps> = ({ badge, analysis }) => (
   <section className={cn("flex flex-col space-y-2", fonts.serif.lora)}>
     <SectionBadge badge={badge} />
-    <p className="pl-2 text-xs text-gray-300">
-      {analysis.contentMarketing.comments}
-    </p>
+    <p className="pl-2 text-xs">{analysis.contentMarketing.comments}</p>
   </section>
 );
 
@@ -278,11 +266,7 @@ const ContentDomain: React.FC<SectionProps> = ({ badge, analysis }) => (
     <SectionBadge badge={badge} />
     <div className="flex space-x-1">
       {analysis.domain.map((domain) => (
-        <Badge
-          key={domain}
-          variant="outline"
-          className="text-xs font-thin text-gray-400"
-        >
+        <Badge key={domain} variant="outline" className="text-xs font-thin">
           {domain}
         </Badge>
       ))}
@@ -303,7 +287,7 @@ export function ArticleCredibility({
   return (
     <div className="flex w-full flex-col space-y-4 p-1 text-muted-foreground">
       {/* <HeroSection badges={topBadges} /> */}
-      
+
       <ClickbaitSection analysis={analysis} badge={sections.clickbait} />
       {analysis.expertiseMismatch.authorDetected && (
         <ExpertiseSection analysis={analysis} badge={sections.expertise} />
@@ -319,7 +303,8 @@ export function ArticleCredibility({
           badge={sections.contentMarketing}
         />
       )}
-      <h1 className="">Observations</h1>
+      <Separator className="bg-primary" />
+      <h1 className="font-serif font-bold text-primary">Observations</h1>
       <ContentDomain analysis={analysis} badge={sections.domain} />
 
       {analysis.news.isNews && (
