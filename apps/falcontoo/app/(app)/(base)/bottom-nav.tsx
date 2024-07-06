@@ -14,7 +14,7 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { vibrate } from "@falcon/lib/vibrate";
 import { Link } from "next-view-transitions";
-import { joyrideSteps } from "./home/joyride/steps";
+import { joyrideSteps } from "./home/welcome/steps";
 
 type NavbarSegments = "home" | "notes" | "profile" | "settings" | "stats";
 

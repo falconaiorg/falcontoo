@@ -5,8 +5,9 @@ import { fonts } from "@falcon/lib/fonts";
 const { crimsonPro, lora } = fonts.serif;
 import { cn } from "@/lib/utils";
 import Image from "next/image";
-import useUserAgent from "./use-user-agent";
+import useUserAgent from "../use-user-agent";
 import { motion } from "framer-motion";
+import { SaveArticles } from "./save-articles";
 
 export const WelcomeScreen = ({
   fullName,
@@ -96,40 +97,7 @@ export const WelcomeScreen = ({
             <motion.li variants={itemVariants}>Click Install App</motion.li>
           </motion.ol>
         </motion.section>
-        <motion.section
-          className="rounded-lg bg-slate-900 p-6 shadow-lg"
-          variants={itemVariants}
-        >
-          <h2
-            className={cn(
-              "mb-4 text-2xl font-semibold text-cyan-400",
-              crimsonPro,
-            )}
-          >
-            Save your first article
-          </h2>
-          <motion.ol
-            className="list-inside list-decimal space-y-6"
-            variants={containerVariants}
-          >
-            <motion.li variants={itemVariants}>
-              Open article in any browser
-            </motion.li>
-            <motion.li variants={itemVariants}>
-              Click on the share button
-            </motion.li>
-            <motion.li variants={itemVariants}>
-              <p className="mb-2">{`Select "Lex" from the list of apps`}</p>
-              <Image
-                src="/welcome/share.webp"
-                width={250}
-                height={250}
-                alt="Share menu"
-                className="rounded-lg border border-cyan-600 shadow-md"
-              />
-            </motion.li>
-          </motion.ol>
-        </motion.section>
+        <SaveArticles />
       </motion.div>
     </motion.section>
   );

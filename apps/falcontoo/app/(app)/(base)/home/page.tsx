@@ -8,7 +8,7 @@ import { WeeklyActivity } from "./weekly-activity";
 import { Skeleton } from "@/components/ui/skeleton";
 import { UserStats } from "./user-stats";
 import { StartSprint } from "./start-sprint";
-import { WelcomeScreen } from "./welcome-screen";
+import { WelcomeScreen } from "./welcome/welcome-screen";
 
 export default async function HomePage() {
   const session = await auth();
