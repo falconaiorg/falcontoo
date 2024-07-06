@@ -188,4 +188,7 @@ export const articleRouter = router({
       }
       return article;
     }),
+  hasArticles: authenticatedProcedure.query(async ({ ctx }) => {
+    return await server.article.checkIfUserHasArticles(ctx.user.id);
+  }),
 });

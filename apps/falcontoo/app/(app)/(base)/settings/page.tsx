@@ -5,15 +5,9 @@ import Link from "next/link";
 import { SignOut } from "@/components/auth/sign-out";
 import { roadmap } from "@/app/roadmap";
 import { CONSTANTS } from "@falcon/lib/constants";
+import { getFirstName } from "@falcon/lib/utils";
 
 const { crimsonPro, lora } = fonts.serif;
-
-const getFirstName = (name: string | null) => {
-  if (!name) {
-    return "";
-  }
-  return name.split(" ")[0];
-};
 
 const email = "www.prashant@falconai.in";
 

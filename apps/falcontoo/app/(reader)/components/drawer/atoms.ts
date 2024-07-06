@@ -8,3 +8,5 @@ export const backBarAtom = atom({
 });
 
 export const readingSessionIdAtom = atom<string | null>(null);
+
+export const startJoyrideAtom = atom<boolean>(false);

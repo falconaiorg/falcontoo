@@ -14,22 +14,31 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { vibrate } from "@falcon/lib/vibrate";
 import { Link } from "next-view-transitions";
+import { joyrideSteps } from "./home/joyride/steps";
 
 type NavbarSegments = "home" | "notes" | "profile" | "settings" | "stats";
 
 const bottomNavConfig = [
-  { href: url.home, Icon: AIMagicIcon, text: "Home", segment: "home" },
+  {
+    href: url.home,
+    Icon: AIMagicIcon,
+    text: "Home",
+    segment: "home",
+    joyRideClass: "joyride-home",
+  },
   {
     href: url.library,
     Icon: BookmarkIcon,
     text: "Library",
     segment: "library",
+    joyRideClass: "joyride-library",
   },
   {
     href: url.settings,
     Icon: SettingsCogIcon,
     text: "Settings",
     segment: "settings",
+    joyRideClass: "joyride-settings",
   },
   // {
   //   href: url.stats,
@@ -53,7 +62,7 @@ export const BottomNav = () => {
   return (
     <div className="fixed bottom-0 z-40 w-full bg-background shadow-md">
       <motion.div layout className="flex items-end justify-around py-2">
-        {bottomNavConfig.map(({ href, Icon, text, segment }) => {
+        {bottomNavConfig.map(({ href, Icon, text, segment, joyRideClass }) => {
           const isSelected = layoutSegment === segment;
           return (
             <Link
@@ -66,6 +75,7 @@ export const BottomNav = () => {
                   "text-primary": isSelected,
                   "text-slate-600": !isSelected,
                 },
+                joyRideClass,
               )}
             >
               <div className="flex flex-col items-center space-y-0.5">

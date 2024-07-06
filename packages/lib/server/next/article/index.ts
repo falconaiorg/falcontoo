@@ -3,3 +3,4 @@ export * from "./get-article";
 export * from "./delete-article";
 export * from "./get-recommendations";
 export * from "./snooze-article";
+export * from "./has-articles";
