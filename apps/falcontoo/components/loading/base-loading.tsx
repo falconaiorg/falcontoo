@@ -4,7 +4,8 @@ import { Skeleton } from "../ui/skeleton";
 export const LexLoading = () => {
   return (
     <div className="h-screen">
-      <Skeleton className="h-full w-full bg-slate-900" />
+      <div className="animate-breath border-t-2 border-cyan-500"></div>
+      <Skeleton className="h-full w-full bg-slate-800" />
     </div>
     // <div className="relative h-full w-full">
     //   <span className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 transform bg-gradient-to-r from-slate-100 to-slate-200 bg-clip-text font-serif text-5xl font-semibold text-transparent brightness-50">
