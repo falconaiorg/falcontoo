@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import Link from "next/link";
 import { url } from "@/urls";
 import { ArticleCard } from "./article-card";
@@ -9,7 +8,6 @@ import { useState } from "react";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { cn } from "@/lib/utils";
 import { fonts } from "@falcon/lib/fonts";
-import { Badge } from "@/components/ui/badge";
 
 export const ArticleList = ({
   articles,

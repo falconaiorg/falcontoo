@@ -16,9 +16,12 @@ import { api } from "@falcon/trpc/next/client";
 import { format } from "date-fns";
 import Link from "next/link";
 import { url } from "@/urls";
+import { motion } from "framer-motion";
+import { usePrefetchArticle } from "@/hooks/query/usePrefetchArticle";
 
 export const ReadingHistory = () => {
   const [sessions] = api.stats.getSessionHistory.useSuspenseQuery();
+  const { prefetchArticle } = usePrefetchArticle();
 
   return (
     <Card>
@@ -43,14 +46,22 @@ export const ReadingHistory = () => {
                 </div>
               </AccordionTrigger>
               <AccordionContent>
-                {session.sessionArticles.map((article, articleIndex) => (
-                  <Link
-                    href={url.reader.read({ articleId: article.article.id })}
+                {session.sessionArticles.map((articleData, articleIndex) => (
+                  <motion.div
                     key={articleIndex}
-                    className="underline decoration-cyan-400 underline-offset-2"
+                    onViewportEnter={() =>
+                      prefetchArticle({ articleId: articleData.article.id })
+                    }
                   >
-                    {article.article.content.title}
-                  </Link>
+                    <Link
+                      href={url.reader.read({
+                        articleId: articleData.article.id,
+                      })}
+                      className="underline decoration-cyan-400 underline-offset-2"
+                    >
+                      {articleData.article.content.title}
+                    </Link>
+                  </motion.div>
                 ))}
               </AccordionContent>
             </AccordionItem>

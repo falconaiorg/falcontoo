@@ -3,7 +3,6 @@ import { ArticleContext } from "./context/context";
 import { Article } from "./article";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
-import { ArticleSkeleton } from "./article-skeleton";
 import { HomeIcon } from "@/components/icons";
 import { FloatingNav } from "@/components/ui/acc/floating-navbar";
 import { Styler } from "./theme/styler";
@@ -35,7 +34,7 @@ export default async function ReadPage({
   return (
     <div className="relative flex flex-col space-y-3 px-1.5 py-4">
       {/* <FilterButton /> */}
-   
+
       <Suspense fallback={<ContextSkeleton />}>
         <ArticleContext articleId={articleId} />
       </Suspense>
@@ -58,3 +57,29 @@ function ContextSkeleton() {
     </Card>
   );
 }
+
+const ArticleSkeleton = () => {
+  const array = [...Array(5).keys()];
+  return (
+    <Card className="h-screen">
+      <CardHeader>
+        <Skeleton className="h-72" />
+      </CardHeader>
+      <CardContent className="flex flex-col space-y-2">
+        {array.map((_, index) => (
+          <Skeleton key={index} className="h-3" />
+        ))}
+      </CardContent>
+      <CardContent className="flex flex-col space-y-2">
+        {array.map((_, index) => (
+          <Skeleton key={index} className="h-3" />
+        ))}
+      </CardContent>
+      <CardContent className="flex flex-col space-y-2">
+        {array.map((_, index) => (
+          <Skeleton key={index} className="h-3" />
+        ))}
+      </CardContent>
+    </Card>
+  );
+};

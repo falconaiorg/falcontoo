@@ -10,8 +10,6 @@
 - I forget what I have read. I don't know how to retain it.
 - I don't know how to learn deeply while I am learning.
 
-
-
 ## Lex Features
 - Readers
   - Article Reader

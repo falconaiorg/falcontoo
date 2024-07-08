@@ -1,15 +1,15 @@
+"use client";
 import { getServerComponentSession } from "@falcon/lib/next-auth";
+import { api } from "@falcon/trpc/next/client";
 import { server } from "@falcon/lib/server/next";
 import { ArticleRenderer } from "./article-renderer";
 const searchWords = [
   "This is a sample markdown text. The words 'sample' and 'markdown'",
 ];
-export async function Article({ articleId }: { articleId: string }) {
-  const { user } = await getServerComponentSession();
-  const article = await server.article.getArticlebyArticleId({
+export function Article({ articleId }: { articleId: string }) {
+  const [article, {}] = api.articles.getArticle.useSuspenseQuery({
     articleId,
-    userId: user.id,
   });
+
   return <ArticleRenderer article={article} />;
-  
 }

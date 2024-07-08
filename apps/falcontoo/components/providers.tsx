@@ -2,11 +2,9 @@
 import { Provider } from "jotai";
 import { SessionProvider } from "next-auth/react";
 import { NextIntlClientProvider } from "next-intl";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import TRPCProvider from "@falcon/trpc/next/client/provider";
 import { CookieTokens } from "@/app/layout";
-
-const queryClient = new QueryClient();
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 export default function Providers({
   children,
@@ -22,9 +20,8 @@ export default function Providers({
       <TRPCProvider headers={headers}>
         <Provider>
           <NextIntlClientProvider locale="en">
-            <QueryClientProvider client={queryClient}>
-              {children}
-            </QueryClientProvider>
+            {children}
+            <ReactQueryDevtools />
           </NextIntlClientProvider>
         </Provider>
       </TRPCProvider>

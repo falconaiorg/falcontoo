@@ -10,6 +10,7 @@ import { SaveArticles } from "../home/welcome/save-articles";
 export default async function HomePage() {
   const { user } = await getServerComponentSession();
   const articles = await server.article.getArticlesbyUserId({
+    //TODO Fix spelling b -> B
     userId: user.id,
   });
   const noArticles = articles.length === 0;

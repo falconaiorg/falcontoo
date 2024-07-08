@@ -2,16 +2,26 @@
 import { useEffect } from "react";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-
 import { Button } from "@/components/ui/acc/moving-border-btn";
 import { TextGenerateEffect } from "@/components/ui/acc/text-generate-effect";
 import { url } from "@/urls";
-import Link from "next/link";
-import React from "react";
+import { motion } from "framer-motion";
 
 const words = "Read.  Learn.  Repeat.";
 
 export default function LexHome() {
+  const handleSignIn = async (provider: string, callbackUrl: string) => {
+    console.log("Sign In");
+    try {
+      let signInCallback = callbackUrl;
+      await signIn(provider, {
+        callbackUrl: signInCallback,
+      });
+    } catch (error) {
+      console.error("SignIn Error", error);
+    }
+  };
+
   const router = useRouter();
   const { data: session, status: sessionStatus } = useSession();
 
@@ -25,9 +35,15 @@ export default function LexHome() {
         Lex
       </span>
       <TextGenerateEffect words={words} className="text-center" />
-      <Link href={url.auth.signin} className="fixed bottom-16">
-        <Button>{sessionStatus === "loading" ? "Staring..." : "Start"}</Button>
-      </Link>
+      <motion.div
+        className="fixed bottom-16"
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+      >
+        <Button onClick={() => handleSignIn("google", "/home")}>
+          {sessionStatus === "loading" ? "Staring..." : "Start"}
+        </Button>
+      </motion.div>
     </span>
   );
 }

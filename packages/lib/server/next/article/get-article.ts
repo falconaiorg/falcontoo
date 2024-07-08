@@ -1,7 +1,7 @@
 import { TRPCError } from "@trpc/server";
 import { checkArticleAccess } from "./access";
 
-export const getArticlebyArticleId = async ({
+export const getArticleByArticleId = async ({
   articleId,
   userId,
 }: {
@@ -23,5 +23,5 @@ export const getArticlebyArticleId = async ({
 };
 
 export type ArticleWithContent = Awaited<
-  ReturnType<typeof getArticlebyArticleId>
+  ReturnType<typeof getArticleByArticleId>
 >;

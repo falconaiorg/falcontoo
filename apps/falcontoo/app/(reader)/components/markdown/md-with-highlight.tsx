@@ -23,7 +23,6 @@ export const MarkdownWithHighlightNew = ({
   markdownText: string;
   searchWords?: string[];
 }) => {
-  console.log("markdownText", markdownText);
   const [hasFilter] = useAtom(filterAtom);
   const hasHighlight = !!(hasFilter && searchWords && searchWords.length > 0);
   const [lineHeight] = useAtom(lineHeightAtom);
@@ -31,7 +30,6 @@ export const MarkdownWithHighlightNew = ({
   const [alignment] = useAtom(alignmentAtom);
   const [margin] = useAtom(marginAtom);
   const [font] = useAtom(fontAtom);
-  console.log("lineHeight", lineHeight);
 
   return (
     <MemoizedReactMarkdown

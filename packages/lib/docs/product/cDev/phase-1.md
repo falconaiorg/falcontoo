@@ -51,7 +51,7 @@
 
 ### About
 
-- Enterepreneur
+- Entrepreneur
 - Reads newsletters
 - Works in hospitality
 
@@ -76,7 +76,7 @@
 
 - I have phases in reading. Right now I am in the strategy phase.
 - I have a set of domains I keep bouncing between - politics, business, economics
-- Show me in-context connection betweeen different articles
+- Show me in-context connection between different articles
 
 ---
 

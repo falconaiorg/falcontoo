@@ -12,7 +12,12 @@ import { saveArticle } from "@falcon/lib/server/next/article/save-article";
 import { authenticatedProcedure, router, t } from "../../trpc";
 import { revalidatePath, revalidateTag } from "next/cache";
 import { dracoAxios, getHeaders } from "@falcon/lib/axios-next";
-import { ArticleWithContent } from "@falcon/lib/server/next/article";
+import { ai } from "@falcon/lib/ai";
+
+import {
+  ArticleWithContent,
+  getArticleByArticleId,
+} from "@falcon/lib/server/next/article";
 import { ArticleContent } from "@falcon/lib/parser/types";
 
 const ArticleIdSchema = z.object({
@@ -57,7 +62,23 @@ export const articleRouter = router({
       });
     }
   }),
+  getArticle: authenticatedProcedure
+    .input(ArticleIdSchema)
+    .query(async ({ ctx, input }) => {
+      const userId = ctx.user.id;
+      return await server.article.getArticleByArticleId({
+        articleId: input.articleId,
+        userId,
+      });
+    }),
 
+  getArticleAnalysis: authenticatedProcedure
+    .input(ArticleIdSchema)
+    .query(async ({ ctx, input }) => {
+      return await ai.analysis.getArticleAnalysis({
+        articleId: input.articleId,
+      });
+    }),
   doesArticleExist: authenticatedProcedure
     .input(ZDoesArticleExist)
     .query(async ({ input, ctx }) => {
