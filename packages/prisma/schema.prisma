@@ -214,8 +214,10 @@ model Article {
     sprintArticles  SprintArticle[]
 
     // Stats
-    readingProgress Float @default(0)
-    rating          Int   @default(0)
+    readingProgress Float   @default(0)
+    rating          Int     @default(0)
+    isPublic        Boolean @default(false)
+    publicComment   String?
 }
 
 // Check if the context is stale, if so, regenerate it
