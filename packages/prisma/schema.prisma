@@ -106,6 +106,24 @@ model User {
     sprints         Sprint[]
     settings        Settings?
     about           About?
+
+    // public profile
+    PublicProfile PublicProfile?
+    books         Book[]
+}
+
+model PublicProfile {
+    id          String   @id @default(cuid())
+    userId      String   @unique
+    user        User     @relation(fields: [userId], references: [id])
+    username    String   @unique
+    bio         String?
+    socialLinks Json?
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+    books       Book[]
+
+    @@index([username])
 }
 
 model About {
@@ -154,6 +172,7 @@ enum Theme {
     DARK
 }
 
+// ! Stats Models
 model UserStats {
     id                 String    @id @default(cuid())
     userId             String    @unique
@@ -177,6 +196,7 @@ model DailyUserStats {
     @@unique([date, userId])
 }
 
+// ! Article Models
 model Article {
     id              String            @id @default(cuid())
     createdAt       DateTime          @default(now())
@@ -297,6 +317,39 @@ model SessionArticles {
     @@unique([readingSessionId, articleId])
 }
 
+// ! Book Models
+model Book {
+    id              String         @id @default(cuid())
+    comment         String?
+    user            User           @relation(fields: [userId], references: [id])
+    userId          String
+    createdAt       DateTime       @default(now())
+    rating          Int?
+    status          ReadingStatus  @default(READING)
+    tags            String[]
+    metadata        BookMetadata?  @relation(fields: [medtadataId], references: [id])
+    medtadataId     String?
+    PublicProfile   PublicProfile? @relation(fields: [publicProfileId], references: [id])
+    publicProfileId String?
+}
+
+enum ReadingStatus {
+    READING
+    READ
+    TO_READ
+}
+
+model BookMetadata {
+    id            String   @id @default(cuid())
+    googleBooksId String   @unique
+    title         String
+    description   String?
+    authors       String[]
+    thumbnail     String?
+    userBooks     Book[]
+}
+
+// ! Annotation Models
 // Layers
 model Layer {
     id               String            @id @default(cuid())
@@ -350,6 +403,7 @@ model WorkSession {
     chat      Chat?
 }
 
+// Chat Models
 model Chat {
     id            String       @id @default(uuid())
     title         String
@@ -363,6 +417,7 @@ model Chat {
     userId        String?
 }
 
+// File Models
 model File {
     id          String        @id @default(cuid())
     createdAt   DateTime      @default(now())
