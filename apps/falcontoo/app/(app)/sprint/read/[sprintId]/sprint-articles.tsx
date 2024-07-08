@@ -1,6 +1,5 @@
 "use client";
 import { ArticleRenderer } from "@/app/(reader)/read/[articleId]/article-renderer";
-import { ArticleSkeleton } from "@/app/(reader)/read/[articleId]/article-skeleton";
 import { Button } from "@/components/ui/button";
 import { ArticleWithContent } from "@falcon/lib/server/next/article";
 import autoAnimate from "@formkit/auto-animate";
@@ -9,13 +8,13 @@ import { Suspense, useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { CheckBadgeIcon } from "@/components/icons";
+import { ArticleSkeleton } from "@/app/(reader)/read/[articleId]/article-skeleton";
 export function SprintArticles({
   articles,
 }: {
   articles: ArticleWithContent[];
 }) {
   const parent = useRef(null);
-  
 
   useEffect(() => {
     parent.current && autoAnimate(parent.current);

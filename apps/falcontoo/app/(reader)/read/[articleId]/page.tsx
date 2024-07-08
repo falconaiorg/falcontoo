@@ -6,6 +6,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { HomeIcon } from "@/components/icons";
 import { FloatingNav } from "@/components/ui/acc/floating-navbar";
 import { Styler } from "./theme/styler";
+import { ArticleSkeleton } from "./article-skeleton";
 const dummyNavItems = [
   {
     name: "Home",
@@ -58,28 +59,4 @@ function ContextSkeleton() {
   );
 }
 
-const ArticleSkeleton = () => {
-  const array = [...Array(5).keys()];
-  return (
-    <Card className="h-screen">
-      <CardHeader>
-        <Skeleton className="h-72" />
-      </CardHeader>
-      <CardContent className="flex flex-col space-y-2">
-        {array.map((_, index) => (
-          <Skeleton key={index} className="h-3" />
-        ))}
-      </CardContent>
-      <CardContent className="flex flex-col space-y-2">
-        {array.map((_, index) => (
-          <Skeleton key={index} className="h-3" />
-        ))}
-      </CardContent>
-      <CardContent className="flex flex-col space-y-2">
-        {array.map((_, index) => (
-          <Skeleton key={index} className="h-3" />
-        ))}
-      </CardContent>
-    </Card>
-  );
-};
+
