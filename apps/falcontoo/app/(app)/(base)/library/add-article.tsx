@@ -108,17 +108,15 @@ export function AddArticle() {
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <AlertDialogHeader>
-              <AlertDialogTitle>Add to library</AlertDialogTitle>
-              {isCheckingExistence && <p>Checking if article exists...</p>}
-              {checkError && (
-                <p>Error checking article existence: {checkError.message}</p>
-              )}
-              {isCreationPending && (
-                <p className="animate-pulse">Creation takes upto 10 seconds</p>
-              )}
-              {creationError && (
-                <p>Error creating article: {creationError.message}</p>
-              )}
+              <AlertDialogTitle
+                className={cn({
+                  "animate-pulse": isCreationPending || isCheckingExistence,
+                })}
+              >
+                {isCreationPending || isCheckingExistence
+                  ? "Creation takes upto 10 seconds"
+                  : "Add to library"}
+              </AlertDialogTitle>
 
               <FormField
                 control={form.control}
