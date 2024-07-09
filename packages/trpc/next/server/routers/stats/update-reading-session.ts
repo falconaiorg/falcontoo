@@ -29,7 +29,7 @@ async function updateUserStats({
   //console.log("Updating user stats");
   try {
     await prisma.$transaction(async (tx) => {
-      await updateUserStatsTable(tx, userId, totalTime, now);
+      await updateUserStatsTable(tx, userId, totalTime, activeTime, now);
       await updateDailyUserStats(tx, userId, today, activeTime, totalTime);
       await updateReadingSession(
         tx,
@@ -38,7 +38,7 @@ async function updateUserStats({
         idleTime,
         totalTime,
         isCompleted,
-        now,
+        now
       );
       await updateSessionArticles(
         tx,
@@ -46,7 +46,7 @@ async function updateUserStats({
         articleId,
         activeTime,
         idleTime,
-        totalTime,
+        totalTime
       );
     });
     //console.log("User stats updated successfully");
@@ -60,7 +60,8 @@ async function updateUserStatsTable(
   tx: Prisma.TransactionClient,
   userId: string,
   totalTime: number,
-  now: Date,
+  activeTime: number,
+  now: Date
 ) {
   const userStats = await tx.userStats.findUnique({ where: { userId } });
   const lastUpdate = await getLastUpdateDate(tx, userId);
@@ -69,28 +70,30 @@ async function updateUserStatsTable(
   const currentStreak = calculateStreak(
     lastUpdate,
     today,
-    userStats?.currentStreak || 0,
+    userStats?.currentStreak || 0
   );
 
   await tx.userStats.upsert({
     where: { userId },
     create: {
       userId,
-      totalReadingTime: totalTime,
+      totalReadingTime: activeTime,
       currentStreak,
       longestStreak: currentStreak,
       bestReadingDay: now,
-      bestReadingDayTime: totalTime,
+      bestReadingDayTime: activeTime,
     },
     update: {
-      totalReadingTime: { increment: totalTime },
+      totalReadingTime: { increment: activeTime },
       currentStreak,
       longestStreak: Math.max(userStats?.longestStreak || 0, currentStreak),
       bestReadingDay:
-        userStats && totalTime > userStats.bestReadingDayTime ? now : undefined,
+        userStats && activeTime > userStats.bestReadingDayTime
+          ? now
+          : undefined,
       bestReadingDayTime: Math.max(
         userStats?.bestReadingDayTime || 0,
-        totalTime,
+        activeTime
       ),
     },
   });
@@ -98,7 +101,7 @@ async function updateUserStatsTable(
 
 async function getLastUpdateDate(
   tx: Prisma.TransactionClient,
-  userId: string,
+  userId: string
 ): Promise<Date> {
   const lastDailyStats = await tx.dailyUserStats.findFirst({
     where: { userId },
@@ -111,11 +114,11 @@ async function getLastUpdateDate(
 function calculateStreak(
   lastUpdate: Date,
   today: Date,
-  currentStreak: number,
+  currentStreak: number
 ): number {
   const oneDayMs = 24 * 60 * 60 * 1000;
   const diffDays = Math.round(
-    (today.getTime() - lastUpdate.getTime()) / oneDayMs,
+    (today.getTime() - lastUpdate.getTime()) / oneDayMs
   );
 
   if (diffDays === 0) return currentStreak; // Same day, streak unchanged
@@ -128,7 +131,7 @@ async function updateDailyUserStats(
   userId: string,
   today: Date,
   activeTime: number,
-  totalTime: number,
+  totalTime: number
 ) {
   // Ensure 'today' has no time component or is adjusted to the start of the day
   const dateOnly = new Date(today);
@@ -158,7 +161,7 @@ async function updateReadingSession(
   idleTime: number,
   totalTime: number,
   isCompleted: boolean,
-  now: Date,
+  now: Date
 ) {
   await tx.readingSession.update({
     where: { id: readingSessionId },
@@ -178,7 +181,7 @@ async function updateSessionArticles(
   articleId: string,
   activeTime: number,
   idleTime: number,
-  totalTime: number,
+  totalTime: number
 ) {
   await tx.sessionArticles.upsert({
     where: { readingSessionId_articleId: { readingSessionId, articleId } },

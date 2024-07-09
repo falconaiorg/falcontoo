@@ -120,4 +120,23 @@ export const statsRouter = router({
         });
       }
     }),
+  resetAllStats: authenticatedProcedure.mutation(async ({ ctx }) => {
+    await prisma.$transaction([
+      prisma.readingSession.deleteMany({
+        where: {
+          userId: ctx.user.id,
+        },
+      }),
+      prisma.userStats.delete({
+        where: {
+          userId: ctx.user.id,
+        },
+      }),
+      prisma.dailyUserStats.deleteMany({
+        where: {
+          userId: ctx.user.id,
+        },
+      }),
+    ]);
+  }),
 });
