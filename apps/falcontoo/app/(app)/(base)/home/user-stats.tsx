@@ -42,7 +42,7 @@ export const UserStats = () => {
             label="Longest Streak"
             value={`${userStats?.longestStreak} days`}
           />
-          <StatItem
+          {/* <StatItem
             label="Best Day"
             value={
               userStats?.bestReadingDay
@@ -53,7 +53,7 @@ export const UserStats = () => {
           <StatItem
             label="Best Day: Time"
             value={`${userStats?.bestReadingDayTime ? Math.round(userStats.bestReadingDayTime / 1000) : 0} mins`}
-          />
+          /> */}
         </div>
       </CardContent>
     </Card>

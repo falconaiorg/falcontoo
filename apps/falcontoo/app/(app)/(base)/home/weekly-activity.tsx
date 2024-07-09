@@ -67,7 +67,7 @@ export const WeeklyActivity = () => {
           className="mt-2 h-60"
           data={weeklyData}
           index="date"
-          categories={["Active Reading", "Reading"]}
+          categories={["Active Reading"]}
           yAxisWidth={40}
           showXAxis={false}
           showLegend={true}
