@@ -6,7 +6,10 @@ export const roadmap = {
     "Article Reflections Practice",
     "Import chrome bookmarks",
   ],
-  issues: ["Miscalculation of reading time", "Saving the article is slow"],
+  issues: [
+    "Miscalculation of reading time, and stats.",
+    "Saving the article is slow",
+  ],
 };
 
 export const updateLog = [

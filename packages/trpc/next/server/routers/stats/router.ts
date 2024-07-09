@@ -75,7 +75,7 @@ export const statsRouter = router({
           userId: ctx.user.id,
         },
         orderBy: {
-          date: "desc",
+          date: "asc",
         },
         take: 7,
       })

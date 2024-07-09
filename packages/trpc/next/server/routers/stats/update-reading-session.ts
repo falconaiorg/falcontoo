@@ -130,10 +130,14 @@ async function updateDailyUserStats(
   activeTime: number,
   totalTime: number,
 ) {
+  // Ensure 'today' has no time component or is adjusted to the start of the day
+  const dateOnly = new Date(today);
+  dateOnly.setHours(0, 0, 0, 0);
+
   await tx.dailyUserStats.upsert({
-    where: { date_userId: { date: today, userId } },
+    where: { date_userId: { date: dateOnly, userId } },
     create: {
-      date: today,
+      date: dateOnly,
       userId,
       totalTime,
       activeTime,
