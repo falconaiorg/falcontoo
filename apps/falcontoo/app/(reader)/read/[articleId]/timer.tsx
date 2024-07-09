@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useAtom } from "jotai";
 import { readingSessionIdAtom } from "../../components/drawer/atoms";
 import { api } from "@falcon/trpc/next/client";
+import { usePageVisibility } from "react-page-visibility";
 
 // Harmonic interval of 2 minutes
 const INTERVAL = 1000 * 60 * 1; // 2 minutes
@@ -22,6 +23,7 @@ export const Timer = ({
   articleId: string;
   userId: string;
 }) => {
+  const isVisible = usePageVisibility();
   const apiUtils = api.useUtils();
 
   const [readingSessionId, setReadingSessionId] = useAtom(readingSessionIdAtom);
@@ -75,7 +77,7 @@ export const Timer = ({
   }, [readingSessionId, createReadingSession, isCreatingSession]);
 
   const updateSession = async () => {
-    if (!readingSessionId || isIdle()) {
+    if (!readingSessionId || isIdle() || !isVisible) {
       return;
     }
     const activeTime = getActiveTime();
