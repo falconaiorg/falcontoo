@@ -107,10 +107,14 @@ export const articleRouter = router({
       });
 
       if (!userArticle) {
-        return false;
+        return {
+          article: null,
+        };
       }
 
-      return userArticle;
+      return {
+        article: userArticle,
+      };
     }),
   createArticle: authenticatedProcedure
     .input(ZAddOrUpdateArticle)

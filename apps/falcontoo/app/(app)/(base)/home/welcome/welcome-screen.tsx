@@ -8,6 +8,8 @@ import Image from "next/image";
 import { useUserAgent } from "../use-user-agent";
 import { motion } from "framer-motion";
 import { SaveArticles } from "./save-articles";
+import { url } from "@/urls";
+import Link from "next/link";
 
 export const WelcomeScreen = ({
   fullName,
@@ -16,7 +18,7 @@ export const WelcomeScreen = ({
 }) => {
   const firstName = !fullName ? null : getFirstName(fullName);
   const noFirstName = !firstName || firstName === "";
-  const { isChrome, userAgentInfo, isPWA } = useUserAgent();
+  const { isChrome, userAgentInfo, isPWA, isIOS } = useUserAgent();
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -103,6 +105,21 @@ export const WelcomeScreen = ({
           </motion.section>
         )}
         <SaveArticles />
+
+        {isIOS && (
+          <motion.section>
+            <h2 className={cn("mb-4 text-lg", crimsonPro)}>
+              Save your first article by clicking the + button on the top right
+              corner of the{" "}
+              <Link
+                href={url.library}
+                className="underline decoration-cyan-400"
+              >
+                library.
+              </Link>
+            </h2>
+          </motion.section>
+        )}
       </motion.div>
     </motion.section>
   );

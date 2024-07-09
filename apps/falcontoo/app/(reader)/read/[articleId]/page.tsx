@@ -7,6 +7,7 @@ import { HomeIcon } from "@/components/icons";
 import { FloatingNav } from "@/components/ui/acc/floating-navbar";
 import { Styler } from "./theme/styler";
 import { ArticleSkeleton } from "./article-skeleton";
+import { notFound } from "next/navigation";
 const dummyNavItems = [
   {
     name: "Home",
@@ -31,6 +32,7 @@ export default async function ReadPage({
 }) {
   const articleId = params.articleId;
   //console.log(articleId);
+  if (!articleId) notFound();
 
   return (
     <div className="relative flex flex-col space-y-3 px-1.5 py-4">
@@ -58,5 +60,3 @@ function ContextSkeleton() {
     </Card>
   );
 }
-
-

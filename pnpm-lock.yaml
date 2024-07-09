@@ -480,6 +480,9 @@ importers:
       ua-parser-js:
         specifier: ^1.0.38
         version: 1.0.38
+      unique-names-generator:
+        specifier: ^4.7.1
+        version: 4.7.1
       use-deep-compare-effect:
         specifier: ^1.8.1
         version: 1.8.1(react@18.3.1)
@@ -16369,6 +16372,11 @@ packages:
       is-plain-obj: 4.1.0
       trough: 2.2.0
       vfile: 6.0.1
+    dev: false
+
+  /unique-names-generator@4.7.1:
+    resolution: {integrity: sha512-lMx9dX+KRmG8sq6gulYYpKWZc9RlGsgBR6aoO8Qsm3qvkSJ+3rAymr+TnV8EDMrIrwuFJ4kruzMWM/OpYzPoow==}
+    engines: {node: '>=8'}
     dev: false
 
   /unique-string@2.0.0:

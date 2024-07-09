@@ -14,6 +14,7 @@ export const useUserAgent = () => {
     null,
   );
   const [isChrome, setIsChrome] = useState<boolean>(false);
+  const [isIOS, setIsIOS] = useState<boolean>(false);
   const [isPWA, setIsPWA] = useState<boolean>(false);
 
   useEffect(() => {
@@ -24,6 +25,11 @@ export const useUserAgent = () => {
     // Check if the browser is Chrome by Google
     if (result.browser.name === "Chrome") {
       setIsChrome(true);
+    }
+
+    // Check if the OS is iOS
+    if (result.os.name === "iOS") {
+      setIsIOS(true);
     }
 
     // Function to check if the app is running as a PWA
@@ -57,5 +63,5 @@ export const useUserAgent = () => {
     return () => mediaQuery.removeEventListener("change", handleChange);
   }, []);
 
-  return { userAgentInfo, isChrome, isPWA };
+  return { userAgentInfo, isChrome, isPWA, isIOS };
 };

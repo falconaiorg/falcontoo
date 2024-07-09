@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { fonts } from "@falcon/lib/fonts";
+import { useUserAgent } from "../use-user-agent";
 const { crimsonPro, lora } = fonts.serif;
 
 const containerVariants = {
@@ -28,6 +29,12 @@ const itemVariants = {
 };
 
 export const SaveArticles = () => {
+  const { isIOS } = useUserAgent();
+
+  if (isIOS) {
+    return null;
+  }
+
   return (
     <motion.section
       className="rounded-lg bg-slate-900 p-6 shadow-lg"

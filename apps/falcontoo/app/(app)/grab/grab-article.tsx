@@ -90,7 +90,7 @@ export function GrabArticle({ url }: { url: string }) {
 
   return (
     <div>
-      {article && (
+      {article?.article && (
         <AlertDialog open={!!article}>
           <AlertDialogContent className="w-11/12">
             <AlertDialogHeader>
@@ -102,7 +102,9 @@ export function GrabArticle({ url }: { url: string }) {
                     : "Exists in your library"}
               </AlertDialogTitle>
               <AlertDialogDescription>
-                <span className="line-clamp-2">{article.content.title}</span>
+                <span className="line-clamp-2">
+                  {article.article.content.title}
+                </span>
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter className="flex flex-row justify-center space-x-2">
@@ -117,7 +119,7 @@ export function GrabArticle({ url }: { url: string }) {
                 href={
                   isCreationPending
                     ? ""
-                    : urlRouter.reader.read({ articleId: article?.id })
+                    : urlRouter.reader.read({ articleId: article.article?.id })
                 }
               >
                 <Button disabled={isCreationPending}>Go to the Article</Button>

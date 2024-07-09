@@ -36,6 +36,7 @@ import {
   ExclamationCircleIcon,
   EllipsisHorizontalCircleIcon,
   AdjustmentsHorizontalIcon,
+  StarIcon as StarIconSolid,
 } from "@heroicons/react/24/solid";
 import { XCircleIcon } from "@heroicons/react/24/outline";
 import { FaFilePdf } from "react-icons/fa";
@@ -107,6 +108,10 @@ export default BaseIcon;
 
 export type IconProps = Omit<BaseIconProps, "Icon">;
 export type FalconIcon = React.FC<IconProps>;
+
+const AdjustmentsIcon = React.forwardRef<SVGSVGElement, IconProps>((props) => (
+  <BaseIcon {...props} Icon={AdjustmentsHorizontalIcon} />
+));
 
 const SettingsIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props} Icon={WrenchScrewdriverIcon} />
@@ -291,9 +296,8 @@ const EllipsisIcon: React.FC<IconProps> = (props) => (
 const FontIcon: React.FC<IconProps> = (props) => (
   <BaseIcon {...props} Icon={FaFont} />
 );
-
-const AdjustmentsIcon = React.forwardRef<SVGSVGElement, IconProps>(
-  (props) => <BaseIcon {...props} Icon={AdjustmentsHorizontalIcon} />,
+const StarIcon: React.FC<IconProps> = (props) => (
+  <BaseIcon {...props} Icon={StarIconSolid} />
 );
 
 export {
@@ -344,4 +348,5 @@ export {
   EllipsisIcon,
   FontIcon,
   AdjustmentsIcon,
+  StarIcon,
 };
