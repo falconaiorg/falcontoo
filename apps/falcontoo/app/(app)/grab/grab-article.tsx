@@ -64,7 +64,8 @@ export function GrabArticle({ url }: { url: string }) {
 
   useEffect(() => {
     const createArticleIfNotExists = async () => {
-      if (!article && isSuccess) {
+      if (!article?.article && isSuccess) {
+        console.log("Creating article");
         await createArticleAndRedirect();
       }
     };

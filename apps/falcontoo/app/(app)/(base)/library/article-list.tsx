@@ -8,7 +8,7 @@ import { useState } from "react";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { cn } from "@/lib/utils";
 import { fonts } from "@falcon/lib/fonts";
-import { AddArticle } from "./add-article";
+import { AddArticle } from "./add-article-new";
 
 export const ArticleList = ({
   articles,
@@ -25,26 +25,24 @@ export const ArticleList = ({
   return (
     <div className="flex flex-col space-y-4">
       <div className="flex flex-row items-center justify-between space-x-2">
-        <div className="flex flex-row items-center space-x-2">
-          <div
-            className={cn("p-2 text-xs", fonts.serif.lora, {
-              "rounded bg-secondary": unread,
-            })}
-          >
-            {length} articles
-          </div>
-          <Button
-            className="hover:bg-inherit hover:text-inherit"
-            variant={unread ? "secondary" : "outline"}
-            size={"sm"}
-            onClick={() => setUnread((unread) => !unread)}
-          >
-            unread
-          </Button>
+        <div
+          className={cn("p-2 text-xs", fonts.serif.lora, {
+            "rounded bg-secondary": unread,
+          })}
+        >
+          {length} articles
         </div>
-        <AddArticle />
+        <Button
+          className="hover:bg-inherit hover:text-inherit"
+          variant={unread ? "secondary" : "outline"}
+          size={"sm"}
+          onClick={() => setUnread((unread) => !unread)}
+        >
+          unread
+        </Button>
       </div>
       <div className="mt-8 flex flex-col gap-4 pb-96" ref={animationParent}>
+        <AddArticle />
         {filteredArticles.map((article) => (
           <Link
             href={url.reader.read({ articleId: article.id })}

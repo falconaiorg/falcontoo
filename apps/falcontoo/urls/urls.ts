@@ -7,6 +7,7 @@ export const url = {
   auth: {
     signin: `${root}/auth/sign-in`,
   },
+  grab: ({ url }: { url: string }) => `${root}/grab/${url}`,
   home: `${root}/home`,
   library: `${root}/library`,
   stats: `${root}/stats`,

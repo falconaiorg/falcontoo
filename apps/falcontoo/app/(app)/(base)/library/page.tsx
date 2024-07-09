@@ -1,11 +1,7 @@
 import { getServerComponentSession } from "@falcon/lib/next-auth";
 import { ArticleList } from "./article-list";
 import { server } from "@falcon/lib/server/next";
-import Link from "next/link";
-import { testArticles } from "./test-article";
-import { Button } from "@/components/ui/button";
-import { LexLoading } from "@/components/loading/base-loading";
-import { SaveArticles } from "../home/welcome/save-articles";
+import { AddArticle } from "./add-article-new";
 
 export default async function HomePage() {
   const { user } = await getServerComponentSession();
@@ -17,7 +13,7 @@ export default async function HomePage() {
   if (noArticles) {
     return (
       <div className="flex h-full flex-col items-center justify-center">
-        <SaveArticles />
+        <AddArticle />
       </div>
     );
   }
