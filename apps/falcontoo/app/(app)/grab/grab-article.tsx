@@ -45,7 +45,7 @@ export function GrabArticle({ url }: { url: string }) {
     error: creationError,
   } = api.articles.createArticle.useMutation({
     onSuccess(data, variables, context) {
-      //console.log("Article created", data);
+      router.refresh();
     },
   });
 
