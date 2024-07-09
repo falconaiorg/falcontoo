@@ -22,6 +22,7 @@
     "@trpc/server": "11.0.0-rc.366",
     "@types/react": "^18.3.3",
     "await-to-js": "^3.0.0",
+    "date-fns": "^3.6.0",
     "express": "^4.19.2",
     "next": "14.2.3",
     "next-auth": "^4.24.7",

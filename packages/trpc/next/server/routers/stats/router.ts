@@ -7,6 +7,7 @@ import {
   ZUserStatsUpdateSchema,
   updateUserStats,
 } from "./update-reading-session";
+import { subDays } from "date-fns";
 
 export const statsRouter = router({
   createReadingSession: authenticatedProcedure.mutation(
@@ -69,15 +70,19 @@ export const statsRouter = router({
     return sessions;
   }),
   getWeeklyStats: authenticatedProcedure.query(async ({ ctx }) => {
+    const sevenDaysAgo = subDays(new Date(), 7);
+
     const [error, stats] = await to(
       prisma.dailyUserStats.findMany({
         where: {
           userId: ctx.user.id,
+          date: {
+            gte: sevenDaysAgo,
+          },
         },
         orderBy: {
           date: "asc",
         },
-        take: 7,
       })
     );
     if (error) {
