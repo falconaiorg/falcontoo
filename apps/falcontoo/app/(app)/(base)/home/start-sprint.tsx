@@ -21,7 +21,7 @@ const sessions = [
 export const StartSprint = () => (
   <Card>
     <CardHeader>
-      <CardTitle>Reading Sprint</CardTitle>
+      <CardTitle>Start a Sprint</CardTitle>
     </CardHeader>
     <CardContent>
       <div className="flex justify-around">

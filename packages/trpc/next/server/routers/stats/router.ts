@@ -30,16 +30,22 @@ export const statsRouter = router({
       return { readingSessionId };
     }
   ),
+  /**
+   * Get the reading session history for the last 7 days
+   */
   getSessionHistory: authenticatedProcedure.query(async ({ ctx }) => {
     const [error, sessions] = await to(
       prisma.readingSession.findMany({
         where: {
           userId: ctx.user.id,
+          createdAt: {
+            gte: new Date(new Date().getTime() - 7 * 24 * 60 * 60 * 1000), // Last 7 days
+          },
         },
         orderBy: {
           createdAt: "desc",
         },
-        take: 5,
+        take: 10,
         include: {
           sessionArticles: {
             include: {

@@ -23,11 +23,15 @@ export const ReadingHistory = () => {
   const [sessions] = api.stats.getSessionHistory.useSuspenseQuery();
   const { prefetchArticle } = usePrefetchArticle();
 
+  const sessionsWithArticles = sessions.filter(
+    (session) => session.sessionArticles.length > 0,
+  );
+
   return (
     <Card>
       <CardHeader>
         <CardTitle>
-          <div>Reading History</div>
+          <div>Session History</div>
         </CardTitle>
       </CardHeader>
       <CardContent>
@@ -37,7 +41,7 @@ export const ReadingHistory = () => {
           className="w-full"
           defaultValue="item-0"
         >
-          {sessions.map((session, sessionIndex) => (
+          {sessionsWithArticles.map((session, sessionIndex) => (
             <AccordionItem key={sessionIndex} value={`item-${sessionIndex}`}>
               <AccordionTrigger>
                 <div className="flex space-x-4">
