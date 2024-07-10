@@ -18,6 +18,10 @@ const nextConfig = {
   ) => {
     if (isServer) {
       config.plugins = [...config.plugins, new PrismaPlugin()];
+      config.module.rules.push({
+        test: /\.node$/,
+        use: "node-loader",
+      });
     }
     // add externals
     config.externals = config.externals || [];

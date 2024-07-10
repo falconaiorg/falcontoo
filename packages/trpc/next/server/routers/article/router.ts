@@ -8,7 +8,10 @@ import { parseUrl } from "@falcon/lib/parser/url";
 import { parseArticle } from "@falcon/lib/parser";
 import to from "await-to-js";
 import { server } from "@falcon/lib/server/next";
-import { saveArticle } from "@falcon/lib/server/next/article/save-article";
+import {
+  saveArticle,
+  saveArticleWithoutContent,
+} from "@falcon/lib/server/next/article/save-article";
 import { authenticatedProcedure, router, t } from "../../trpc";
 import { revalidatePath, revalidateTag } from "next/cache";
 import { dracoAxios, getHeaders } from "@falcon/lib/axios-next";
@@ -19,6 +22,7 @@ import {
   getArticleByArticleId,
 } from "@falcon/lib/server/next/article";
 import { ArticleContent } from "@falcon/lib/parser/types";
+import { scrapeMetadata } from "./metadata";
 
 const ArticleIdSchema = z.object({
   articleId: z.string(),
@@ -126,15 +130,6 @@ export const articleRouter = router({
         });
       }
       const userId = ctx.user.id;
-      //console.log("Creating article", input.url);
-      const parsedUrl = await parseUrl({ url: input.url });
-      //console.log("Parsed URL", parsedUrl);
-
-      const ParserBodySchema = z.object({
-        url: z.string(),
-      });
-      //console.log("Parsed URL", parsedUrl);
-      //console.log(input.url);
       const nextAuthHeaders = getHeaders();
       const [errDraco, response] = await to(
         dracoAxios({
@@ -147,12 +142,30 @@ export const articleRouter = router({
         })
       );
       if (errDraco) {
-        //console.log("Error parsing article", errDraco);
-        throw new TRPCError({
-          code: "INTERNAL_SERVER_ERROR",
-          message: "Error parsing article",
-          cause: errDraco,
-        });
+        const metadata = await scrapeMetadata({ url: input.url });
+        const [error, savedArticleWithoutContent] = await to(
+          saveArticleWithoutContent({
+            articleData: {
+              author: metadata.author,
+              description: metadata.description,
+              publishedAt: metadata.date,
+              thumbnail: metadata.image,
+              title: metadata.title,
+              url: input.url,
+            },
+            userId: ctx.user.id,
+          })
+        );
+        if (error) {
+          throw new TRPCError({
+            code: "INTERNAL_SERVER_ERROR",
+            message: "Failed to save article",
+            cause: error,
+          });
+        }
+        revalidatePath("/");
+        revalidateTag("articles");
+        return savedArticleWithoutContent;
       }
       const article = response.data as ArticleContent;
       //console.log("Parsed article", article);
@@ -162,7 +175,25 @@ export const articleRouter = router({
       revalidateTag("articles");
       return savedArticle;
     }),
-
+  createArticleAfterParsingError: authenticatedProcedure
+    .input(z.object({ url: z.string() }))
+    .mutation(async ({ input, ctx }) => {
+      const metadata = await scrapeMetadata({ url: input.url });
+      const savedArticleWithoutContent = await saveArticleWithoutContent({
+        articleData: {
+          author: metadata.author,
+          description: metadata.description,
+          publishedAt: metadata.date,
+          thumbnail: metadata.image,
+          title: metadata.title,
+          url: input.url,
+        },
+        userId: ctx.user.id,
+      });
+      revalidatePath("/");
+      revalidateTag("articles");
+      return savedArticleWithoutContent;
+    }),
   setReadingProgress: authenticatedProcedure
     .input(
       z.object({ articleId: z.string(), progress: z.number().min(0).max(100) })

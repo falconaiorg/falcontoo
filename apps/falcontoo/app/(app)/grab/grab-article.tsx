@@ -80,14 +80,24 @@ export function GrabArticle({ url }: { url: string }) {
     createArticleAndRedirect,
   ]);
 
-  if (isLoading) return <FullScreenMessage text={"Removing Ads"} />;
-  if (error) return <FullScreenMessage text={"Error Occurred"} />;
+  if (isLoading)
+    return <FullScreenMessage text={"Removing Ads"}></FullScreenMessage>;
+  if (error)
+    return <FullScreenMessage text={"Error Occurred"}></FullScreenMessage>;
   if (isCreationPending)
-    return <FullScreenMessage text={"Saving to Lex's Memory"} />;
-  if (creationError) return <FullScreenMessage text={"Error Occurred"} />;
+    return (
+      <FullScreenMessage text={"Saving to Lex's Memory"}></FullScreenMessage>
+    );
+  if (creationError)
+    return (
+      <FullScreenMessage text={"Error Occurred"}>
+        <div className="text-lg">Oops! We cannot save this article.</div>
+        <Link href={urlRouter.library}>Go to library</Link>
+      </FullScreenMessage>
+    );
   if (isCreationSuccess)
     return <FullScreenMessage text={"Article Created Successfully"} />;
-  if (isRedirecting) return <FullScreenMessage text={"Opening Libarary"} />;
+  if (isRedirecting) return <FullScreenMessage text={"Opening Library"} />;
 
   return (
     <div>

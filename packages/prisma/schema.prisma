@@ -110,6 +110,7 @@ model User {
     // public profile
     PublicProfile PublicProfile?
     books         Book[]
+    parsingErrors ParsingError[]
 }
 
 model PublicProfile {
@@ -214,10 +215,12 @@ model Article {
     sprintArticles  SprintArticle[]
 
     // Stats
-    readingProgress Float   @default(0)
-    rating          Int     @default(0)
-    isPublic        Boolean @default(false)
+    readingProgress Float          @default(0)
+    rating          Int            @default(0)
+    isPublic        Boolean        @default(false)
     publicComment   String?
+    parsingErrors   ParsingError[]
+    isParsed        Boolean        @default(false)
 }
 
 // Check if the context is stale, if so, regenerate it
@@ -442,4 +445,22 @@ enum FileType {
     VIDEO
     AUDIO
     DOCUMENT
+}
+
+//! Errors: Models to store parsing errors, errors where parsing fails.
+
+model ParsingError {
+    id        String   @id @default(cuid())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    error     String
+    stack     String?
+    url       String
+    hostname  String
+    article   Article  @relation(fields: [articleId], references: [id])
+    articleId String
+    user      User     @relation(fields: [userId], references: [id])
+    userId    String
+
+    @@index([hostname])
 }

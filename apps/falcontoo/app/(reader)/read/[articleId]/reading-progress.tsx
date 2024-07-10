@@ -21,7 +21,6 @@ const FormSchema = z.object({
 // TODO Fix opmitimistic updates, currently state does not reset to previous state if the request fails
 export const ReadingProgress = ({
   article,
-  
 }: {
   article: ArticleWithContent;
 }) => {
@@ -64,7 +63,7 @@ export const ReadingProgress = ({
   const percentage = form.watch("hasRead") ? 100 : 0;
 
   return (
-    <div className="flex items-center space-x-2">
+    <div className="flex items-center space-x-1">
       <div
         className={cn("relative h-8 w-8 transition-transform duration-200", {})}
       >
@@ -94,7 +93,7 @@ export const ReadingProgress = ({
                         field.onChange(value);
                         form.handleSubmit(onSubmit)();
                       }}
-                      className=" absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform border-2 border-secondary data-[state=checked]:h-5 data-[state=checked]:w-5 data-[state=checked]:border-transparent data-[state=checked]:bg-transparent data-[state=checked]:font-bold data-[state=checked]:text-primary"
+                      className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform border-2 border-primary data-[state=checked]:h-5 data-[state=checked]:w-5 data-[state=checked]:border-transparent data-[state=checked]:bg-transparent data-[state=checked]:font-bold data-[state=checked]:text-primary"
                     />
                   </FormControl>
                 </FormItem>
@@ -104,7 +103,7 @@ export const ReadingProgress = ({
         </Form>
       </div>
       <div
-        className={cn("text-secondary text-sm", {
+        className={cn("text-sm text-primary", {
           "text-primary": form.watch("hasRead"),
         })}
       >

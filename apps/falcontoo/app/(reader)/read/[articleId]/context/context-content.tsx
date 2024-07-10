@@ -10,14 +10,18 @@ import { fonts } from "@falcon/lib/fonts";
 import { Analysis } from "@falcon/lib/ai/context/analysis/generate-analysis";
 import { Styler } from "../theme/styler";
 import { Separator } from "@/components/ui/separator";
+import { api } from "@falcon/trpc/next/client";
 
 export function ContextContent({
   context,
-  analysis,
+  articleId,
 }: {
   context: string;
-  analysis: Analysis;
+  articleId: string;
 }) {
+  const [analysis] = api.articles.getArticleAnalysis.useSuspenseQuery({
+    articleId,
+  });
   const [expanded, setExpanded] = useState(false);
   const [contentHeight, setContentHeight] = useState(0);
   const contentRef = useRef<HTMLDivElement>(null);

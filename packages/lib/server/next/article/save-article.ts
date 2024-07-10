@@ -24,6 +24,7 @@ export const saveArticle = async ({
             id: userId,
           },
         },
+        isParsed: true,
         content: {
           create: {
             author: articleData.author,
@@ -31,7 +32,7 @@ export const saveArticle = async ({
             markdownChecksum: articleData.markdownChecksum,
             title: articleData.title,
             url: articleData.url,
-            readablityHtml: articleData.readablityHtml,
+            readablityHtml: articleData.readablityHtml, // Fix typo
             publishedAt: articleData.publishedAt,
             description: articleData.description,
             thumbnail: articleData.thumbnail,
@@ -51,9 +52,57 @@ export const saveArticle = async ({
           id: userId,
         },
       },
+      isParsed: true,
       content: {
         connect: {
           id: existingContent.id,
+        },
+      },
+    },
+    include: {
+      content: true,
+    },
+  });
+  return newArticle;
+};
+
+type ArticleWithoutContent = {
+  url: string;
+  title: string | undefined;
+  description: string | undefined;
+  thumbnail: string | undefined;
+  publishedAt: string | undefined;
+  author: string | undefined;
+};
+export const saveArticleWithoutContent = async ({
+  articleData,
+  userId,
+}: {
+  userId: string;
+  articleData: ArticleWithoutContent;
+}): Promise<ArticleIncludingContent> => {
+  const publishedAtDate = articleData.publishedAt
+    ? new Date(articleData.publishedAt)
+    : new Date();
+  const newArticle = await prisma.article.create({
+    data: {
+      User: {
+        connect: {
+          id: userId,
+        },
+      },
+      isParsed: false,
+      content: {
+        create: {
+          author: articleData.author || "Not Found",
+          markdown: "",
+          markdownChecksum: "",
+          title: articleData.title || "Not Found",
+          url: articleData.url || "Not Found",
+          readablityHtml: "",
+          publishedAt: publishedAtDate,
+          description: articleData.description,
+          thumbnail: articleData.thumbnail,
         },
       },
     },

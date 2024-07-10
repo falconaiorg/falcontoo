@@ -15,6 +15,38 @@ const searchWords = [
   "This is a sample markdown text. The words 'sample' and 'markdown'",
 ];
 export function ArticleRenderer({ article }: { article: ArticleWithContent }) {
+  if (article.isParsed !== false) {
+    return (
+      <Card className="flex flex-col gap-4 border-none">
+        <Timer articleId={article.id} userId={article.userId} />
+        <CardHeader className="px-2">
+          <CardTitle className="w-10/12 font-medium">
+            {article.content.title}
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="flex flex-col space-y-2 p-2">
+          <div>
+            Due to some technical issues, we are unable to remove the ads and
+            add AI analysis to this article. But, it is still saved and you can
+            still read it.
+          </div>
+          <CardDescription className="text-lg underline decoration-sky-700 underline-offset-2">
+            <Link
+              href={article.content.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              prefetch={false}
+            >
+              Read
+            </Link>
+          </CardDescription>
+        </CardContent>
+        <CardFooter className="flex items-center justify-center">
+          <ReadingProgress article={article} />
+        </CardFooter>
+      </Card>
+    );
+  }
   return (
     <Card className="flex flex-col gap-4 border-none">
       <Timer articleId={article.id} userId={article.userId} />
