@@ -15,7 +15,7 @@ const searchWords = [
   "This is a sample markdown text. The words 'sample' and 'markdown'",
 ];
 export function ArticleRenderer({ article }: { article: ArticleWithContent }) {
-  if (article.isParsed !== false) {
+  if (article.isParsed === false) {
     return (
       <Card className="flex flex-col gap-4 border-none">
         <Timer articleId={article.id} userId={article.userId} />
