@@ -159,6 +159,7 @@ export const articleRouter = router({
               url: input.url,
             },
             userId: ctx.user.id,
+            parsingError: errDraco,
           })
         );
         if (error) {
@@ -190,25 +191,6 @@ export const articleRouter = router({
       revalidatePath("/");
       revalidateTag("articles");
       return savedArticle;
-    }),
-  createArticleAfterParsingError: authenticatedProcedure
-    .input(z.object({ url: z.string() }))
-    .mutation(async ({ input, ctx }) => {
-      const metadata = await scrapeMetadata({ url: input.url });
-      const savedArticleWithoutContent = await saveArticleWithoutContent({
-        articleData: {
-          author: metadata.author,
-          description: metadata.description,
-          publishedAt: metadata.date,
-          thumbnail: metadata.image,
-          title: metadata.title,
-          url: input.url,
-        },
-        userId: ctx.user.id,
-      });
-      revalidatePath("/");
-      revalidateTag("articles");
-      return savedArticleWithoutContent;
     }),
   setReadingProgress: authenticatedProcedure
     .input(

@@ -78,9 +78,11 @@ type ArticleWithoutContent = {
 export const saveArticleWithoutContent = async ({
   articleData,
   userId,
+  parsingError,
 }: {
   userId: string;
   articleData: ArticleWithoutContent;
+  parsingError: Error;
 }): Promise<ArticleIncludingContent> => {
   const randomMarkdownChecksum = createId();
 
@@ -113,5 +115,20 @@ export const saveArticleWithoutContent = async ({
       content: true,
     },
   });
+  try {
+    await prisma.parsingError.create({
+      data: {
+        url: articleData.url,
+        error: parsingError.message,
+        stack: parsingError.stack,
+        userId,
+        articleId: newArticle.id,
+        hostname: new URL(articleData.url).hostname,
+      },
+    });
+  } catch (error) {
+    console.error("Error saving parsing error", error);
+  }
+
   return newArticle;
 };
