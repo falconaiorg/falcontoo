@@ -1,6 +1,7 @@
 import { ArticleWithContent, ParsedArticle } from "../../../parser/types";
 import { ArticleWithContent as ArticleIncludingContent } from "./get-article";
 import prisma from "@falcon/prisma";
+import { createId } from "@paralleldrive/cuid2";
 
 export const saveArticle = async ({
   articleData,
@@ -81,6 +82,8 @@ export const saveArticleWithoutContent = async ({
   userId: string;
   articleData: ArticleWithoutContent;
 }): Promise<ArticleIncludingContent> => {
+  const randomMarkdownChecksum = createId();
+
   const publishedAtDate = articleData.publishedAt
     ? new Date(articleData.publishedAt)
     : new Date();
@@ -96,7 +99,7 @@ export const saveArticleWithoutContent = async ({
         create: {
           author: articleData.author || "Not Found",
           markdown: "",
-          markdownChecksum: "",
+          markdownChecksum: randomMarkdownChecksum,
           title: articleData.title || "Not Found",
           url: articleData.url || "Not Found",
           readablityHtml: "",

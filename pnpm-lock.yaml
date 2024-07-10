@@ -649,6 +649,9 @@ importers:
       '@mozilla/readability':
         specifier: ^0.5.0
         version: 0.5.0
+      '@paralleldrive/cuid2':
+        specifier: ^2.2.2
+        version: 2.2.2
       '@qdrant/js-client-rest':
         specifier: ^1.9.0
         version: 1.9.0(typescript@5.5.2)
@@ -3923,8 +3926,8 @@ packages:
       - supports-color
     dev: true
 
-  /@maxim_mazurok/gapi.client.androidpublisher-v3@0.0.20240709:
-    resolution: {integrity: sha512-VAdDnQBUbx5ZQEmk2ceUojaZQsvz3JRATBNt6AvNG+pJRxWaCSMT7m9+ywDPgIfwOCeutMgaiE7LbeEi/nAJnQ==}
+  /@maxim_mazurok/gapi.client.androidpublisher-v3@0.0.20240710:
+    resolution: {integrity: sha512-OrPVQHAIGn5lDbDsyKpgXsLm+L95ipEpSNt7nRavHFdQuBqyz3hZaFSzkREa6pBXdM1iS7a27+0sQsoCDkzrKg==}
     dependencies:
       '@types/gapi.client': 1.0.8
       '@types/gapi.client.discovery-v1': 0.0.4
@@ -4080,6 +4083,11 @@ packages:
     dev: false
     optional: true
 
+  /@noble/hashes@1.4.0:
+    resolution: {integrity: sha512-V1JJ1WTRUqHHrOSh597hURcMqVKVGL/ea3kv0gSnEdsEZ0/+VyPghM1lMNGc00z7CIQorSvbKpuJkxvuHbvdbg==}
+    engines: {node: '>= 16'}
+    dev: false
+
   /@nodelib/fs.scandir@2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
     engines: {node: '>= 8'}
@@ -4120,6 +4128,12 @@ packages:
 
   /@panva/hkdf@1.2.0:
     resolution: {integrity: sha512-97ZQvZJ4gJhi24Io6zI+W7B67I82q1I8i3BSzQ4OyZj1z4OW87/ruF26lrMES58inTKLy2KgVIDcx8PU4AaANQ==}
+    dev: false
+
+  /@paralleldrive/cuid2@2.2.2:
+    resolution: {integrity: sha512-ZOBkgDwEdoYVlSeRbYYXs0S9MejQofiVYoTbKzy/6GQa39/q5tQU2IX46+shYnUkpEl3wc+J6wRlar7r2EK2xA==}
+    dependencies:
+      '@noble/hashes': 1.4.0
     dev: false
 
   /@pkgjs/parseargs@0.11.0:
@@ -5833,7 +5847,7 @@ packages:
     resolution: {integrity: sha512-ITizgxAt4cTHQ7n+pGRTHi/QeWA1MKYliiuZcuR2rjyiyAvR/jdTamKmUYxdtP3lWorR+q/+RFZToFKkCliGnQ==}
     deprecated: use @types/gapi.client.androidpublisher-v3 instead; see https://github.com/Maxim-Mazurok/google-api-typings-generator/issues/652 for details
     dependencies:
-      '@maxim_mazurok/gapi.client.androidpublisher-v3': 0.0.20240709
+      '@maxim_mazurok/gapi.client.androidpublisher-v3': 0.0.20240710
     dev: true
 
   /@types/gapi.client.discovery-v1@0.0.4:

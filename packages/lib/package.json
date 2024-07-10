@@ -28,6 +28,7 @@
     "@langchain/qdrant": "^0.0.5",
     "@langchain/textsplitters": "^0.0.2",
     "@mozilla/readability": "^0.5.0",
+    "@paralleldrive/cuid2": "^2.2.2",
     "@qdrant/js-client-rest": "^1.9.0",
     "@sparticuz/chromium": "^123.0.1",
     "@trpc/server": "^10.36.0",
