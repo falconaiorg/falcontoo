@@ -450,17 +450,23 @@ enum FileType {
 //! Errors: Models to store parsing errors, errors where parsing fails.
 
 model ParsingError {
-    id        String   @id @default(cuid())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+    id        String             @id @default(cuid())
+    createdAt DateTime           @default(now())
+    updatedAt DateTime           @updatedAt
     error     String
     stack     String?
     url       String
     hostname  String
-    article   Article  @relation(fields: [articleId], references: [id])
+    article   Article            @relation(fields: [articleId], references: [id])
     articleId String
-    user      User     @relation(fields: [userId], references: [id])
+    user      User               @relation(fields: [userId], references: [id])
     userId    String
+    status    ParsingErrorStatus @default(PENDING)
 
     @@index([hostname])
+}
+
+enum ParsingErrorStatus {
+    PENDING
+    RESOLVED
 }
