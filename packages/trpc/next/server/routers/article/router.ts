@@ -129,19 +129,24 @@ export const articleRouter = router({
           message: "URL is required",
         });
       }
+
       const userId = ctx.user.id;
       const nextAuthHeaders = getHeaders();
+
+      // Send request to dracoAxios
       const [errDraco, response] = await to(
         dracoAxios({
           method: "post",
           url: "/parser",
-          data: {
-            url: input.url,
-          },
+          data: { url: input.url },
           headers: nextAuthHeaders,
         })
       );
+
+      // Handle error from dracoAxios
       if (errDraco) {
+        console.error("Failed to parse article", errDraco);
+        // Scrape metadata if dracoAxios fails
         const metadata = await scrapeMetadata({ url: input.url });
         const [error, savedArticleWithoutContent] = await to(
           saveArticleWithoutContent({
@@ -157,20 +162,31 @@ export const articleRouter = router({
           })
         );
         if (error) {
+          console.error("Failed to save article", error);
           throw new TRPCError({
             code: "INTERNAL_SERVER_ERROR",
             message: "Failed to save article",
             cause: error,
           });
         }
+        // Revalidate paths and tags
         revalidatePath("/");
         revalidateTag("articles");
         return savedArticleWithoutContent;
       }
+      // If dracoAxios succeeds
       const article = response.data as ArticleContent;
-      //console.log("Parsed article", article);
-      const savedArticle = await saveArticle({ articleData: article, userId });
-      //console.log("Saved article", savedArticle);
+      const [saveError, savedArticle] = await to(
+        saveArticle({ articleData: article, userId })
+      );
+      if (saveError) {
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "Failed to save article",
+          cause: saveError,
+        });
+      }
+      // Revalidate paths and tags
       revalidatePath("/");
       revalidateTag("articles");
       return savedArticle;

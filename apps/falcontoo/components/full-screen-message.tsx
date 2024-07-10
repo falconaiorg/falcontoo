@@ -1,8 +1,6 @@
 export const FullScreenMessage = function ({
-  text,
   children,
 }: {
-  text: string;
   children?: React.ReactNode;
 }) {
   return (

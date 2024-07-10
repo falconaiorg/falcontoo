@@ -24,8 +24,6 @@ export default function TestingPage() {
   };
 
   return (
-    <FullScreenMessage text={"Error Occurred"}>
-      <Button onClick={handleSaveArticle}>Update all articles to parsed</Button>
-    </FullScreenMessage>
+    <Button onClick={handleSaveArticle}>Update all articles to parsed</Button>
   );
 }
