@@ -37,9 +37,9 @@ export const ArticleCard = ({ article }: { article: ArticleWithContent }) => {
             {article.content.description}
           </CardDescription>
           <CardDescription className="flex flex-row justify-between text-xs">
-            <p className="font-semibold tracking-tight">
+            <span className="font-semibold tracking-tight">
               {article.readingProgress === 100 ? "Read" : `Unread`}
-            </p>
+            </span>
           </CardDescription>{" "}
         </CardHeader>
       </Card>
